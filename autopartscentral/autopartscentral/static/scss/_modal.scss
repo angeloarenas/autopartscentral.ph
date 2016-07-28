@@ -1,0 +1,160 @@
+/*=== 4. MODAL ===*/
+/*=== 4.1 LOGIN MODAL ===*/
+%modal-common{
+	@include border-radius(0);
+	box-shadow: none;
+	border: none;
+}
+%productInfo{
+	overflow: visible;
+	h2, h3{
+		font-weight: 700;
+		margin-bottom: $margin - 3px;
+		letter-spacing: 1px;
+	}
+	h3{
+		margin-bottom: $margin*2+6px;
+	}
+	p{
+		font-size: font-size+3px;
+		line-height: 24px;
+		color: $text-slider-title;
+		margin-bottom: $margin*3+7px; 
+	}
+	.quick-drop{
+		margin: 0 $margin+2px $margin*3+8px 0;
+		display: inline-block;
+	}
+	.btn-area{
+		display: block;
+		width: 100%;
+		.btn-primary{
+			width: 196px;
+			height: 55px;
+			border-radius: 0;
+			border: none;
+			background-color: $primary-color;
+			padding: 0 $padding*2;
+			line-height: 55px;
+			position: relative;
+			text-align: left;
+			@include transition(all 0.3s ease-in-out);
+			i{
+				position: absolute;
+				right: 20px;
+				top: 18px;
+				font-size: $font-size*2+2px;
+			}
+			&:hover{
+				opacity: .8;
+			}
+		}
+	}
+}
+%full-modal{
+	
+	margin: $margin auto 0 auto;
+	.modal-content{
+		@extend %modal-common;
+		.modal-header{
+			background-color: $primary-color;
+			.modal-title{
+				text-align: center;
+				color: $white-color;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+			.close{
+				opacity: 1;
+				color: $white-color;
+				&:hover, &:focus{
+					opacity: .6;
+				}
+			}
+		}
+		.modal-body{
+			@extend .form-field;
+		}
+	}
+	@include mobile-xs{
+		width: 270px;
+	}
+	@include mobile{
+		width: 430px;
+	}
+}
+#login{
+	.modal-dialog{
+		@extend %full-modal;
+	}
+}
+#signup{
+	.modal-dialog{
+		@extend %full-modal;
+		.modal-body{
+			form{
+				.btn-primary{
+					margin-bottom: $margin+5px;
+				}
+			}
+		}
+	}
+}
+
+/*=== 4.2 PORDUCT QUICK VIEW MODAL ===*/
+.quick-view{
+	.modal-dialog{
+		@include mobile-xs{
+		  width: 280px;
+		  margin: 0 auto;
+		}
+		@include mobile{
+		  width: 450px;
+		  margin: 0 auto;
+		}
+		@include tablet{
+		  width: 750px;
+		}
+		@include desktops{
+		  width: 950px;
+		}
+		@include large-desktops{
+		  width: 1030px;
+		}
+		.modal-content{
+			@extend %modal-common;
+			.modal-body{
+				padding: $padding*3;
+				.close{
+					font-size: $font-size*6;
+					font-weight: 300;
+					margin: $margin - 30px $margin - 30px 0 0;
+					line-height: 30px;
+				}
+				.media{
+					margin-top: 0;
+					.media-left{
+						@include mobile{
+							width: 100%;
+							padding: 0 0 $padding*2 0;
+						}
+						@include tablet{
+							width: 100%;
+							padding: 0 0 $padding*2 0;
+						}
+						@include desktops{
+							padding-right: $padding*4;
+							width: auto;
+						}
+						img{
+							width: 100%;
+						}
+					}
+					.media-body{
+						@extend %productInfo;
+					}
+				}
+			}
+		}
+	}
+}

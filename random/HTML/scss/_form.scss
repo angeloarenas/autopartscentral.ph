@@ -1,0 +1,263 @@
+/*=== 3. FORM ===*/
+/*=== 3.1 FORM COMMON ===*/
+%formFieldPart{
+	border-radius: 0;
+	background-color: $light-color;
+	border: none;
+	height: 50px;
+	box-shadow: none;
+	&:focus{
+		box-shadow: none;
+	}
+}
+.form-field{
+	padding: $padding+5px $padding*3;
+	.form-group{
+		margin-bottom: $margin*3;
+		label{
+			font-size: $font-size + 3px;
+		}
+		.form-control{
+			@extend %formFieldPart;
+		}
+	}
+	.checkbox{
+		margin: 0 0 $margin*3 0;
+		label{
+			font-size: $font-size + 3px;
+		}
+	}
+	.btn-primary{
+		border-radius: 0;
+		background-color: $primary-color;
+		border: none;
+		text-transform: uppercase;
+		font-size: $font-size + 5px;
+		font-weight: 700;
+		padding: 0;
+		height: 50px;
+		line-height: 50px;
+		@include transition(all 0.3s ease-in-out);
+		&:hover{
+			opacity: .9;
+		}
+	}
+	.btn-link{
+		color: $primary-color;
+		text-transform: capitalize;
+		@include transition(all 0.3s ease-in-out);
+		&:hover{
+			text-decoration: none;
+			color: $primary-color-light;
+		}
+	}
+}
+.form-body{
+	.panel{
+		border-radius: 0;
+		border: none;
+		.panel-heading{
+			background-color: $primary-color;
+			border-radius: 0;
+			padding: 0 $padding+5px;
+			height: 60px;
+			h3{
+				text-align: center;
+				text-transform: uppercase;
+				margin-bottom: 0;
+				font-weight: 700;
+				color: $white-color;
+				line-height: 60px;
+			}
+		}
+		.panel-body{
+			@include add-border(5px, $light-color, all);
+			border-top: none;
+			@extend .form-field;
+			.btn-link{
+				span{
+					color: $text-slider-title;
+				}
+			}
+		}
+	}	
+}
+
+/*=== 3.2 FORM SIGN UP ===*/
+.signUp{
+	@extend .form-body;
+	@include mobile{
+		padding: $padding*4+5px 0 $padding*2+5px 0;
+	}
+	@include mobile{
+		padding: $padding*9 0 $padding*7 0;
+	}
+}
+
+/*=== 3.3 FORM LOST PASSWORD ===*/
+.lostPassword{
+	@extend .form-body;
+	.panel-body{
+		padding: $padding*5 $padding*3 !important;  
+	}
+	.help-block{
+		color: $secondary-color;
+		font-size: $font-size+3px;
+		line-height: 22px;
+		margin: 0 0 $margin*2 0;
+	}
+	@include mobile{
+		padding: $padding*4+5px 0 $padding*2+5px 0;
+	}
+	@include mobile{
+		padding: $padding*9 0 $padding*7 0;
+	}
+}
+
+/*=== 3.4 FORM LOG IN ===*/
+.logIn{
+	@extend .form-body;
+	.btn-default{
+		height: 45px;
+		padding: 0;
+		line-height: 45px;
+		border-radius: 0;
+		border: none;
+		margin: $margin*3 0 0 0;
+		color: $white-color;
+		text-transform: uppercase;
+		font-weight: 700;
+		@include transition(all 0.3s ease-in-out);
+		&.pull-left{
+			background-color: $facebook-color;
+		}
+		&.pull-right{
+			background-color: $google-plus-color;
+		}
+		i{
+			margin-right: $margin - 5px;
+		}
+		&:hover{
+			opacity: .9;
+		}
+		@include mobile-xs{
+			width: 100%;
+			font-size: $font-size+1px; 
+		}
+		@include mobile{
+			width: 48%;
+			font-size: $font-size; 
+		}
+		@include desktops{
+			font-size: $font-size+1px; 
+		}
+		@include large-desktops{
+			font-size: $font-size+4px; 
+		}
+	}
+	@include mobile{
+		padding: $padding*4+5px 0 $padding*2+5px 0;
+	}
+	@include tablet{
+		padding: $padding*9 0 $padding*7 0;
+	}
+}
+
+/*=== 3.5 BLOG SINGLE COMMENTS FORM ===*/
+.commentsForm{
+	@include mobile{
+		padding: 0 0 $padding*9 0;
+	}
+	@include tablet{
+		padding: 0 0 $padding*3 0;
+	}
+	h3{
+		@extend %sectionTitle;
+	}
+	@extend .form-field;
+	textarea.form-control{
+		height: 150px !important;
+	}
+	.btn-primary{
+		@include mobile-xs{
+			width: 100% !important;
+		}
+		@include mobile{
+			width: 100% !important;
+		}
+		@include tablet{
+			width: 178px !important;
+		}
+	}
+}
+/*=== 3.6 STEPS PAGE FORM ===*/
+.stepsPage{
+	form{
+		margin: 0 $margin - 25px;
+		.form-group{
+			margin-bottom: $margin*3;
+			label{
+				font-size: $font-size + 3px;
+				display: block;
+			}
+			.form-control{
+				@extend %formFieldPart;
+
+			}
+			textarea{
+				&.form-control{
+					height: 150px;
+				}
+			}
+		}
+		.checkboxArea{
+			float: left;
+			margin: $margin+3 0 $margin*5 0;
+			input[type=checkbox]:not(old){
+				width     : 20px;
+				margin    : 0;
+				padding   : 0;
+				font-size : $font-size;
+				opacity   : 0;
+				& + label{
+					display      : inline-block;
+					margin-left  : $margin - 30px;
+					line-height  : 20px;
+					font-weight: 400;
+					font-size: $font-size+3px; 
+					span{
+						background-color: $white-color;
+						@include add-border(1px, $border-gray, all);
+						@include border-radius(0);
+						display          : inline-block;
+						height           : 20px;
+						margin           : 0 $margin 0 0;
+						vertical-align   : middle;
+						width            : 20px;
+						@include transition(all 0.3s ease-in-out);
+					}
+				}
+				&:checked{
+					& + label{
+						span{
+							background-color: $primary-color;
+							@include add-border(1px, $primary-color, all);
+							&:before{
+								color       : $white-color;
+								content     : "\f00c";
+								font-family: 'FontAwesome';
+								display     : block;
+								font-size   : 12px;
+								font-weight : normal;
+								height      : 20px;
+								line-height : 17px;
+								text-align  : center;
+								width       : 20px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,116 @@
+/*=== 14. COMMING SOON ===*/
+.commingSoon{
+	text-align: center;
+	background: url(../img/comming-soon/comming-soon-bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: $dark-bg;
+}
+.commingSoon .blackSection{
+	padding: $padding*9 0;
+	.pageLogo{
+		@extend %otherLogo;
+		margin-bottom: $margin*7;
+	}
+	h1{
+		color: $white-color;
+		text-transform: capitalize;
+		small{
+			display: block;
+			font-size: $font-size+5px;
+			margin: $margin+7px 0 $margin*5 0;
+		}
+	}
+	.input-group{
+		@extend .input-field;
+		margin-bottom: $margin*5;
+		.form-control{
+			background-color: transparent; 
+			color: $white-color;
+		}
+		a{
+			i{
+				color: $white-color;
+			}
+		}
+	}
+	.list-inline{
+		li{
+			a{
+				font-size: 20px;
+				color: rgba($white-color, .5);
+				padding: 0 $padding;
+				@include transition(all 0.3s ease-in-out);
+				&:hover{
+					color: rgba($white-color, 1);
+				}
+			}
+		}
+	}
+}
+.count-down{
+	padding: 0 0 $padding*7+5px 0;
+	#simple_timer{
+		width: 100%;
+		margin: 0 auto;
+		color: $white-color;
+		text-align: center;
+		.table-cell{
+			display: inline-block;
+			@include mobile {
+				margin: 0 $margin;
+			}
+			@include tablet {
+				margin: 0 $margin;
+			}
+			@include desktops {
+				margin: 0 $margin;
+			}
+			@include large-desktops {
+				margin: 0 $margin+2px;
+			}
+			.tab-val{
+				font-weight: 700;
+				display: block;
+				margin-bottom: $margin*2+5px;
+				@include border-radius(100%);
+				background-color: $primary-color;
+				@include mobile {
+					width: 65px;
+					height: 65px;
+					line-height: 65px;
+					font-size: $font-size*2+5px;
+				}
+				@include tablet {
+					width: 85px;
+					height: 85px;
+					line-height: 85px;
+					font-size: $font-size*3+5px;
+				}
+				@include desktops {
+					width: 85px;
+					height: 85px;
+					line-height: 85px;
+					font-size: $font-size*3+5px;
+				}
+				@include large-desktops {
+					width: 109px;
+					height: 109px;
+					line-height: 109px;
+					font-size: $font-size*4+5px;
+				}
+			}
+			.tab-metr{
+				color: $white-color;
+				font-size: 12px;
+				font-weight: 700;
+				text-transform: uppercase;
+				@include tablet {
+					font-size: 15px;
+				}
+			}
+		}
+	}
+}

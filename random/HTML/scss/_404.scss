@@ -1,0 +1,74 @@
+/*=== 9. 404 PAGE ===*/
+.input-field{
+	margin-bottom: $margin*2;
+	.form-control{
+		height: 49px;
+		border-radius: 0;
+		border-color: $border-gray-light;
+		border-right: none;
+		padding-left: $padding*2;
+		&:focus{
+			box-shadow: none;
+		}
+	}
+	.input-group-addon{
+		background-color: transparent;
+		border-radius: 0;
+		border-color: $border-gray-light;
+		font-size: $font-size+8px;
+		color: $secondary-color;
+		padding: $padding - 4px $padding*2;
+	}
+}
+%otherLogo{
+	margin-bottom: $margin*10;
+	display: inline-block; 
+	float:none;
+	margin-top:0;
+	padding:0;
+}
+.notFound{
+	text-align: center;
+	padding-bottom: $padding*9;
+	.pageLogo{
+		@extend %otherLogo;
+	}
+	h1{
+		color: $primary-color;
+		text-shadow: 8px 8px 1px $text-shadow;
+		margin-bottom: $margin*7;
+		@include mobile-xs{
+			font-size: $font-size*15;
+		}
+		@include mobile{
+			font-size: $font-size*20;
+		}
+		@include tablet{
+			font-size: $font-size*30;
+		}
+	}
+	h2{
+		color: $text-dark;
+		margin-bottom: $margin*6;
+	}
+	.input-group{
+		@extend .input-field;
+	}
+	.btn-default{
+		width: 120px;
+		height: 42px;
+		background-color: $primary-color;
+		font-size: $font-size+4px;
+		color: $white-color;
+		text-transform: uppercase;
+		border-radius: 0;
+		padding: 0;
+		line-height: 42px;
+		border: none;
+		font-weight: 700;
+		@include transition(all 0.3s ease-in-out);
+		&:hover{
+			opacity: .9;
+		}
+	}
+}

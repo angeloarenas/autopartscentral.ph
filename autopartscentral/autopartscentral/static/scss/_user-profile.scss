@@ -1,0 +1,448 @@
+/*=== 13. USER PROFILE ===*/
+/*=== 13.1 COMMON PART ===*/
+%resetBtn{
+	box-shadow: none;
+	background-color: $light-color;
+	border: none;
+	border-radius: 0;
+}
+%panel-style{
+	border-radius: 0;
+	@include add-border(3px, $light-color, all);
+	box-shadow: none;
+	margin-bottom: $margin*3;
+	.panel-heading{
+		background-color: $light-color;
+		border-color: $light-color;
+		border-radius: 0;
+		.panel-title{
+			font-size: $font-size+5px;
+			margin-bottom: 0;
+			font-weight: 700; 
+			text-transform: capitalize;
+		}
+	}
+	.panel-body{
+		address{
+			font-size: $font-size+3px;
+			line-height: 30px;
+			margin-bottom: 0;
+			strong{
+				font-size: $font-size+5px;
+				font-weight: 400;
+			}
+			span{
+				font-size: $font-size+5px;
+			}
+			a{
+				font-size: $font-size+5px;
+				color: $secondary-color;
+				@include transition(all 0.3s ease-in-out);
+				&:hover{
+					opacity: .8;
+				}
+			}
+			p{
+				line-height: 24px;
+				margin-bottom: 0;
+				color: $secondary-color;
+			}
+		}
+	}
+}
+.userProfile{
+	.btn-group{
+		margin-bottom: $margin*3;
+		display: block;
+		a{
+			float: none;
+			height: 45px;
+			padding: 0 $padding*2;
+			line-height: 45px;
+			color: $secondary-color;
+			
+			font-weight: 700;
+			@extend %resetBtn;
+			@include transition(all 0.3s ease-in-out);
+			@include mobile-xs{
+				font-size: $font-size;
+				padding: 0 $padding;
+				margin: 0 $margin - 5px $margin - 5px 0;
+			}
+			@include mobile{
+				font-size: $font-size;
+				padding: 0 $padding;
+				margin: 0 $margin - 5px $margin - 5px 0;
+			}
+			@include tablet{
+				font-size: $font-size+1px;
+				padding: 0 $padding*2;
+				margin: 0 $margin - 5px 0 0;
+			}
+			@include desktops{
+				font-size: $font-size+4px;
+			}
+			i{
+				margin-right: $margin;
+			} 
+			&:hover, &.active{
+				background-color: $primary-color;
+				color: $white-color;
+			}
+		}
+	}
+	.innerWrapper{
+		width: 100%;
+		display: block;
+		@include add-border(5px, $light-color, all);
+		padding: $padding*3 $padding*3 0 $padding*3;
+		@include mobile{
+			margin-bottom: $margin*9;
+		}
+		@include tablet{
+			margin-bottom: $margin*3;
+		}
+		.alert{
+			border: none;
+			border-radius: 0;
+		}
+		h3{
+			font-weight: 400;
+			text-transform: capitalize;
+			margin-bottom: $margin+5px;
+			span{
+				color: $primary-color;
+			}
+		}
+		p{
+			font-size: $font-size+4px;
+			color: $text-gray;
+			line-height: 22px;
+			margin-bottom: $margin*4+5px; 
+		}
+		.list-inline{
+			display: block;
+			margin-bottom: $margin*5;
+			li{
+				@include mobile-xs{
+					padding: 0;
+					display: block;
+					margin-bottom: $margin;
+				}
+				@include mobile{
+					padding: 0;
+					display: block;
+					margin-bottom: $margin;
+				}
+				@include tablet{
+					padding: 0 $padding 0 0;
+					display: inline-block;
+					margin: 0
+				}
+				@include desktops{
+					padding: 0 $padding*2 0 0;
+				}
+				.btn-lg{
+					color: $text-slider-title;
+					font-weight: 700;  
+					@extend %resetBtn;
+					@include transition(all 0.3s ease-in-out);
+					@include mobile-xs{
+						width: 100%;
+						padding: $padding*4+7px 0;
+						font-size: $font-size+6px;
+					}
+					@include mobile{
+						width: 100%;
+						padding: $padding*4+7px 0;
+						font-size: $font-size+6px;
+					}
+					@include tablet{
+						width: 120px;
+						padding: $padding*3+1px 0;
+						font-size: $font-size+4px;
+					}
+					@include desktops{
+						width: 156px;
+						padding: $padding*4+7px 0;
+						font-size: $font-size+6px;
+					}
+					@include large-desktops{
+						width: 196px;
+						padding: $padding*6+7px 0;
+						font-size: $font-size+8px;
+					}
+					i{
+						display: block;
+						margin-bottom: $margin*2;
+					}
+					&:hover{
+						background-color: $primary-color;
+						color: $white-color;
+					}
+				}
+				&:last-child{
+					padding: 0;
+				}
+			}
+		}
+		.panel{
+			@extend %panel-style;
+		}
+		&.singleOrder{
+			.orderBox{
+				margin-bottom: 0;
+			}
+			.btn-group{
+				margin-bottom: $margin*3;
+				float: left;
+				.btn-default{
+					border-radius: 0;
+					border: none;
+					background-color: $primary-color;
+					padding: 0 $padding*2;
+					color: $white-color;
+					font-size: $font-size+2px;
+					font-weight: 700;
+					text-transform: uppercase;
+					height: 40px;
+					line-height: 40px;
+					@include transition(all 0.3s ease-in-out);
+					&:hover{
+						opacity: .8;
+					}
+					@include mobile-xs{
+						display: block;
+						width: 100%;
+						margin: 0 0 $margin+5px 0;
+					}
+					@include mobile{
+						display: inline-block;
+						width: auto;
+						margin-right: $margin - 5px;
+					}
+				}
+			}
+		}
+	}
+}
+.orderBox{
+	display: block;
+	margin-bottom: $margin*5;
+	h4{
+		font-weight: 400;
+		text-transform: capitalize;
+		font-size: $font-size*2;
+	}
+	.table-responsive{
+		margin-bottom: 0;
+		@include mobile{
+			overflow-x: auto;
+		}
+		@include tablet{
+			overflow-x: visible;
+		}
+		.table{
+			margin-bottom: 0;
+			thead{
+				tr{
+					@include add-border(3px, $primary-color, right-left);
+					th{
+						@extend %tableHead;
+						@include mobile-xs{
+							padding: $padding;
+							text-align: center;
+							font-size: $font-size+2px;
+						}
+						@include mobile{
+							padding: $padding;
+							text-align: center;
+							font-size: $font-size+2px;
+						}
+						@include tablet{
+							padding: $padding $padding $padding $padding*2;
+							text-align: left;
+							font-size: $font-size+5px;
+						}
+					}
+				}
+			}
+			tbody{
+				tr{
+					@include add-border(3px, $light-color, right-left);
+					td{
+						@extend %tableData;
+						padding-left: $padding*2;
+						font-weight: 400;
+						.btn-default{
+							box-shadow: none;
+							border-radius: 0;
+							@include add-border(1px, $border-gray, all);
+							padding: $padding+5px $padding*2;
+							display: inline-block;
+							font-size: $font-size+2px;
+							font-weight: 700;
+							color: $secondary-color;
+							@include transition(all 0.3s ease-in-out);
+							text-transform: uppercase;
+							&:hover{
+								background-color: $primary-color;
+								color: $white-color;
+								border-color: $primary-color;
+							}
+						}
+						&:last-child{
+							text-align: center;
+							padding-left: $padding;
+						}
+						&:first-child{
+							color: $primary-color;
+							.fa{
+								color: $secondary-color !important;
+							}
+						}
+						.label{
+							border-radius: 0;
+							font-size: $font-size+2px;
+						}
+					}
+				}
+			}
+		}
+	}
+	&.myAddress{
+		margin-bottom: $margin;
+		.table-responsive{
+			.table{
+				tbody{
+					tr{
+						border: none;
+						td{
+							&:first-child{
+								color: $secondary-color;
+							}
+							.btn-default{
+								padding: $padding $padding+4px;
+								border: none;
+							}
+							.close{
+								@extend %closeBtn;
+							}
+						}
+						&:last-child{
+							td{
+								border: none;
+							}	
+						}
+					}
+				}
+			}
+		}
+		&.wishList{
+			.table-responsive{
+				.table{
+					thead{
+						tr{
+							th{
+								&:first-child{
+									@include mobile-xs{
+										display: none;
+									}
+									@include mobile{
+										display: none;
+									}
+									@include tablet{
+										display: table-cell;
+									}
+								}
+							}
+						}
+					}
+					tbody{
+						tr{
+							td{
+								&:nth-child(4){
+									color: $primary-color;
+								}
+								.btn-default{
+									@include add-border(1px, $border-gray, all);
+									padding: $padding+5px $padding*2;
+								}
+								&:first-child{
+									@include mobile-xs{
+										display: none;
+									}
+									@include mobile{
+										display: none;
+									}
+									@include tablet{
+										display: table-cell;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/*=== 13.2 PROFILE ===*/
+%commonBtn{
+	height: 45px;
+	font-weight: 700;
+	color: $white-color;
+	font-size: $font-size+5px;
+	border-radius: 0;
+	background-color: $primary-color;
+	border: none;
+	@include transition(all 0.3s ease-in-out);
+	&:hover{
+		opacity: .8;
+	}
+}
+.profile{
+	.orderBox{
+		margin-bottom: $margin*3;
+	}
+	.thumbnail{
+		img{
+			width: 100%;
+		}
+		.caption{
+			.btn-primary{
+				@extend %commonBtn;
+				padding: 0;
+				line-height: 45px;
+			}
+		}
+	}
+	.form-horizontal{
+		.form-group{
+			@include mobile{
+				margin-bottom: $margin*2;
+			}
+			@include tablet{
+				margin-bottom: $margin*3;
+			}
+			.control-label{
+				padding-top: 0;
+				@include mobile{
+					height: 25px;
+					line-height: 25px;
+				}
+				@include tablet{
+					height: 50px;
+					line-height: 50px;
+				}
+			}
+			.form-control{
+				@extend %formFieldPart;
+			}
+			.btn-primary{
+				@extend %commonBtn;
+			}
+		}
+	}
+}

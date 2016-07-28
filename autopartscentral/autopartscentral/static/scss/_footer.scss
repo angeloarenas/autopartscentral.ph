@@ -1,0 +1,197 @@
+/*=== 2.2 FOOTER ===*/
+
+/*=== 2.2.1 MAIN FOOTER ===*/
+.footer{
+	display: block;
+	width: 100%;
+	padding: $padding*3+8px 0; 
+	background-color: $secondary-color;
+	@include add-border(8px, $primary-color, top);
+	.footerLink{
+		@include mobile-xs{
+			text-align: center;
+			margin-bottom: $margin*2+5px;
+		}
+		@include mobile{
+			text-align: center;
+			margin-bottom: $margin*2+5px;
+		}
+		@include tablet{
+			text-align: left;
+			margin-bottom: 0;
+		}
+		h5{
+			color: $text-title-light;
+			text-transform: uppercase;
+			margin-bottom: $margin+3px;
+		}
+		ul{
+			li{
+				color: $text-link-two;
+				font-size: 12px;
+				line-height: 20px;
+				a{
+					color: $text-link-two;
+					font-size: $font-size+2px;
+					line-height: 20px;
+					&:hover{
+						color: $text-link-two - 50;
+					}
+				}
+			}
+		}
+	}
+	.newsletter{
+		display: block;
+		text-align: center;
+		@include mobile{
+			float: none;
+			margin: 0 auto;
+			margin-bottom: $margin*2+5px;
+			width: 75%;
+		}
+		@include tablet{
+			float: right;
+			margin-bottom: 0;
+			width: 90%;
+		}
+		@include desktops{
+			width: 75%;
+		}
+		h4{
+			color: $text-title-light;
+			font-size: $font-size+8px;
+			text-transform: uppercase;
+			margin-bottom: 0;
+		}	
+		h3{
+			color: $text-link-two;
+			text-transform: uppercase;
+			margin-bottom: $margin;
+		}
+		p{
+			color: $text-link-two;
+		}
+		.input-group{
+			display: block;
+			width: 100%;
+			.form-control, .input-group-addon{
+				display: inline-block;
+				float: left;
+				margin-right: 2%;
+				border-radius: 0;
+				border: none;
+				background-color: #3b3b3b;
+				height: 35px;
+				line-height: 35px;
+				padding: 0 $padding+4px;
+				font-size: $font-size+2px;
+				color: $text-field-text;
+				&:focus{
+					box-shadow: none;
+				}
+				@include mobile-xs{
+					width: 73%;
+				}
+				@include mobile{
+					width: 73%;
+				}
+				@include tablet{
+					width: 63%;
+				}
+				@include desktops{
+					width: 73%;	
+				}
+			}
+			.input-group-addon{
+				margin-right: 0;
+				height: 35px;
+				padding: 0;
+				line-height: 29px;
+				border:3px solid $primary-color;
+				font-size: $font-size+4px;
+				text-transform: uppercase;
+				font-weight: 700;
+				color: $white-color;
+				@include transition(all 0.3s ease-in-out);
+				@include mobile-xs{
+					width: 25%;
+				}
+				@include mobile{
+					width: 25%;
+				}
+				@include tablet{
+					width: 35%;
+				}
+				@include desktops{
+					width: 25%;	
+				}
+				i{
+					@include transition(all 0.3s ease-in-out);
+					color: $primary-color;					
+					@include mobile{
+						margin-left: $margin - 3px;	
+					}
+					@include tablet{
+						margin-left: $margin - 7px;	
+					}
+					@include desktops{
+						margin-left: $margin - 3px;	
+					}
+				}
+				&:hover{
+					background-color: $primary-color;
+					border-color: $primary-color;
+					color: $white-color;
+					i{
+						color: $white-color;
+					}
+				}
+			}
+		}
+	}
+}
+/*=== 2.2.2 COPY RIGHT ===*/
+.copyRight{
+	display: block;
+	width: 100%;
+	min-height: 53px;
+	background-color: #101010;
+	p{
+		color: $text-link-two;
+		margin-bottom: 0;
+		@include mobile-xs{
+			text-align: center;
+			line-height: 45px;
+			font-size: $font-size - 2px;
+		}
+		@include mobile{
+			text-align: center;
+			line-height: 45px;
+			font-size: $font-size+2px;
+		}
+		@include tablet{
+			text-align: left;
+			line-height: 53px;
+		}
+	}
+	ul{
+		@include mobile-xs{
+			text-align: center;
+		}
+		@include mobile{
+			text-align: center;
+		}
+		@include tablet{
+			text-align: right;
+		}
+		
+		li{
+			a{
+				display: block;
+				line-height: 53px;
+				font-size: 14px;
+			}
+		}
+	}
+}

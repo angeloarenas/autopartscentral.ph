@@ -1,0 +1,318 @@
+/*=== 10. BLOG ===*/
+/*=== 10.1 BLOG FULL WIDTH ===*/
+.blogPage{
+	.thumbnail{
+		padding-bottom: $padding*5;
+		margin-bottom: $margin*5;
+		@include add-border(3px, $light-color, bottom);
+		img{
+			margin-bottom: $margin*5;
+		}
+		.carousel{
+			margin-bottom: $margin*5;
+			.carousel-inner{
+				.item{
+					img{
+						margin-bottom: 0;
+					}
+				}
+			}
+			.carousel-control{
+				@include transition(all 0.3s ease-in-out);
+				span{
+					width: 45px;
+					height: 45px;
+					background-color: $light-color;
+					border-radius: 0;
+					display: block;
+					line-height: 45px;
+					font-size: 15px;
+					text-shadow: none;
+					color: $secondary-color;
+					margin-top: $margin - 30px;
+				}
+			}
+			.carousel-control.right,
+			.carousel-control.left{
+				background-image:none;
+			}
+		}
+		.caption{
+			padding-top: 0;
+			h5{
+				float: left;
+				width: 100%;
+				text-transform: capitalize;
+				@include mobile{
+					margin: 0 0 $margin 0;
+				}
+				@include tablet{
+					margin: $margin*3 0 $margin 0;
+				}
+			}
+			.list-unstyled{
+				width: 100%;
+				@include mobile-xs{
+					display: block;
+					margin-bottom: $margin*2;
+					float: left;
+				}
+				@include mobile{
+					display: block;
+					margin-bottom: $margin*2;
+					float: left;
+				}
+				@include tablet{
+					display: block;
+					margin-bottom: 0;
+				}
+				li{
+					color: $text-slider-title;
+					font-size: $font-size+4px;
+					line-height: 22px;
+					@include mobile{
+						display: inline-block;
+						float: left;
+						width: 50%;
+					}
+					@include tablet{
+						display: inline-block;
+						float: left;
+						width: 100%;
+					}
+					a{
+						color: $text-slider-title;
+						@include transition(all 0.3s ease-in-out);
+						&:hover{
+							opacity: .8;
+						}
+						i{
+							margin-right: $margin+3px;
+						} 
+					}
+					i{
+						margin-right: $margin+3px;
+					}
+				}
+			}
+			h3{
+				text-transform: capitalize;
+				margin-bottom: $margin*3;
+				font-weight: 700;
+				line-height: 32px;
+				a{
+					color: $secondary-color;
+					@include transition(all 0.3s ease-in-out);
+					&:hover{
+						opacity: .8;
+					}
+				}
+			}
+			p{
+				font-size: $font-size+4px;
+				color: $text-slider-title;
+				line-height: 22px;
+			}
+			.list-inline{
+				margin: 0 0 $margin*2 0;
+				float: left;
+				li{
+					padding: 0 $padding - 5px 0 0;
+					float: left;
+					a{
+						text-align: center;
+						display: block;
+						color: $white-color;
+						font-size: $font-size+4px;
+						@include transition(all 0.3s ease-in-out);
+						&:hover{
+							opacity: .9;
+						}
+						@include mobile-xs{
+						  width: 35px;
+						  height: 35px;
+						  line-height: 35px;
+						}
+						@include mobile{
+						  width: 35px;
+						  height: 35px;
+						  line-height: 35px;
+						}
+						@include tablet{
+							width: 27px;
+							height: 27px;
+							line-height: 27px;
+						}
+						@include desktops{
+						  width: 27px;
+						  height: 27px;
+						  line-height: 27px;
+						}
+						@include large-desktops{
+						  width: 35px;
+						  height: 35px;
+						  line-height: 35px;
+						}
+					}
+					&:first-child{
+						a{
+							background-color: $facebook-color;
+						}
+					}
+					&:nth-child(2){
+						a{
+							background-color: $twitter-color;
+						}
+					}
+					&:nth-child(3){
+						a{
+							background-color: $dribbble-color;
+						}
+					}
+					&:last-child{
+						a{
+							background-color: $tumblr-color;
+						}
+					}
+				}
+			}
+		}
+		.pager{
+			background-color: $light-color;
+			padding: $padding*2;
+			margin: $margin*3+6px 0 $margin*6 0;
+			li{
+				a{
+					border-radius: 0;
+					background-color: $border-gray-lighter;
+					height: 45px;
+					padding: 0;
+					line-height: 45px;
+					font-weight: 700;
+					text-transform: uppercase;
+					color: $secondary-color;
+					font-size: $font-size+5px;
+					@include transition(all 0.3s ease-in-out);
+					border:none;
+					@include mobile-xs{
+						width: 110px;
+					}
+					@include mobile{
+						width: 136px;
+					}
+					&:hover{
+						opacity: .8;
+					}
+				}
+			}
+		}
+	}
+	.pagination{
+		@include mobile{
+			margin: 0 0 $margin*5 0;
+		}
+		@include tablet{
+			margin: 0;
+		}
+		li{
+			a{
+				float: none;
+				border-radius: 0;
+				padding: 0;
+				@include add-border(3px, $light-color, all);
+				display: inline-block;
+				font-size: $font-size+8px;
+				color: $secondary-color;
+				font-weight: 700;
+				@include transition(all 0.3s ease-in-out);
+				margin: 0 $margin - 7px;
+				text-align: center !important;
+				@include mobile-xs{
+					width: 35px;
+					height: 35px;
+					line-height: 30px;
+				}
+				@include mobile{
+					width: 45px;
+					height: 45px;
+					line-height: 40px;
+				}
+				span{
+					font-size: $font-size*2+4px;
+					@include mobile-xs{
+						line-height: 20px;
+					}
+					@include mobile{
+						line-height: 30px;
+					}
+				}
+				&:hover{
+					color: $white-color;
+					background-color: $primary-color;
+					border-color: $primary-color;
+				}
+			}
+		}
+		li.active{
+			a{
+				color: $white-color;
+				background-color: $primary-color;
+				border-color: $primary-color;
+			}
+		}
+	}
+}
+%sectionTitle{
+	font-weight: 400;
+	text-transform: capitalize;
+	margin-bottom: $margin*3;
+}
+.commentsArea{
+	h3{
+		@extend %sectionTitle;
+	}
+	.media{
+		margin: 0 0 $margin*5 0;
+		a{
+			padding-right: $padding*2;
+		}
+		.media-body{
+			.media{
+				margin: $margin*5 0 0 0;
+			}
+			h4, p{
+				text-transform: capitalize;
+				font-size: $font-size+4px;
+				margin: 0 0 $margin+4px 0;
+				display: block;
+				span{
+					color: $text-slider-title;
+					font-weight: 400;
+					i{
+						margin-right: $margin+4px;
+					}
+				}
+			}
+			p{
+				color: $text-slider-title;
+				line-height: 22px; 
+			}
+			.btn-link{
+				padding: 0;
+				color: $text-slider-title;
+				@include transition(all 0.3s ease-in-out);
+				text-transform: capitalize;
+				font-size: $font-size+4px;
+				&:hover{
+					color: $primary-color;
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}
+.singleBlog{
+	.thumbnail{
+		padding-bottom: 0;
+	}
+}

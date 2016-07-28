@@ -1,0 +1,584 @@
+/*=== 7. PRODUCTS ===*/
+/*=== 7.1 PRODUCTS COMMON ===*/
+.productsContent{
+	.productBox{
+		@extend .imageBox;
+		.productImage{
+			@include tablet{
+				width: 100%;
+				height: auto;
+			}
+			@include desktops{
+				width: 100%;
+				height: auto;
+			}
+		}
+	}
+}
+.filterArea{
+	margin-bottom: $margin*3;
+	.btn-group{
+		.btn-default{
+			height: 35px;
+			padding: 0;
+			line-height: 35px;
+			border-radius: 0;
+			border-color: $border-gray;
+			margin: 0 0 0 $margin - 5px;
+			color: $secondary-color;
+			box-shadow: none;
+			@include transition(all 0.3s ease-in-out);
+			i{
+				@include mobile-xs{
+					margin-right: 0;
+				}
+				@include mobile{
+					margin-right: $margin - 4px; 
+				}
+			}
+			span{
+				@include mobile-xs{
+					display: none;
+				}
+				@include mobile{
+					display: inline-block;
+				}
+			}
+			&:hover, &.active{
+				background-color: $primary-color;
+				color: $white-color;
+				border-color: $primary-color;
+			}
+			@include mobile-xs{
+				width: 40px;
+			}
+			@include mobile{
+				width: 88px;
+			}
+		}
+	}
+}
+.productListSingle{
+	.media{
+		margin-bottom: $margin*5;
+		.media-left{
+			position: relative;
+			padding-right: 0;
+			overflow: hidden;
+			img{
+				@include transition(all 0.5s ease-in-out);
+			}
+			.maskingImage{
+				@extend .masking-hover;
+				.viewBtn{
+					@extend .masking-btn;
+					width: 175px;
+					padding: 0;
+					line-height: 55px;
+				}
+			}
+			@include mobile-xs{
+				float: none !important;
+				display: block;
+				margin: 0 0 $margin*2 0;
+				img{
+					width: 100%;
+					height: auto;
+				}
+			}
+			@include mobile{
+				float: none !important;
+				display: block;
+				margin: 0 0 $margin*2 0;
+				img{
+					width: 100%;
+					height: auto;
+				}
+			}
+			@include tablet{
+				float: left !important;
+				margin-right: $margin*3;
+				display: inline-block;
+				width: 226px;
+				img{
+					width: 100%;
+					height: auto;
+				}
+			}
+		}
+		.media-body{
+			.media-heading a{
+				font-size: $font-size*2;
+				letter-spacing: 1px;
+				margin-bottom: $margin*2+5px;
+				@include transition(all 0.3s ease-in-out);
+				color: inherit;
+			}
+			p{
+				font-size: $font-size+4px;
+				color: $text-gray;
+				line-height: 22px;
+				margin-bottom: $margin*2+5px;
+			}
+			h3{
+				color: $text-product-price;
+				font-weight: 700;
+				margin-bottom: $margin*2+5px;
+				@include transition(all 0.3s ease-in-out);
+			}
+			.btn-group{
+				.btn-default{
+					border-radius: 0;
+					width: 35px;
+					height: 35px;
+					padding: 0;
+					text-align: center;
+					margin-right: $margin - 3px;
+					border-color: $border-gray;
+					@include transition(all 0.3s ease-in-out);
+					i{
+						@include transition(all 0.3s ease-in-out);
+						color: $text-gray;
+					}
+					&:hover, &:focus{
+						background-color: $primary-color;
+						border-color:$primary-color; 
+						i{
+							color: $white-color;
+						}
+					}
+				}
+			}
+		}
+		&:hover{
+			.pull-left{
+				img{
+					@include transform(scale(1.2));
+				}
+			}
+			.maskingImage{
+				opacity: 1;
+				.viewBtn{
+					-webkit-animation: itemMove 0.3s linear;
+					animation: itemMove 0.3s linear;
+				}
+			}
+		} 
+		&:hover .media-heading,
+		&:hover h3{
+			color: $primary-color;
+		}
+	}
+}
+
+/*=== 7.2 SINGLE PRODUCTS ===*/
+.singleProduct{
+	.media{
+		margin-bottom: $margin*7;
+		.productSlider{
+			@include mobile-xs{
+				width: 100%;
+				padding: 0 0 $padding*3 0;
+			}
+			@include mobile{
+				width: 100%;
+				padding: 0 0 $padding*3 0;
+			}
+			@include tablet{
+				width: 100%;
+				padding: 0 0 $padding*3 0;
+			}
+			@include desktops{
+				width: 489px;
+				padding: 0 $padding*3 0 0;
+			}
+			#carousel{
+				margin-bottom: $margin*2;
+				.item{
+					img{
+						width: 100%
+					}
+				}
+			}
+			#thumbcarousel{
+					.thumb{
+						width: 23.35%;
+						cursor: pointer;
+						float: left;
+						@include transition(all 0.3s ease-in-out); 
+						@include mobile-xs{
+							margin-right: 2.1%;
+						}
+						@include mobile{
+							margin-right: 2.1%;
+						}
+						@include tablet{
+							margin-right: 2.1%;
+						}
+						@include desktops{
+							margin-right: $margin;
+						}
+						img{
+							width: 100%;
+						}
+						&:last-child{
+							margin-right: 0;
+						}
+						&:hover{
+							opacity: .8;
+						}
+				}
+				.carousel-control{
+					display: none;
+				}
+			}
+		}
+		.media-body{
+			@extend %productInfo;
+			@include mobile-xs{
+				display: block;
+				width: 100%;
+			}
+			@include mobile{
+				display: block;
+				width: 100%;
+			}
+			@include desktops{
+				display: table-cell;
+			}
+			.list-inline{
+				margin-bottom: $margin*3;
+				li{
+					a{
+						color: $text-light-three;
+						@include transition(all 0.3s ease-in-out);
+						i{
+							margin-right: $margin - 2px;
+						}
+						&:hover{
+							opacity: .8;
+						}
+					}
+				}
+			}
+			.btn-area{
+				margin-bottom: $margin*4;
+			}
+			.tabArea{
+				
+				.nav-tabs{
+					li{
+						a{
+							
+							text-transform: uppercase;
+							border: none;
+							color: $text-light-three;
+							@include transition(all 0.3s ease-in-out);
+							&:hover{
+								color: $secondary-color;
+								background-color: transparent;
+							}
+							@include mobile-xs{
+								font-size: $font-size;
+								padding: $padding;
+							}
+							@include mobile{
+								font-size: $font-size+3px;
+								padding: $padding $padding+5px;
+							}
+						}
+						&.active{
+							a{
+								color: $secondary-color;
+								@include add-border(1px, $text-gray, bottom);
+							}
+						}
+					} 
+				}
+				.tab-content{
+					padding: $padding*2+5px 0;
+					color: $text-light-three;
+					p{
+						color: $text-light-three;
+						line-height: 18px;
+					}
+					.list-unstyled{
+						padding-left: $padding+5px;
+						li{
+							list-style-type: square;
+						}
+					}
+				}
+				@include mobile-xs{
+					width: 100%;
+				}
+				@include mobile{
+					width: 348px;
+				}
+			}
+		}
+	}
+}
+/*=== 7.3 CART PRODUCTS ===*/
+%cartInput{
+	border-radius: 0;
+	box-shadow: none;
+	height: 40px;
+	background-color: $white-color;
+	@include add-border(2px, $border-gray, all);
+}
+%buttonFont{
+	text-transform: uppercase;
+	font-size: $font-size+3px;
+	font-weight: 700;
+}
+%tableDiv{
+	display: block;
+	float: left;
+	padding: $padding*2 $padding*3;
+	width: 100%;
+	@include add-border(5px, $light-color, right-left);
+	@include add-border(3px, $light-color, bottom);
+}
+%tableHead{
+	background-color: $primary-color;
+	padding: 0;
+	height: 55px;
+	vertical-align: middle;
+	text-align: left;
+	font-size: $font-size+5px;
+	color: $white-color;
+	padding-left: $padding*2;
+	@include add-border(1px, rgba(255,255,255,0.2), right);
+	border-bottom: none;
+}
+%tableData{
+	vertical-align: middle;
+	text-transform: uppercase;
+	font-weight: 700;
+	@include add-border(3px, $light-color, bottom);
+	border-top: none;
+}
+%closeBtn{
+	display: inline-block;
+	float: left;
+	font-size: $font-size*3+5px;
+	margin-right: $margin*3;
+	color: $primary-color;
+	opacity: 1;
+	line-height: 74px;
+	font-weight: normal;
+	@include transition(all 0.3s ease-in-out);
+	&:hover{
+		opacity: .8;
+	}
+	@include tablet{
+		margin-right: $margin - 5px;
+	}
+	@include desktops{
+		margin-right: $margin*3;
+	}
+}
+.cartListInner{
+	.table-responsive{
+		margin-bottom: 0;
+		@include mobile{
+			overflow-x: auto;
+		}
+		@include tablet{
+			overflow-x: visible;
+		}
+		.table{
+			margin-bottom: 0;
+			thead{
+				tr{
+					@include add-border(5px, $primary-color, right-left);
+					th{
+						@extend %tableHead;
+						&:last-child{
+							border-right: none;
+						}
+						&:first-child{
+							@include mobile-xs{
+								display: none;
+							}
+							@include mobile{
+								display: none;
+							}
+							@include tablet{
+								display: table-cell;
+							}
+						}
+					}
+				}
+			}
+			tbody{
+				tr{
+					@include add-border(5px, $light-color, right-left);
+					td{
+						@extend %tableData;
+						@include mobile{
+							padding: $padding;
+						}
+						@include tablet{
+							padding: $padding;
+						}
+						@include tablet{
+							padding-left: $padding*2;
+						}
+						.close{
+							@extend %closeBtn;
+						}
+						.cartImage{
+							display: inline-block;
+							float: left;
+						}
+						&:nth-child(3){
+							color: $text-gray;
+						}
+						input{
+							width: 70px;
+							height: 40px;
+							text-align: center;
+							line-height: 40px;
+							color: $text-dark;
+							font-weight: 700;
+							@include add-border(1px, $border-light, all);
+						}
+						&:first-child{
+							@include mobile-xs{
+								display: none;
+							}
+							@include mobile{
+								display: none;
+							}
+							@include tablet{
+								display: table-cell;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.updateArea{
+		@extend %tableDiv;
+		.input-group{
+			float: left;
+			@include mobile-xs{
+				width: 100%;
+				margin-bottom: $margin*2;
+			}
+			@include mobile{
+				width: 100%;
+				margin-bottom: $margin*2;
+			}
+			@include tablet{
+				width: 435px;
+				margin-bottom: 0;
+			}
+			.form-control{
+				@extend %cartInput;
+				margin-right: $margin;
+				margin-right: $margin;
+				border-color: $border-light;
+				@include mobile-xs{
+					width: 50%;
+				}
+				@include mobile{
+					width: 60%;
+				}
+				@include tablet{
+					width: 285px;
+				}
+			}
+			.input-group-addon{
+				@extend %cartInput;
+				@extend %buttonFont;
+				@include transition(all 0.3s ease-in-out);
+				&:hover{
+					opacity: .8;
+				}
+				@include mobile-xs{
+					width: 45%;
+					font-size: $font-size;
+				}
+				@include mobile{
+					width: 35%;
+				}
+				@include tablet{
+					width: 140px;
+				}
+			}
+		}
+		.btn{
+			@extend %cartInput;
+			@extend %buttonFont;
+			display: inline-block;
+			@include transition(all 0.3s ease-in-out);
+			padding: 0;
+			line-height: 36px;
+			color: $secondary-color;
+			&:hover{
+				background-color: $primary-color;
+				border-color: $primary-color;
+				color: $white-color;
+			}
+			@include mobile-xs{
+				width: 100%;
+				float: left;
+			}
+			@include mobile{
+				width: 100%;
+				float: left;
+			}
+			@include tablet{
+				width: 127px;
+				float: right;
+			}
+		}
+	}
+	.totalAmountArea{
+		@extend %tableDiv;
+		.list-unstyled{
+			li{
+				font-weight: 700;
+				text-align: right;
+				margin: $margin 0;
+				span{
+					width: 108px;
+					display: inline-block;
+					color: $text-gray;
+				}
+				.grandTotal{
+					color: $secondary-color;
+				}
+			}
+		}
+	}
+	.checkBtnArea{
+		@extend %tableDiv;
+		border-bottom-width: 5px;
+		.btn-primary{
+			width: 196px;
+			height: 55px;
+			border-radius: 0;
+			border: none;
+			background-color: $primary-color;
+			padding: 0 $padding*2;
+			line-height: 55px;
+			position: relative;
+			text-align: center;
+			font-weight: 700;
+			float: right;
+			font-size: $font-size+5px;
+			@include transition(all 0.3s ease-in-out);
+			i{
+				margin-left: $margin;
+			}
+			&:hover{
+				opacity: .8;
+			}
+		}
+	}
+}

@@ -1,0 +1,156 @@
+/*=== 11. ABOUT US ===*/
+.aboutUsInfo{
+	img{
+		width: 100%;
+		height: auto;
+		@include mobile-xs{
+			margin-bottom: $margin*2;
+		}
+		@include mobile{
+			margin-bottom: $margin*2;
+		}
+		@include tablet{
+			margin-bottom: 0;
+		}
+	}
+	p{
+		font-size: $font-size+4px;
+		color: $text-slider-title;
+		line-height: 22px;
+	}
+	.lead{
+		font-size: $font-size+5px;
+		font-weight: 400;
+		color: $secondary-color;
+	}
+	.list-unstyled{
+		li{
+			font-size: $font-size+4px;
+			color: $text-slider-title;
+			line-height: 30px;
+			padding-left: $padding+8px;
+			
+			&:before{
+				content: "";
+			    width: 8px;
+			    height: 8px;
+			    position: relative;
+			    left: -10px;
+			    top: -1px;
+			    background: $primary-color;
+			    @include transform(rotate(45deg));
+			    display: inline-block;
+			}
+		}
+		@include mobile{
+			margin-bottom: $margin*5;
+		}
+		@include tablet{
+			margin-bottom: 0;
+		}
+	}
+}
+%sectionTitleSmall{
+	color: $white-color;
+	text-transform: capitalize;
+	font-weight: 400;
+	margin-bottom: $margin*2+5px;
+}
+%captionTitle{
+	color: $white-color;
+	text-transform: capitalize;
+	font-size: $font-size+5px;
+	margin-bottom: $margin+6px;
+}
+.darkSection{
+	background-image: url("../img/about-us/store-bg.jpg");
+	background-attachment: fixed;
+	width: 100%;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	color: $white-color;
+	padding: $padding*10 0;
+	h3{
+		@extend %sectionTitleSmall;
+	}
+	.thumbnail{
+		padding: $padding*2;
+		background-color: rgba(black, .4);
+		min-height: 180px;
+		margin-bottom: $margin*3;
+		.caption{
+			padding: 0;
+			h5{
+				@extend %captionTitle;
+			}
+			address{
+				font-size: $font-size+2px;
+				color: rgba($white-color, .7);
+				font-weight: 700;
+				line-height: 22px;
+				@include mobile{
+					font-size: $font-size+2px;
+				}
+				@include tablet{
+					font-size: $font-size+2px;
+				}
+				@include desktops{
+					font-size: $font-size;
+				}
+				@include large-desktops{
+					font-size: $font-size;
+				}
+			}
+		}
+	}
+	.btn-default{
+		width: 141px;
+		height: 45px;
+		background-color: transparent;
+		@include add-border(2px, rgba($border-blues, .5), all);
+		border-radius: 0;
+		color: $white-color;
+		padding: 0;
+		line-height: 45px;
+		font-size: $font-size+4px;
+		font-weight: 700;
+		@include transition(all 0.3s ease-in-out);
+		&:hover{
+			background-color: $primary-color;
+			color: $white-color;
+			border-color: $primary-color;
+		}
+	}
+}
+.aboutPeople{
+	@include mobile{
+		padding-bottom: $padding*9;
+	}
+	@include mobile{
+		padding-bottom: $padding*6;
+	}
+	h3{
+		@extend %sectionTitleSmall;
+		color: $secondary-color;
+	}
+	.thumbnail{
+		img{
+			width: 100%;
+			height: auto;
+		}
+		.caption{
+			padding-top: $padding+8px; 
+			h5{
+				@extend %captionTitle;
+				color: $secondary-color;
+				text-transform: uppercase;
+				margin-bottom: $margin - 5px;
+			}
+			p{
+				font-size: $font-size+3px;
+			}
+		}
+	}
+}

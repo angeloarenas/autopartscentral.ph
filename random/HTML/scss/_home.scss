@@ -1,0 +1,497 @@
+/*================= 2. HOME ==================*/
+@import 'header-v1';
+@import 'footer';
+/*=== 2.3 BANNER ===*/
+.fullscreenbanner-container {
+	width:100%;
+	position:relative;
+	padding:0;
+	.tp-bullets.preview4{
+		position: relative;
+		left: 0 !important; 
+		bottom: 0 !important;
+		padding: 9px 50px;
+		width: 150px;
+		height: 30px;
+		margin: -15px auto 0px auto !important;
+		display: block;
+		@include linear-gradient(to bottom, $primary-color-light 0%, $primary-color-light 50%, $primary-color 51%, $primary-color 100%);
+		text-align: center;
+		&::before{
+			content: "";
+			width: 22px;
+			height: 22px;
+			position: absolute;
+			left: -10px;
+			top: 4px;
+			z-index: -1;
+			@include linear-gradient(135deg, $primary-color-light 0%, $primary-color-light 50%, $primary-color 51%, $primary-color 100%);
+			@include transform(rotate(45deg));
+		}
+		&::after{
+			content: "";
+			width: 22px;
+			height: 22px;
+			position: absolute;
+			right: -10px;
+			top: 4px;
+			z-index: -1;
+			@include linear-gradient(135deg, $primary-color-light 0%, $primary-color-light 50%, $primary-color 51%, $primary-color 100%);
+			@include transform(rotate(45deg));
+		}
+		&.hidebullets{
+			opacity: 1;
+		}
+	}
+	.tp-bullets.preview4 .bullet {
+		background-color: rgba($white-color, .5) !important;
+		@include border-radius (50%);
+		box-shadow: none!important;
+		width: 9px !important;
+		height: 9px !important;
+		border:  0 !important;
+		display: inline-block;
+		margin: 0 $margin - 8px $margin - 8px $margin - 8px!important;
+		@include transition (background-color 0.2s, border-color 0.2s);
+		float: none !important;
+	}
+	.tp-bullets.preview4 .bullet:hover, .tp-bullets.preview4 .bullet.selected {
+		box-shadow: none!important;
+		background-color: $white-color !important;
+	}
+	.tparrows.preview4 .tp-arr-iwrapper {
+		display: none !important;
+	}
+}
+.tp-bullets{
+	z-index: 99;
+}
+@include tablet {
+	.tparrows.preview4:hover:after{	
+		-webkit-transform: rotateY(0);
+		transform:rotateY(0);
+	 }
+	.tp-leftarrow.preview4:hover:after{	
+		-webkit-transform: rotateY(0); 
+		transform:rotateY(0)
+	}
+}
+.fullscreenbanner{
+	color: $text-light;
+	width:100%;
+	position:relative;
+}
+.tp-caption{
+	white-space: normal!important;
+	width: inherit;
+	@include tablet {
+		width: 80%;
+	}
+	@include desktops {
+		width: 70%;
+	}
+	@include large-desktops {
+		width: 55%;
+	}
+}
+.captionCenterAlign{
+	width: auto !important;
+	text-align: center !important;
+	margin: 0 auto !important;
+}
+.tp-caption.rs-caption-2{
+	text-transform: uppercase;
+	color: $text-slider-title !important;
+	font-size: 14px !important;
+		line-height: 20px !important;
+	@include mobile {
+		font-size: 16px !important;
+		line-height: 22px !important;
+	}
+	@include tablet {
+		font-size: 36px !important;
+		line-height: 42px !important;
+	}
+}
+.tp-caption.rs-caption-3{
+	text-transform: uppercase;
+	color: $text-slider-subtitle !important;
+	font-weight: 300;
+	font-size: 12px !important;
+		line-height: 18px !important;
+	@include mobile {
+		font-size: 14px !important;
+		line-height: 20px !important;
+	}
+	@include tablet {
+		font-size: 24px !important;
+		line-height: 36px !important;
+	}
+	small{
+		color: $secondary-color !important;
+		font-size: 10px !important;
+			line-height: 16px !important;
+		@include mobile {
+			font-size: 12px !important;
+			line-height: 18px !important;
+		}
+		@include tablet {
+			font-size: 14px !important;
+			line-height: 20px !important;
+		}	
+	}
+}
+.tp-caption.rs-caption-4{
+	.btn{
+		@include add-border(3px, $primary-color, all);
+		color: $secondary-color !important;
+		font-weight: 700;
+		font-size: $font-size+8px;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		width: 196px;
+		height: 55px;
+		line-height: 50px;
+		text-align: left;
+		text-indent: 32px;
+		border-radius: 0;
+		@include transition(all 0.3s ease-in-out);
+		@include mobile-xs {
+			display: none;
+		}
+		@include mobile {
+			display: none;
+		}
+		@include tablet {
+			display: block;
+			padding: 0 !important;
+		}
+		i{
+			color: $primary-color;
+			@include transition(all 0.3s ease-in-out);
+		}
+		&:hover{
+			background-color: $primary-color;
+			color: $white-color !important;
+			i{
+				color: $white-color;
+			}
+		}
+	}
+}
+.fullscreenbanner .tp-dottedoverlay.twoxtwo {
+	background-image: none!important;
+	z-index: 1;
+}
+.captionCenter{
+	.tp-caption.rs-caption-2{
+		text-transform: uppercase;
+		color: $text-slider-subtitle !important;
+		font-weight: 300;
+		@include mobile {
+			font-size: 12px !important;
+			line-height: 18px !important;
+		}
+		@include tablet {
+			font-size: 24px !important;
+			line-height: 36px !important;
+		}
+	}
+	.tp-caption.rs-caption-3{
+		text-transform: uppercase;
+		color: $text-slider-title !important;
+		@include mobile {
+			font-size: 14px !important;
+			line-height: 20px !important;
+		}
+		@include tablet {
+			font-size: 36px !important;
+			line-height: 42px !important;
+		}
+	}
+}
+/*=== 2.4 WHITE SECTION ===*/
+.page-header{
+	margin: 0 0 $margin+7px 0;
+	@include add-border(5px, $border-light, bottom);
+	h4{
+		margin-bottom: 0;
+		text-transform: uppercase;
+	}
+}
+.masking-hover{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba($primary-color, .9);
+	opacity: 0;
+	@include transition(all 0.3s ease-in-out);
+}
+.content-center{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	@include transform(translate(-50%, -50%));
+}
+.thumbnail{
+	border: none;
+	border-radius: 0;
+	padding: 0;
+	.caption{
+		padding: $padding*2 0 0 0;
+	}
+}
+.imageBox{
+	height: auto;
+	display: block;
+	cursor: pointer;
+	margin-bottom: $margin*8;
+	.productImage{
+		position: relative;
+		margin-bottom: $margin*2;
+		display: block;
+		overflow: hidden;
+		img{
+			@include transition(all 0.5s ease-in-out);
+			width: 100%;
+		}
+		&:hover{
+			img{
+				@include transform(scale(1.2));
+			}
+		}
+		.productMasking{
+			@extend .masking-hover;
+			ul{
+				width: 157px;
+				height: 42px;
+				@extend .content-center;
+				li{
+					padding: 0 $padding - 6px;
+					a{
+						width: 42px;
+						height: 42px;
+						padding: 0;
+						text-align: center;
+						@include add-border(3px, rgba(255, 255, 255, 0.6), all);
+						border-radius: 0px;
+						background-color: transparent;
+						line-height: 36px;
+						@include transition(all 0.3s ease-in-out);
+						i{
+							@include transition(all 0.3s ease-in-out);
+							font-size: 14px;
+							color: $white-color;
+						}
+						&:hover{
+							background-color:$white-color; 
+							border-color: $white-color; 
+							i{
+								color: $primary-color;
+							}
+						} 
+					}
+				}
+			}
+		}
+		@include mobile{
+			width: 100%;
+			height: auto;
+		}
+	}
+	&:hover .productMasking{
+		opacity: 1;
+		ul{
+			-webkit-animation: itemMove 0.3s linear;
+			animation: itemMove 0.3s linear;
+		}
+	}
+	.productCaption{
+		width: 100%;
+		display: block;
+		h5{
+			font-size: $font-size + 2px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			margin-bottom: $margin;
+		}
+		h3{
+			color: $text-product-price;
+			font-weight: 700;
+			margin-bottom: 0;
+		}
+	}
+	margin-bottom: $margin*3;
+}
+
+.masking-btn{
+	width: 196px;
+	min-height: 55px;
+	@extend .content-center;
+	@include add-border(3px, $white-color, all);
+	text-transform: uppercase;
+	font-weight: 700;
+	color: $white-color;
+	font-size: $font-size+6px;
+	@include transition(all 0.3s ease-in-out);
+	box-shadow: 0;
+	border-radius: 0;
+	padding:0;
+	line-height: 55px;
+	&:hover{
+		background-color: $white-color;
+		color: $primary-color;
+	}
+}
+.whiteSection, .mainContent{
+	background-color: $white-color;
+	@include mobile-xs{
+		padding: $padding*4 0 $padding*4 0;	
+	}
+	@include mobile{
+		padding: $padding*9 0 0 0;	
+	}
+	@include tablet{
+		padding: $padding*9 0 $padding*6 0;	
+	}
+	.featuredCollection{
+		.thumbnail{
+			cursor: pointer;
+			@include mobile-xs{
+				margin-bottom: $margin*4 !important;
+			}
+			@include mobile{
+				margin-bottom: $margin*4 !important;
+			}
+			@include tablet{
+				margin-bottom: $margin*8+8px;
+			}
+			.imageWrapper{
+				position: relative;
+				width: 100%;
+				overflow: hidden;
+				img{
+					@include transition(all 0.5s ease-in-out);
+					width: 100%;
+				}
+				.masking{
+					@extend .masking-hover;
+					.viewBtn{
+						@extend .masking-btn;
+					}
+				}
+			}
+			&:hover .imageWrapper{
+				.masking{
+					opacity:1;
+				}
+				img{
+					@include transform(scale(1.2));
+				}
+				.viewBtn{
+					-webkit-animation: itemMove 0.3s linear;
+					animation: itemMove 0.3s linear;
+				}
+			} 
+			.caption{
+				h4{
+					margin-bottom: 0;
+					text-transform: uppercase;
+					@include transition(all 0.3s ease-in-out);
+				}
+			}
+			&:hover .caption{
+				h4{
+					color: $primary-color;
+				}
+			}
+		}
+	}
+	.featuredProducts{
+		.slide{
+			@extend .imageBox;
+		}
+	}
+	.latestArticles{
+		.thumbnail{
+			margin-bottom: $margin*3;
+			h5{
+				font-size: $font-size+2px;
+				letter-spacing: 1px;
+				line-height: 18px;
+				text-transform: uppercase;
+				margin-bottom: 0;
+				a{
+					font-size: inherit;
+					letter-spacing: inherit;
+					color: $secondary-color;
+				}
+				span{
+					text-transform: capitalize;
+					color: $text-light-two;
+					a{
+						color: $text-light-two;
+						text-decoration: underline !important;
+					}
+				}
+			}
+			span{
+				text-transform: capitalize;
+				color: $text-light-two;
+				display: block;
+				margin-bottom: $margin;
+				a{
+					color: $text-light-two;
+					text-decoration: underline !important;
+				}
+			}
+			img{
+				width: 100%;
+			}
+			p{
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+/*=== 2.5 LIGHT SECTION ===*/
+.lightSection{
+	background-color: $light-color;
+	height: 125px;
+	.partnersLogoSlider{
+		.owl-nav{
+			display: none;
+		}
+		.slide{
+			display: table;
+			height: 125px;
+			width: 100%;
+			.partnersLogo{
+				display: table-cell;
+				vertical-align: middle;
+				text-align:center !important;
+				img{
+					width: auto;
+					margin: 0 auto;
+				}
+				@include mobile{
+					width: 100%;
+				}
+				@include tablet{
+					width: 270px;
+				}
+			}
+		}
+	}
+}
+@-webkit-keyframes itemMove {
+	0% {top:55%;}
+	100% {top:50%;}
+}
+@keyframes itemMove {
+	0% {top:55%;}
+	100% {top:50%;}
+}

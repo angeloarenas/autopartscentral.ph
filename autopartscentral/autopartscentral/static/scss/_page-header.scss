@@ -1,0 +1,150 @@
+/*=== 5. PAGE HEADER ===*/
+
+/*=== 5.1 COMMON HEADER ===*/
+.pageHeader{
+	.col-xs-6{
+		@include mobile-xs{
+			width: 100%;
+			padding-top: $padding;
+		}
+		@include mobile{
+			width: 50%;
+			padding-top: 0;
+		}
+	}
+}
+.pageHeader{
+	height: 70px;
+	.page-title{
+		h2{
+			color: $text-slider-title;
+			text-transform: uppercase;
+			font-weight: 400;
+			margin-bottom: 0;
+			@include mobile-xs{
+				font-size: $font-size+2px; 
+				line-height: 18px;
+			}
+			@include mobile{
+				font-size: $font-size+2px; 
+				line-height: 70px;
+			}
+			@include tablet{
+				font-size: $font-size*2+4px; 
+			}
+			@include desktops{
+				font-size: $font-size*3; 
+			}
+		}
+	}
+	ol.breadcrumb{
+		background-color: transparent;
+		
+		margin-bottom: 0;
+		padding: 0 ;
+		@include mobile-xs{
+			float: left !important;
+			min-height: 15px;
+		}
+		@include mobile{
+			float: right !important;
+			min-height: 70px;
+		}
+		.active{
+			color: $secondary-color;
+			text-transform: uppercase;
+			@include mobile{
+				font-size: $font-size - 1px;
+			}
+			@include tablet{
+				font-size: $font-size+2px;
+			}
+		}
+		li{
+			+ li::before{
+				@include mobile{
+					padding: 0
+				}
+				@include tablet{
+					padding: 0 $padding - 5px;
+				}
+			}
+			a{
+				
+				text-transform: uppercase;
+				color: $text-breadcrumb;
+				@include transition(all 0.3s ease-in-out);
+				&:hover{
+					opacity: .9;
+				}
+				@include mobile{
+					font-size: $font-size - 1px;
+					line-height: 15px;
+				}
+				@include mobile{
+					font-size: $font-size - 1px;
+					line-height: 70px;
+				}
+				@include tablet{
+					font-size: $font-size+2px;
+				}
+			}
+		}
+	}
+}
+/*=== 5.2 ABOUT US HEADER===*/
+.aboutUsInfo{
+	.page-header{
+		border: none;
+		padding: 0;
+		margin: 0;
+		h3{
+			text-transform: capitalize;
+			font-weight: 400;
+			@include mobile-xs{
+				margin-bottom: $margin*2;
+			}
+			@include mobile{
+				margin-bottom: $margin*2;
+			}
+			@include tablet{
+				margin-bottom: $margin*4+5px;
+			}
+		}
+	}
+}
+/*=== 5.3 CART PAGE HEADER ===*/
+.pageHeaderImage{
+	@include background-image;
+	height: 200px;
+	background-image: url(../img/products/page-header-image.jpg);
+	
+	.tableBlock{
+		display: table;
+		height: 200px;
+		width: 100%;
+		.tableInner{
+			display: table-cell;
+			vertical-align: middle;
+			text-align: center;
+			height: 73px;
+			.page-title{
+				h2{
+					color: $white-color-2;
+					font-weight: 400;
+					margin-bottom: $margin*2;
+				}
+				.breadcrumb{
+					background-color: transparent;
+					margin-bottom: 0;
+					padding: 0;
+					li{
+						text-transform: uppercase;
+						color: $white-color-3;
+					}
+				}
+			}
+		}
+	}
+	
+}

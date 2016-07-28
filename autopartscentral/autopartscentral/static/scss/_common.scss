@@ -1,0 +1,55 @@
+/*=== 1.COMMON ===*/
+.container{
+    width: 100%;
+	@include mobile {
+    	width: 450px;
+    }
+    @include tablet {
+    	width: 750px;
+    }
+    @include desktops {
+    	width: 970px;
+    }
+    @include large-desktops {
+    	width: 1170px;
+    }
+}
+.btn{
+	display: inline-block;
+	@include border-radius(4px);
+	text-transform: uppercase;
+    text-align: center;
+    font-size: 14px;
+    padding: 9px 0;
+    outline: 0 !important;
+    @include mobile {
+    	font-size: 15px;
+    	padding: 13px 0;
+    }
+    @include tablet {
+    	font-size: 12px;
+    	padding: 8px 0;
+    }
+    @include desktops {
+    	font-size: 14px;
+    	padding: 12px 0;
+    }
+    @include large-desktops {
+    	font-size: 15px;
+    	padding: 13px 0;
+    }
+}
+.main-wrapper{
+    position: relative;
+}
+a{
+    color: $text-link;
+    text-decoration: none !important;
+}
+a:hover, a:focus{
+    color: $text-link - 50;
+    outline: 0;
+}
+.media-left, .media>.pull-left {
+    float: left !important;
+}

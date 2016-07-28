@@ -1,0 +1,303 @@
+/*=== 12. STEPS ===*/
+/*=== 12.1 STEP # 01 ===*/
+.stepsWrapper{
+	.innerWrapper{
+		border: 5px solid #f0f0f0;
+		display: block;
+		padding: 30px 30px 0;
+		width: 100%;
+		&.stepsPage{
+			@include mobile{
+				margin-bottom: $margin*9;
+			}
+			@include tablet{
+				margin-bottom: $margin*3;
+			}
+			.panel{
+				@extend %panel-style;
+			}
+			.cartListInner{
+				margin-bottom: $margin*5;
+				float: left;
+				display: block;
+				width: 100%;
+				.totalAmountArea{
+					border-width: 5px;
+				}
+			}
+		}
+		.well{
+			border-radius: 0;
+			border: none;
+			box-shadow: none;
+			margin-bottom: $margin*5;
+			.pager{
+				margin: 0;
+				li{
+					a{
+						border-radius: 0;
+						border: none;
+						box-shadow: none;
+						padding: 0;
+						height: 45px;
+						line-height: 45px;
+						background-color: $primary-color;
+						color: $white-color;
+						font-weight: 700;
+						text-transform: uppercase;
+						font-size: $font-size+5px;
+						@include transition(all 0.3s ease-in-out);
+						&:hover{
+							background-color: $primary-color;
+							color: $white-color;
+						}
+						&.hideContent{
+							display: none;
+						}
+						@include mobile-xs{
+							width: 100%;
+							margin-bottom: 0;
+						}
+						@include mobile{
+							width: 136px;
+							margin: 0;
+						}
+					}
+					&.previous{
+						a{
+							background-color: $border-gray-lighter;
+							color: $secondary-color;
+							margin-bottom: $margin;
+							&:hover{
+								background-color: $primary-color;
+								color: $white-color;
+							}
+						}
+					}
+				}
+			}
+		}
+		.orderBox{
+			.table-responsive{
+				.table{
+					tbody{
+						tr{
+							td{
+								text-transform: capitalize;
+								.checkboxArea{
+									margin: 0;
+									float: none;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
+%after{
+	content: ' '; 
+	width: 14px; 
+	height: 14px; 
+	background: $white-color; 
+	@include border-radius($radius: 50%);
+	position: absolute; 
+	top: 8px; 
+	left: 8px;
+}
+.progress-wizard { 
+	padding: 0 $padding+5px $padding*5 $padding+5px;
+	.progress-wizard-step {
+		padding: 0; 
+		position: relative;
+		.progress-wizard-stepnum {
+			color: $secondary-color;
+			margin-bottom: $margin - 5px;
+			@include mobile-xs{
+				font-size: $font-size;
+				height: 55px;
+			}
+			@include mobile{
+				font-size: $font-size;
+				height: 36px;
+			}
+			@include tablet{
+				font-size: $font-size+2px;
+				height: auto;
+			}
+			@include desktops{
+				font-size: $font-size+4px;
+			}
+		}
+		.progress-wizard-info {
+			color: #999; 
+			font-size: 14px;
+		}
+		.progress-wizard-dot {
+			position: absolute; 
+			width: 30px; 
+			height: 30px; 
+			display: block; 
+			background: $primary-color; 
+			left: 50%; 
+			margin-top: $margin - 25px; 
+			margin-left: $margin - 25px; 
+			@include border-radius($radius: 50%);
+			&:after {
+				@extend %after;
+			} 
+			@include mobile{
+				top: 60px;
+			}
+			@include tablet{
+				top: 43px; 
+			}
+		}
+		.progress {
+			position: relative; 
+			@include border-radius(0);
+			height: 8px; 
+			box-shadow: none; 
+			margin: $margin*2 0;
+			background-color: $light-color;
+			.progress-bar {
+				width:0px; 
+				box-shadow: none; 
+				background: $primary-color;
+			}
+		}
+		&.complete{
+			.progress{
+				.progress-bar{
+					width:100%;
+				}
+			}
+			&:first-child{
+				.progress{
+					left: 0; 
+					width: 100%;
+					.progress-bar{
+						width:50%;
+
+					}
+				}
+			}
+			&:last-child{
+				.progress{
+					width: 100%;
+					.progress-bar{
+						width:100%;
+					}
+				}
+			}
+			&.fullBar{
+				.progress{
+					.progress-bar{
+						width:100%;
+					}
+				}
+			}
+		}
+		&.active{
+			.progress{
+				.progress-bar{
+					width:50%;
+				}
+			}
+		}
+		&.disabled{
+			.progress-wizard-dot {
+				background-color: $light-color;
+				&:after {
+					@extend %after;
+				}
+			}
+		}
+	}
+}
+/*=== 12.5 STEP # 05 ===*/
+.setp5{
+	padding-bottom: $padding*9;
+	.thanksContent{
+		@include add-border(5px, $light-color, all);
+		padding: $padding*5 $padding*3;
+		h2{
+			display: block;
+			text-align: center;
+			text-transform: capitalize;
+			font-weight: 700;
+			margin-bottom: $margin*5+5px;
+			@include mobile{
+				font-size: $font-size*2+6px;
+			}
+			@include tablet{
+				font-size: $font-size*3;
+			}
+			small{
+				display: block;
+				margin-top: $margin+4px;
+				font-size: $font-size+4px;
+			}
+		}
+		h3{
+			@extend %sectionTitleSmall;
+			color: $secondary-color;
+		} 
+		.thanksInner{
+			padding: $padding*3;
+			min-height: 214px;
+			@include add-border(3px, $light-color, all);
+			.tableBlcok{
+				display: table;
+				height: 154px;
+				address{
+					display: table-cell;
+					vertical-align: middle;
+					text-align:left;
+					font-size: $font-size+5px;
+					font-weight: 300;
+					line-height: 30px;
+					span{
+						font-weight: 400;
+					}
+					a{
+						color: #252525;
+						text-decoration: none;
+					}
+				}
+			}
+			.well{
+				background-color: $primary-color;
+				border: none;
+				float: right;
+				border-radius: 0;
+				margin-bottom: 0;
+				text-align: center;
+				height: 154px;
+				padding: $padding*5 0 0 0;
+				@include mobile-xs{
+					width: 100%;
+				}
+				@include mobile{
+					width: 100%;
+				}
+				@include tablet{
+					width: 250px;
+				}
+				h2{
+					color: $white-color;
+					font-weight: 700;
+					margin-bottom: 0;
+					small{
+						color: $white-color;
+						font-weight: 700;
+						font-size: $font-size+5px;
+						margin: 0 0 $margin+3px 0;
+					}
+				}
+			} 
+		} 
+	}
+}

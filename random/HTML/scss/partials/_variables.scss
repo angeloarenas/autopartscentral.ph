@@ -1,0 +1,55 @@
+/*=== VARIABLES ===*/
+$primary-color:#47bac1;
+$primary-color-light:#4dc8cf;
+$primary-color-lightess:#92d5d9;
+$primary-color-lighter: #47aeb5;
+$secondary-color:#252525;
+
+
+$text-color:$secondary-color;
+$text-light:#acacac;
+$text-light-two:#bcbcbc;
+$text-light-three: #b4b4b4;
+$text-gray: #888888;
+$text-dark: #313131;
+
+$text-link: #d9d9d9;
+$text-link-two: #acacac;
+$text-field-text: #999999;
+
+$text-title-light: #5f5f5f;
+$text-slider-title:#797979;
+$text-slider-subtitle:#704664;
+$text-product-price:#c5c5c5;
+$text-breadcrumb:#969696;
+$text-shadow: #dadada;
+$text-dark: #333333;
+$text-title: #c9c9c9;
+$white-color: #ffffff;
+$white-color-2: #fffefe;
+$white-color-3: #e6e6e6;
+$light-color: #f0f0f0;
+$border-light: #e4e4e4;
+$border-lighter: #ececec;
+$border-blues: #ace0e3;
+$border-gray: #d0d0d0;
+$border-gray-lighter: #dedede;
+$border-gray-light:#bfbfbf;
+$border-sky-light:#ace0e3;
+$btn-bg:#f8f8f8;
+$facebook-color:#46639f;
+$google-plus-color:#d6513e;
+$twitter-color:#0084b4;
+$dribbble-color:#c73b6f;
+$tumblr-color:#36465d;
+
+$dark-bg:#282828;
+
+$padding: 10px;
+$margin: 10px;
+$font-size: 10px;
+
+
+@function tint($primary-color, $percentage) {
+  @return mix(white, $primary-color, $percentage);
+}
