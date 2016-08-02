@@ -214,6 +214,7 @@
             </div>
             <div class="col-xs-12">
                 <div class="owl-carousel featuredProductsSlider">
+                    {% for i in view.product_featured %}
                     <div class="slide">
                         <div class="productImage clearfix">
                             <img src="img/home/featured-product/product-01.jpg" alt="featured-product-img">
@@ -227,11 +228,12 @@
                         </div>
                         <div class="productCaption clearfix">
                             <a href="single-product.html">
-                                <h5>Mauris efficitur</h5>
+                                <h5>{{ i.name }}</h5>
                             </a>
-                            <h3>$199</h3>
+                            <h3>₱{{ i.price }}</h3>
                         </div>
                     </div>
+                    {% endfor %}
                     <div class="slide">
                         <div class="productImage">
                             <img src="img/home/featured-product/product-02.jpg" alt="featured-product-img">

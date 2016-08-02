@@ -1,13 +1,11 @@
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
-
 from django.contrib import admin
-
+from views import IndexView
 
 urlpatterns = [
-    url(r"^$", TemplateView.as_view(template_name="index.html"), name="home"),
+    url(r"^$", IndexView.as_view(), name="index"),
     url(r"^admin/", include(admin.site.urls)),
     url(r"^account/", include("account.urls")),
 ]

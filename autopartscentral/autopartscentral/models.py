@@ -28,7 +28,7 @@ class Subcategory(models.Model):
     category = models.ForeignKey(Category, related_name='scc')
     name = models.CharField(max_length=30)
     description = models.TextField(null=True)
-    image = models.ImageField(null=True,blank=True,upload_to='category_images/')
+    image = models.ImageField(null=True,blank=True,upload_to='subcategory_images/')
 
 class Brand(models.Model):
     id = models.AutoField(primary_key=True)
@@ -45,6 +45,11 @@ class Product(models.Model):
     description = models.TextField(null=True)
     image = models.ImageField(null=True,blank=True,upload_to='product_images/')
     availability = models.BooleanField(default=True)
+
+#Enforce uniqueness here!!
+class ProductFeatured(models.Model):
+    id = models.AutoField(primary_key=True)
+    product = models.ForeignKey(Product, related_name='pfp')
 
 class Discount(models.Model):
     id = models.AutoField(primary_key=True)
