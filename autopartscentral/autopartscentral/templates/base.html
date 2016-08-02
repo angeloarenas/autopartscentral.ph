@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
     {% block head %}
@@ -9,19 +11,19 @@
         <title>BIGBAG Store - Ecommerce Bootstrap Template</title>
 
         <!-- PLUGINS CSS STYLE -->
-        <link href="plugins/jquery-ui/jquery-ui.css" rel="stylesheet">
-        <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <link href="plugins/selectbox/select_option1.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="plugins/rs-plugin/css/settings.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="plugins/owl-carousel/owl.carousel.css" media="screen">
+        <link href="{% static "plugins/jquery-ui/jquery-ui.css" %}" rel="stylesheet">
+        <link href="{% static "plugins/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+        <link href="{% static "plugins/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet">
+        <link href="{% static "plugins/selectbox/select_option1.css" %}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% static "plugins/rs-plugin/css/settings.css" %}" media="screen">
+        <link rel="stylesheet" type="text/css" href="{% static "plugins/owl-carousel/owl.carousel.css" %}" media="screen">
 
         <!-- GOOGLE FONT -->
         <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
 
         <!-- CUSTOM CSS -->
-        <link href="css/style.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/colors/default.css" id="option_color">
+        <link href="{% static "css/style.css" %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static "css/colors/default.css" %}" id="option_color">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -62,10 +64,10 @@
                                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li>
-                            <span class="input-group">
-                              <input type="text" class="form-control" placeholder="Search…" aria-describedby="basic-addon2">
-                              <span class="input-group-addon" id="basic-addon2">Search</span>
-                            </span>
+                                                <span class="input-group">
+                                                  <input type="text" class="form-control" placeholder="Search…" aria-describedby="basic-addon2">
+                                                  <span class="input-group-addon" id="basic-addon2">Search</span>
+                                                </span>
                                             </li>
                                         </ul>
                                     </li>
@@ -76,7 +78,7 @@
                                             <li>
                                                 <a href="single-product.html">
                                                     <div class="media">
-                                                        <img class="media-left media-object" src="img/home/cart-items/cart-item-01.jpg" alt="cart-Image">
+                                                        <img class="media-left media-object" src="{% static "img/home/cart-items/cart-item-01.jpg" %}" alt="cart-Image">
                                                         <div class="media-body">
                                                             <h5 class="media-heading">INCIDIDUNT UT <br><span>2 X $199</span></h5>
                                                         </div>
@@ -86,7 +88,7 @@
                                             <li>
                                                 <a href="single-product.html">
                                                     <div class="media">
-                                                        <img class="media-left media-object" src="img/home/cart-items/cart-item-01.jpg" alt="cart-Image">
+                                                        <img class="media-left media-object" src="{% static "img/home/cart-items/cart-item-01.jpg" %}" alt="cart-Image">
                                                         <div class="media-body">
                                                             <h5 class="media-heading">INCIDIDUNT UT <br><span>2 X $199</span></h5>
                                                         </div>
@@ -118,7 +120,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="javascript:void(0)"><img src="img/logo.png" alt=""></a>
+                            <a class="navbar-brand" href="javascript:void(0)"><img src="{% static "img/logo.png" %}" alt=""></a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -159,7 +161,7 @@
                                             </ul>
                                         </li>
                                         <li class="col-sm-3 col-xs-12">
-                                            <a href="#" class="menu-photo"><img src="img/menu-photo.jpg" alt="menu-img"></a>
+                                            <a href="#" class="menu-photo"><img src="{% static "img/menu-photo.jpg" %}" alt="menu-img"></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -364,14 +366,14 @@
 
         {% block body_scripts %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="plugins/jquery-ui/jquery-ui.js"></script>
-        <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-        <script src="plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-        <script src="plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-        <script src="plugins/owl-carousel/owl.carousel.js"></script>
-        <script src="plugins/selectbox/jquery.selectbox-0.1.3.min.js"></script>
-        <script src="plugins/countdown/jquery.syotimer.js"></script>
-        <script src="js/custom.js"></script>
+        <script src="{% static "plugins/jquery-ui/jquery-ui.js" %}"></script>
+        <script src="{% static "plugins/bootstrap/js/bootstrap.min.js" %}"></script>
+        <script src="{% static "plugins/rs-plugin/js/jquery.themepunch.tools.min.js" %}"></script>
+        <script src="{% static "plugins/rs-plugin/js/jquery.themepunch.revolution.min.js" %}"></script>
+        <script src="{% static "plugins/owl-carousel/owl.carousel.js" %}"></script>
+        <script src="{% static "plugins/selectbox/jquery.selectbox-0.1.3.min.js" %}"></script>
+        <script src="{% static "plugins/countdown/jquery.syotimer.js" %}"></script>
+        <script src="{% static "js/custom.js" %}"></script>
         {% endblock %}
 
         {% block body_scripts_extra %} {% endblock %}
