@@ -30,12 +30,17 @@ class Subcategory(models.Model):
     description = models.TextField(null=True)
     image = models.ImageField(null=True,blank=True,upload_to='category_images/')
 
+class Brand(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     product_number = models.BigIntegerField()
     category = models.ForeignKey(Category, related_name='pc')
     subcategory = models.ForeignKey(Subcategory, related_name='psc', null=True)
+    brand = models.ForeignKey(Brand, related_name='pb')
     price = models.DecimalField(max_digits=12, decimal_places=2)
     description = models.TextField(null=True)
     image = models.ImageField(null=True,blank=True,upload_to='product_images/')
