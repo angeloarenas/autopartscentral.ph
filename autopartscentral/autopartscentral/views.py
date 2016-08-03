@@ -1,11 +1,15 @@
 from django.views.generic import TemplateView
-from models import ProductFeatured
-from models import Product
+import models
+import account.views
+import account.forms
 
 class IndexView(TemplateView):
-    template_name = "index_show.html"
+    template_name = "index.html"
 
     def product_featured(self):
-        products = Product.objects.all()
-        #products.productfeatured_set.all()
+        products = models.Product.objects.all()
         return products
+
+class LoginView(account.views.LoginView):
+    template_name = "login.html"
+    form_class = account.forms.LoginEmailForm
