@@ -13,3 +13,6 @@ class IndexView(TemplateView):
 class LoginView(account.views.LoginView):
     template_name = "login.html"
     form_class = account.forms.LoginEmailForm
+
+class SignupView(account.views.SignupView):
+    template_name = "signup.html"
