@@ -9,7 +9,7 @@ COUNTRY_CHOICES = []  # For address also add city and state
 class Address(models.Model):
     id = models.AutoField(primary_key=True)
     line_1 = models.CharField(max_length=40)
-    line_2 = models.CharField(max_length=40)
+    line_2 = models.CharField(max_length=40, null=True)
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=20)  # Just put choices here of states in PH
     country = models.CharField(max_length=20)  # Should be just PH
@@ -18,7 +18,7 @@ class Address(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='userprofile')
     first_name = models.CharField(max_length=30)
-    middle_name = models.CharField(max_length=30)
+    middle_name = models.CharField(max_length=30, null=True)
     last_name = models.CharField(max_length=30)
     contact_no = models.CharField(max_length=13)
     default_shipping_address = models.OneToOneField(Address, related_name='userprofile')  # Subject to change
