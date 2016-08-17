@@ -14,6 +14,9 @@ class Address(models.Model):
     state = models.CharField(max_length=20)  # Just put choices here of states in PH
     country = models.CharField(max_length=20)  # Should be just PH
 
+    def __unicode__(self):
+        return u'%s %s' % (self.line_1, self.line_2)
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='userprofile')
@@ -23,12 +26,18 @@ class UserProfile(models.Model):
     contact_no = models.CharField(max_length=13)
     default_shipping_address = models.OneToOneField(Address, related_name='userprofile')  # Subject to change
 
+    def __unicode__(self):
+        return u'%i: %s %s' % (self.user.id, self.first_name, self.last_name)
+
 
 class CategoryL1(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30, unique=True)
     description = models.TextField(blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='category_images/')
+
+    def __unicode__(self):
+        return self.name
 
 
 class CategoryL2(models.Model):
@@ -41,6 +50,9 @@ class CategoryL2(models.Model):
     class Meta:
         unique_together = ('category', 'name')
 
+    def __unicode__(self):
+        return self.name
+
 
 class CategoryL3(models.Model):
     id = models.AutoField(primary_key=True)
@@ -52,10 +64,16 @@ class CategoryL3(models.Model):
     class Meta:
         unique_together = ('category', 'name')
 
+    def __unicode__(self):
+        return self.name
+
 
 class Brand(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, unique=True)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Part(models.Model):
@@ -64,18 +82,24 @@ class Part(models.Model):
     part_number = models.CharField(max_length=30)
     sku = models.IntegerField(unique=True)
     category_l1 = models.ForeignKey(CategoryL1, related_name='parts')
-    category_l2 = models.ForeignKey(CategoryL2, related_name='parts', null=True)
-    category_l3 = models.ForeignKey(CategoryL3, related_name='parts', null=True)
-    brand = models.ForeignKey(Brand, related_name='parts', null=True)
+    category_l2 = models.ForeignKey(CategoryL2, related_name='parts', blank=True, null=True)
+    category_l3 = models.ForeignKey(CategoryL3, related_name='parts', blank=True, null=True)
+    brand = models.ForeignKey(Brand, related_name='parts', blank=True, null=True)
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     description = models.TextField(blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='part_images/')
     availability = models.BooleanField(default=True)
 
+    def __unicode__(self):
+        return self.name
+
 
 class VehicleMake(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, unique=True)
+
+    def __unicode__(self):
+        return self.name
 
 
 class VehicleModel(models.Model):
@@ -86,6 +110,9 @@ class VehicleModel(models.Model):
     class Meta:
         unique_together = ('name', 'make')
 
+    def __unicode__(self):
+        return u'%s %s' % (self.name, self.make)
+
 
 class VehicleYear(models.Model):
     id = models.AutoField(primary_key=True)
@@ -94,6 +121,9 @@ class VehicleYear(models.Model):
 
     class Meta:
         unique_together = ('year', 'model')
+
+    def __unicode__(self):
+        return self.year
 
 
 class VehicleEngine(models.Model):
@@ -104,6 +134,9 @@ class VehicleEngine(models.Model):
     class Meta:
         unique_together = ('name', 'year')
 
+    def __unicode__(self):
+        return self.name
+
 
 class VehicleTrim(models.Model):
     id = models.AutoField(primary_key=True)
@@ -113,19 +146,25 @@ class VehicleTrim(models.Model):
     class Meta:
         unique_together = ('name', 'engine')
 
+    def __unicode__(self):
+        return self.name
+
 
 # Explanation of this design:
 class PartVehicleCompatibility(models.Model):
     id = models.AutoField(primary_key=True)
     part = models.ForeignKey(Part, related_name='compatibilities')
-    make = models.ForeignKey(VehicleMake, related_name='compatibilities', null=True)
-    model = models.ForeignKey(VehicleModel, related_name='compatibilities', null=True)
-    year = models.ForeignKey(VehicleYear, related_name='compatibilities', null=True)
-    engine = models.ForeignKey(VehicleEngine, related_name='compatibilities', null=True)
-    trim = models.ForeignKey(VehicleTrim, related_name='compatibilities', null=True)
+    make = models.ForeignKey(VehicleMake, related_name='compatibilities', blank=True, null=True)
+    model = models.ForeignKey(VehicleModel, related_name='compatibilities', blank=True, null=True)
+    year = models.ForeignKey(VehicleYear, related_name='compatibilities', blank=True, null=True)
+    engine = models.ForeignKey(VehicleEngine, related_name='compatibilities', blank=True, null=True)
+    trim = models.ForeignKey(VehicleTrim, related_name='compatibilities', blank=True, null=True)
 
     class Meta:
         unique_together = (('part', 'make', 'model', 'year', 'engine', 'trim'), )
+
+    def __unicode__(self):
+        return self.part
 
 
 class PartFeatured(models.Model):
