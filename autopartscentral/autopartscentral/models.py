@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime
 
+# TODO Edit __unicode__ here most specially look at VehicleEngine might need to just combine this table with upper level
+# TODO Arrange fields into -> foreign key (upper level), name, attributes
+# TODO Complete __unicode__ for other tables
+
 YEAR_CHOICES = [(r, r) for r in range(1960, datetime.date.today().year+1)]
 COUNTRY_CHOICES = []  # For address also add city and state
 
@@ -123,7 +127,7 @@ class VehicleYear(models.Model):
         unique_together = ('year', 'model')
 
     def __unicode__(self):
-        return self.year
+        return u'%s %s' % (str(self.year), self.model)
 
 
 class VehicleEngine(models.Model):
