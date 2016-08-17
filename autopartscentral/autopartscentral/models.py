@@ -9,7 +9,7 @@ COUNTRY_CHOICES = []  # For address also add city and state
 class Address(models.Model):
     id = models.AutoField(primary_key=True)
     line_1 = models.CharField(max_length=40)
-    line_2 = models.CharField(max_length=40, null=True)
+    line_2 = models.CharField(max_length=40, blank=True)
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=20)  # Just put choices here of states in PH
     country = models.CharField(max_length=20)  # Should be just PH
@@ -18,7 +18,7 @@ class Address(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='userprofile')
     first_name = models.CharField(max_length=30)
-    middle_name = models.CharField(max_length=30, null=True)
+    middle_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30)
     contact_no = models.CharField(max_length=13)
     default_shipping_address = models.OneToOneField(Address, related_name='userprofile')  # Subject to change
@@ -27,7 +27,7 @@ class UserProfile(models.Model):
 class CategoryL1(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30, unique=True)
-    description = models.TextField(null=True)
+    description = models.TextField(blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='category_images/')
 
 
@@ -35,7 +35,7 @@ class CategoryL2(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.ForeignKey(CategoryL1, related_name='categories')
     name = models.CharField(max_length=30)
-    description = models.TextField(null=True)
+    description = models.TextField(blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='category_images/')
 
     class Meta:
@@ -46,7 +46,7 @@ class CategoryL3(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.ForeignKey(CategoryL2, related_name='categories')
     name = models.CharField(max_length=30)
-    description = models.TextField(null=True)
+    description = models.TextField(blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='category_images/')
 
     class Meta:
@@ -68,7 +68,7 @@ class Part(models.Model):
     category_l3 = models.ForeignKey(CategoryL3, related_name='parts', null=True)
     brand = models.ForeignKey(Brand, related_name='parts', null=True)
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
-    description = models.TextField(null=True)
+    description = models.TextField(blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='part_images/')
     availability = models.BooleanField(default=True)
 
