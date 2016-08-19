@@ -3,6 +3,7 @@ import models
 
 # Follow this http://www.djangobook.com/en/2.0/chapter06.html
 # TODO Arrange list_display here which ones should go first
+# TODO Make inlines especially for Vehicle
 
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -14,11 +15,11 @@ class CategoryL1Admin(admin.ModelAdmin):
 
 
 class CategoryL2Admin(admin.ModelAdmin):
-    list_display = ('category', 'name', 'description', 'image')
+    list_display = ('name', 'category', 'description', 'image')
 
 
 class CategoryL3Admin(admin.ModelAdmin):
-    list_display = ('category', 'name', 'description', 'image')
+    list_display = ('name', 'category', 'description', 'image')
 
 
 class BrandAdmin(admin.ModelAdmin):
@@ -34,19 +35,37 @@ class VehicleMakeAdmin(admin.ModelAdmin):
 
 
 class VehicleModelAdmin(admin.ModelAdmin):
-    list_display = ('make', 'name')
+    list_display = ('name', 'make')
 
 
 class VehicleYearAdmin(admin.ModelAdmin):
-    list_display = ('year', 'model')
+    list_display = ('year', 'make', 'model')
+
+    def make(self, obj):
+        return obj.model.make
 
 
 class VehicleEngineAdmin(admin.ModelAdmin):
-    list_display = ('year', 'name')
+    list_display = ('name', 'make', '_model', 'year')
+
+    def make(self, obj):
+        return obj.year.model.make
+
+    def _model(self, obj):
+        return obj.year.model
 
 
 class VehicleTrimAdmin(admin.ModelAdmin):
-    list_display = ('engine', 'name')
+    list_display = ('name', 'make', '_model', 'year', 'engine')
+
+    def make(self, obj):
+        return obj.engine.year.model.make
+
+    def _model(self, obj):
+        return obj.engine.year.model
+
+    def year(self, obj):
+        return obj.engine.year
 
 admin.site.register(models.UserProfile, UserProfileAdmin)
 admin.site.register(models.CategoryL1, CategoryL1Admin)

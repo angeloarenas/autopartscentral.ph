@@ -3,14 +3,15 @@ from django.contrib.auth.models import User
 import datetime
 
 # TODO Edit __unicode__ here most specially look at VehicleEngine might need to just combine this table with upper level
-# TODO Arrange fields into -> foreign key (upper level), name, attributes
+# TODO Arrange fields into -> primary key, primary names/identifiers, foreign key (many to one), attributes
 # TODO Complete __unicode__ for other tables
+# TODO Check the use of many to many field
 
 YEAR_CHOICES = [(r, r) for r in range(1960, datetime.date.today().year+1)]
 COUNTRY_CHOICES = []  # For address also add city and state
 
 
-class Address(models.Model):
+class Address(models.Model):  # TODO Not in normal form - city, state, country
     id = models.AutoField(primary_key=True)
     line_1 = models.CharField(max_length=40)
     line_2 = models.CharField(max_length=40, blank=True)
@@ -40,19 +41,23 @@ class CategoryL1(models.Model):
     description = models.TextField(blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='category_images/')
 
+    class Meta:
+        verbose_name_plural = "Category Level 1"
+
     def __unicode__(self):
         return self.name
 
 
 class CategoryL2(models.Model):
     id = models.AutoField(primary_key=True)
-    category = models.ForeignKey(CategoryL1, related_name='categories')
     name = models.CharField(max_length=30)
+    category = models.ForeignKey(CategoryL1, related_name='categories')
     description = models.TextField(blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='category_images/')
 
     class Meta:
-        unique_together = ('category', 'name')
+        unique_together = ('name', 'category')
+        verbose_name_plural = "Category Level 2"
 
     def __unicode__(self):
         return self.name
@@ -60,13 +65,14 @@ class CategoryL2(models.Model):
 
 class CategoryL3(models.Model):
     id = models.AutoField(primary_key=True)
-    category = models.ForeignKey(CategoryL2, related_name='categories')
     name = models.CharField(max_length=30)
+    category = models.ForeignKey(CategoryL2, related_name='categories')
     description = models.TextField(blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='category_images/')
 
     class Meta:
-        unique_together = ('category', 'name')
+        unique_together = ('name', 'category')
+        verbose_name_plural = "Category Level 3"
 
     def __unicode__(self):
         return self.name
@@ -102,6 +108,9 @@ class VehicleMake(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, unique=True)
 
+    class Meta:
+        verbose_name_plural = "1. Vehicle Makes"
+
     def __unicode__(self):
         return self.name
 
@@ -113,9 +122,10 @@ class VehicleModel(models.Model):
 
     class Meta:
         unique_together = ('name', 'make')
+        verbose_name_plural = "2. Vehicle Models"
 
     def __unicode__(self):
-        return u'%s %s' % (self.name, self.make)
+        return self.name
 
 
 class VehicleYear(models.Model):
@@ -125,9 +135,10 @@ class VehicleYear(models.Model):
 
     class Meta:
         unique_together = ('year', 'model')
+        verbose_name_plural = "3. Vehicle Years"
 
     def __unicode__(self):
-        return u'%s %s' % (str(self.year), self.model)
+        return str(self.year)
 
 
 class VehicleEngine(models.Model):
@@ -137,6 +148,7 @@ class VehicleEngine(models.Model):
 
     class Meta:
         unique_together = ('name', 'year')
+        verbose_name_plural = "4. Vehicle Engines"
 
     def __unicode__(self):
         return self.name
@@ -149,6 +161,7 @@ class VehicleTrim(models.Model):
 
     class Meta:
         unique_together = ('name', 'engine')
+        verbose_name_plural = "5. Vehicle Trims"
 
     def __unicode__(self):
         return self.name
