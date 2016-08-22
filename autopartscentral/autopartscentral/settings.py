@@ -64,7 +64,8 @@ STATIC_ROOT = os.path.join(PACKAGE_ROOT, "site_media", "static")
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = "/site_media/static/"
+# STATIC_URL = "/site_media/static/" ORIGINAL FROM PINAX (replaced with working for server)
+STATIC_URL = "/static/"
 
 # Additional locations of static files
 STATICFILES_DIRS = [
@@ -141,6 +142,8 @@ INSTALLED_APPS = [
 
     # project
     "autopartscentral",
+
+    "widget_tweaks",
 ]
 
 # A sample logging configuration. The only tangible logging
@@ -180,12 +183,13 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 ACCOUNT_OPEN_SIGNUP = True
 ACCOUNT_EMAIL_UNIQUE = True
-ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = False
-ACCOUNT_LOGIN_REDIRECT_URL = "home"
-ACCOUNT_LOGOUT_REDIRECT_URL = "home"
+ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
+ACCOUNT_LOGIN_REDIRECT_URL = "index"
+ACCOUNT_LOGOUT_REDIRECT_URL = "index"
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
 ACCOUNT_USE_AUTH_AUTHENTICATE = True
 
 AUTHENTICATION_BACKENDS = [
     "account.auth_backends.UsernameAuthenticationBackend",
+    "account.auth_backends.EmailAuthenticationBackend",
 ]

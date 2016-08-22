@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block body_maincontent %}
+    <!-- LIGHT SECTION -->
+    <section class="lightSection clearfix pageHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="page-title">
+                        <h2>sign up</h2>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <ol class="breadcrumb pull-right">
+                        <li>
+                            <a href="{% url 'index' %}">Home</a>
+                        </li>
+                        <li class="active">sign up</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT SECTION -->
+    <section class="mainContent clearfix signUp">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h3>sign up</h3></div>
+                        <div class="panel-body">
+                            <form id="signup_form" method="POST" action="{% url "account_signup" %}" autocapitalize="off" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+                                {% csrf_token %}
+                                {% for error in form.non_field_errors %}
+                                    <label>* {{ error }}</label>
+                                {% endfor %}
+                                <div class="form-group">
+                                    <label>{{ form.email.label }}</label>
+                                    {% render_field form.email class="form-control" %}
+                                    {{ form.email.errors.as_text }}
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ form.username.label }}</label>
+                                    {% render_field form.username class="form-control" %}
+                                    {{ form.username.errors.as_text }}
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ form.password.label }}</label>
+                                    {% render_field form.password class="form-control" %}
+                                    {{ form.password.errors.as_text }}
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ form.password_confirm.label }}</label>
+                                    {% render_field form.password_confirm class="form-control" %}
+                                    {{ form.password_confirm.errors.as_text }}
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ form.first_name.label }}</label>
+                                    {% render_field form.first_name class="form-control" %}
+                                    {{ form.first_name.errors.as_text }}
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ form.middle_name.label }}</label>
+                                    {% render_field form.middle_name class="form-control" %}
+                                    {{ form.middle_name.errors.as_text }}
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ form.last_name.label }}</label>
+                                    {% render_field form.last_name class="form-control" %}
+                                    {{ form.last_name.errors.as_text }}
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ form.contact_no.label }}</label>
+                                    {% render_field form.contact_no class="form-control" %}
+                                    {{ form.contact_no.errors.as_text }}
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ form.address_line_1.label }}</label>
+                                    {% render_field form.address_line_1 class="form-control" %}
+                                    {{ form.address_line_1.errors.as_text }}
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ form.address_line_2.label }}</label>
+                                    {% render_field form.address_line_2 class="form-control" %}
+                                    {{ form.address_line_2.errors.as_text }}
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ form.address_city.label }}</label>
+                                    {% render_field form.address_city class="form-control" %}
+                                    {{ form.address_city.errors.as_text }}
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ form.address_state.label }}</label>
+                                    {% render_field form.address_state class="form-control" %}
+                                    {{ form.address_state.errors.as_text }}
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ form.address_country.label }}</label>
+                                    {% render_field form.address_country class="form-control" %}
+                                    {{ form.address_country.errors.as_text }}
+                                </div>
+                                {% if redirect_field_value %}
+                                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                {% endif %}
+                                <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+                            </form>
+                            <a href="{% url "account_login" %}" class="btn btn-link btn-block">Already have an account? Log in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block body_maincontent %}
+    <!-- LIGHT SECTION -->
+    <section class="lightSection clearfix pageHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="page-title">
+                        <h2>log in</h2>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <ol class="breadcrumb pull-right">
+                        <li>
+                            <a href="{% url 'index' %}">Home</a>
+                        </li>
+                        <li class="active">log in</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT SECTION -->
+    <section class="mainContent clearfix logIn">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h3>log in</h3></div>
+                        <div class="panel-body">
+                            <form method="POST" action="{% url "account_login" %}" autocapitalize="off" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+                                {% csrf_token %}
+                                {% for error in form.non_field_errors %}
+                                    <label>* {{ error }}</label>
+                                {% endfor %}
+                                <div class="form-group">
+                                    <label>{{ form.email.label }}</label>
+                                    {% render_field form.email class="form-control" %}
+                                    {{ form.email.errors }}
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ form.password.label }}</label>
+                                    {% render_field form.password class="form-control" %}
+                                    {{ form.password.errors }}
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        {% render_field form.remember %} {{ form.remember.label }}
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">log in</button>
+                                {% if redirect_field_value %}
+                                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                {% endif %}
+                                <a href="{% url "account_password_reset" %}" class="btn btn-link btn-block">Forgot your password?</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
