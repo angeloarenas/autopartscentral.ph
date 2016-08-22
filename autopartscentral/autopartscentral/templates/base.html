@@ -49,30 +49,20 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6 hidden-sm hidden-xs">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                                <ul class="menu menu-right">
+                                    <li>
+                                        <span class="input-group">
+                                            <input type="text" class="form-control" placeholder="Search Part or Part#" aria-describedby="basic-addon2">
+                                            <span class="input-group-addon" id="basic-addon2">Search AutoPartsCentral</span>
+                                        </span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-md-6 col-xs-12">
                                 <ul class="list-inline pull-right">
                                     <li><span><a data-toggle="modal" href='.login-modal'>Log in</a><small>or</small><a data-toggle="modal" href='#signup'>Create an account</a></span></li>
-                                    <li class="dropdown searchBox">
-                                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li>
-                                                <span class="input-group">
-                                                  <input type="text" class="form-control" placeholder="Search…" aria-describedby="basic-addon2">
-                                                  <span class="input-group-addon" id="basic-addon2">Search</span>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </li>
                                     <li class="dropdown">
-                                        <a href="cart-page.html" class="dropdown-toggle" data-toggle="dropdown disabled"><i class="fa fa-shopping-cart"></i>$0</a>
+                                        <a href="cart-page.html" class="dropdown-toggle" data-toggle="dropdown disabled"><i class="fa fa-shopping-cart"></i>P0</a>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li>Item(s) in your cart</li>
                                             <li>
@@ -122,6 +112,7 @@
                             </button>
                             <a class="navbar-brand" href="javascript:void(0)"><img src="{% static "img/logo_header.png" %}" alt=""></a>
                         </div>
+
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse navbar-ex1-collapse">

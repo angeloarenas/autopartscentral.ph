@@ -1072,6 +1072,12 @@ body.bodyColor.container {
 }
 
 /*=== 2.3 BANNER ===*/
+#cars{
+ width:300px;
+  height:200px;
+  text-align-last:center;
+
+}
 .fullscreenbanner-container {
   width: 100%;
   position: relative;
