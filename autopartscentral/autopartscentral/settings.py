@@ -144,6 +144,7 @@ INSTALLED_APPS = [
     "autopartscentral",
 
     "widget_tweaks",
+    "smart_selects",
 ]
 
 # A sample logging configuration. The only tangible logging

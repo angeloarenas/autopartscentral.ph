@@ -86,7 +86,7 @@ class Brand(models.Model):
         return self.name
 
 
-class Part(models.Model):
+class Part(models.Model):  # TODO: Multiple images add Created_on last_modified
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     part_number = models.CharField(max_length=30)
