@@ -9,6 +9,7 @@ urlpatterns = [
     url(r"^account/login/", views.LoginView.as_view(), name='account_login'),
     url(r"^account/signup/", views.SignupView.as_view(), name='account_signup'),
     url(r"^admin/", include(admin.site.urls)),
+    url(r'^nested_admin/', include('nested_admin.urls')),
     url(r"^account/", include("account.urls")),
 ]
 

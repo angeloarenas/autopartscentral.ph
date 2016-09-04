@@ -1,5 +1,6 @@
 from django.contrib import admin
 import models
+import nested_admin
 
 # Follow this http://www.djangobook.com/en/2.0/chapter06.html
 # TODO Arrange list_display here which ones should go first
@@ -30,8 +31,32 @@ class PartAdmin(admin.ModelAdmin):
     list_display = ('name', 'part_number', 'sku', 'brand', 'price', 'description', 'availability')
 
 
-class VehicleMakeAdmin(admin.ModelAdmin):
+class VehicleTrimInline(nested_admin.NestedStackedInline):
+    model = models.VehicleTrim
+    extra = 0
+
+
+class VehicleEngineInline(nested_admin.NestedStackedInline):
+    model = models.VehicleEngine
+    extra = 0
+    inlines = [VehicleTrimInline]
+
+
+class VehicleYearInline(nested_admin.NestedStackedInline):
+    model = models.VehicleYear
+    extra = 0
+    inlines = [VehicleEngineInline]
+
+
+class VehicleModelInline(nested_admin.NestedStackedInline):
+    model = models.VehicleModel
+    extra = 0
+    inlines = [VehicleYearInline]
+
+
+class VehicleMakeAdmin(nested_admin.NestedModelAdmin):
     list_display = ('name', )
+    inlines = [VehicleModelInline]
 
 
 class VehicleModelAdmin(admin.ModelAdmin):

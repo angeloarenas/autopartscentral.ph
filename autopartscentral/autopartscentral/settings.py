@@ -144,6 +144,7 @@ INSTALLED_APPS = [
     "autopartscentral",
 
     "widget_tweaks",
+    "nested_admin",
 ]
 
 # A sample logging configuration. The only tangible logging
