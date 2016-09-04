@@ -3,8 +3,6 @@ import models
 import nested_admin
 
 # Follow this http://www.djangobook.com/en/2.0/chapter06.html
-# TODO Arrange list_display here which ones should go first
-# TODO Make inlines especially for Vehicle
 
 
 class UserProfileAdmin(admin.ModelAdmin):
