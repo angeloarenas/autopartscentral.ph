@@ -29,7 +29,7 @@ class PartAdmin(admin.ModelAdmin):
     list_display = ('name', 'part_number', 'sku', 'brand', 'price', 'description', 'availability')
 
 
-class VehicleInline(nested_admin.NestedStackedInline):
+class VehicleInline(nested_admin.NestedTabularInline):
     model = models.Vehicle
     extra = 0
 

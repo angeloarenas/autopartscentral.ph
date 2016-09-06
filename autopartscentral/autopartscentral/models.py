@@ -92,7 +92,7 @@ class VehicleMake(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
     class Meta:
-        verbose_name_plural = "1. Vehicle Makes"
+        verbose_name_plural = "Vehicle Makes"
 
     def __unicode__(self):
         return self.name
@@ -105,7 +105,7 @@ class VehicleModel(models.Model):
 
     class Meta:
         unique_together = ('name', 'make')
-        verbose_name_plural = "2. Vehicle Models"
+        verbose_name_plural = "Vehicle Models"
 
     def __unicode__(self):
         return self.name
