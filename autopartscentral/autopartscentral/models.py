@@ -111,46 +111,13 @@ class VehicleModel(models.Model):
         return self.name
 
 
-class VehicleYear(models.Model):
+#PARTIALLY DENORMALIZED TABLE
+class Vehicle(models.Model):
     id = models.AutoField(primary_key=True)
+    model = models.ForeignKey(VehicleModel, related_name='vehicles')
     year = models.IntegerField(choices=YEAR_CHOICES)
-    model = models.ForeignKey(VehicleModel, related_name='vehicle_years')
-
-    class Meta:
-        unique_together = ('year', 'model')
-        verbose_name_plural = "3. Vehicle Years"
-
-    def __unicode__(self):
-        return str(self.year)
-
-
-class VehicleEngine(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
-    year = models.ForeignKey(VehicleYear, related_name='vehicle_engines')
-
-    class Meta:
-        unique_together = ('name', 'year')
-        verbose_name_plural = "4. Vehicle Engines"
-
-    def __unicode__(self):
-        return self.name
-
-
-class VehicleTrim(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
-    engine = models.ForeignKey(VehicleEngine, related_name='vehicle_trims')
-
-    class Meta:
-        unique_together = ('name', 'engine')
-        verbose_name_plural = "5. Vehicle Trims"
-
-    def __unicode__(self):
-        return self.name
-
-    def whole_name(self):
-        return self.engine.year
+    engine = models.CharField(max_length=50)
+    trim = models.CharField(max_length=50)
 
 
 class Part(models.Model):
@@ -163,7 +130,7 @@ class Part(models.Model):
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     description = models.TextField(blank=True)
     availability = models.BooleanField(default=True)
-    compatibility = models.ManyToManyField(VehicleTrim)
+    compatibility = models.ManyToManyField(Vehicle)
     created_on = models.DateField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True)
 
@@ -176,23 +143,6 @@ class PartImage(models.Model):
     name = models.CharField(max_length=50, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='part_images/')
     part = models.ForeignKey(Part, related_name='images')
-
-
-# Should be just trim (or the vehicles themselves) TODO WHAT IF MODEL IS CHANGED TO DIFFERENT MAKE HOW TO UPDATE THIS
-class PartVehicleCompatibility(models.Model):
-    id = models.AutoField(primary_key=True)
-    part = models.ForeignKey(Part, related_name='compatibilities')
-    make = models.ForeignKey(VehicleMake, related_name='compatibilities', blank=True, null=True)
-    model = models.ForeignKey(VehicleModel, related_name='compatibilities', blank=True, null=True)
-    year = models.ForeignKey(VehicleYear, related_name='compatibilities', blank=True, null=True)
-    engine = models.ForeignKey(VehicleEngine, related_name='compatibilities', blank=True, null=True)
-    trim = models.ForeignKey(VehicleTrim, related_name='compatibilities', blank=True, null=True)
-
-    class Meta:
-        unique_together = (('part', 'make', 'model', 'year', 'engine', 'trim'), )
-
-    def __unicode__(self):
-        return self.part
 
 
 class PartFeatured(models.Model):

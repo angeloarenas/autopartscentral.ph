@@ -29,27 +29,15 @@ class PartAdmin(admin.ModelAdmin):
     list_display = ('name', 'part_number', 'sku', 'brand', 'price', 'description', 'availability')
 
 
-class VehicleTrimInline(nested_admin.NestedStackedInline):
-    model = models.VehicleTrim
+class VehicleInline(nested_admin.NestedStackedInline):
+    model = models.Vehicle
     extra = 0
-
-
-class VehicleEngineInline(nested_admin.NestedStackedInline):
-    model = models.VehicleEngine
-    extra = 0
-    inlines = [VehicleTrimInline]
-
-
-class VehicleYearInline(nested_admin.NestedStackedInline):
-    model = models.VehicleYear
-    extra = 0
-    inlines = [VehicleEngineInline]
 
 
 class VehicleModelInline(nested_admin.NestedStackedInline):
     model = models.VehicleModel
     extra = 0
-    inlines = [VehicleYearInline]
+    inlines = [VehicleInline]
 
 
 class VehicleMakeAdmin(nested_admin.NestedModelAdmin):
@@ -57,38 +45,12 @@ class VehicleMakeAdmin(nested_admin.NestedModelAdmin):
     inlines = [VehicleModelInline]
 
 
-class VehicleModelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'make')
-
-
-class VehicleYearAdmin(admin.ModelAdmin):
-    list_display = ('year', 'make', 'model')
+class VehicleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'make', 'model', 'year', 'engine', 'trim')
 
     def make(self, obj):
         return obj.model.make
 
-
-class VehicleEngineAdmin(admin.ModelAdmin):
-    list_display = ('name', 'make', '_model', 'year')
-
-    def make(self, obj):
-        return obj.year.model.make
-
-    def _model(self, obj):
-        return obj.year.model
-
-
-class VehicleTrimAdmin(admin.ModelAdmin):
-    list_display = ('name', 'make', '_model', 'year', 'engine')
-
-    def make(self, obj):
-        return obj.engine.year.model.make
-
-    def _model(self, obj):
-        return obj.engine.year.model
-
-    def year(self, obj):
-        return obj.engine.year
 
 admin.site.register(models.UserProfile, UserProfileAdmin)
 admin.site.register(models.CategoryL1, CategoryL1Admin)
@@ -97,8 +59,4 @@ admin.site.register(models.CategoryL3, CategoryL3Admin)
 admin.site.register(models.Brand, BrandAdmin)
 admin.site.register(models.Part, PartAdmin)
 admin.site.register(models.VehicleMake, VehicleMakeAdmin)
-admin.site.register(models.VehicleModel, VehicleModelAdmin)
-admin.site.register(models.VehicleYear, VehicleYearAdmin)
-admin.site.register(models.VehicleEngine, VehicleEngineAdmin)
-admin.site.register(models.VehicleTrim, VehicleTrimAdmin)
-#admin.site.register(models.PartVehicleCompatibility)
+admin.site.register(models.Vehicle, VehicleAdmin)
