@@ -149,24 +149,33 @@ class VehicleTrim(models.Model):
     def __unicode__(self):
         return self.name
 
+    def whole_name(self):
+        return self.engine.year
 
-class Part(models.Model):  # TODO: Multiple images add Created_on last_modified, if categoryl2 is changed to another l1
+
+class Part(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     part_number = models.CharField(max_length=30)
     sku = models.IntegerField(unique=True)
-    category_l1 = models.ForeignKey(CategoryL1, related_name='parts')
-    category_l2 = models.ForeignKey(CategoryL2, related_name='parts', blank=True, null=True)
-    category_l3 = models.ForeignKey(CategoryL3, related_name='parts', blank=True, null=True)
+    category_l3 = models.ForeignKey(CategoryL3, related_name='parts')
     brand = models.ForeignKey(Brand, related_name='parts', blank=True, null=True)
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     description = models.TextField(blank=True)
-    image = models.ImageField(null=True, blank=True, upload_to='part_images/')
     availability = models.BooleanField(default=True)
     compatibility = models.ManyToManyField(VehicleTrim)
+    created_on = models.DateField(auto_now_add=True)
+    last_modified = models.DateField(auto_now=True)
 
     def __unicode__(self):
         return self.name
+
+
+class PartImage(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to='part_images/')
+    part = models.ForeignKey(Part, related_name='images')
 
 
 # Should be just trim (or the vehicles themselves) TODO WHAT IF MODEL IS CHANGED TO DIFFERENT MAKE HOW TO UPDATE THIS
@@ -202,7 +211,7 @@ class Order(models.Model):
     customer = models.ForeignKey(UserProfile, related_name='orders')
     shipping_address = models.ForeignKey(Address, related_name='orders')
     placed_timestamp = models.DateTimeField(auto_now=True)
-# Customer notes textfield?
+    notes = models.TextField(blank=True)
 
 
 class OrderDetails(models.Model):
