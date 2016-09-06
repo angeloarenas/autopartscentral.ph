@@ -119,6 +119,12 @@ class Vehicle(models.Model):
     engine = models.CharField(max_length=50)
     trim = models.CharField(max_length=50)
 
+    class Meta:
+        unique_together = ('model', 'year', 'engine', 'trim')
+
+    def __unicode__(self):
+        return u'%s %s %s %s' % (self.model, str(self.year), self.engine, self.trim)
+
 
 class Part(models.Model):
     id = models.AutoField(primary_key=True)
