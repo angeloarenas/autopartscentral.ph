@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
-from smart_selects.db_fields import ChainedForeignKey
 
 # TODO Edit __unicode__ here most specially look at VehicleEngine might need to just combine this table with upper level
 # TODO Arrange fields into -> primary key, primary names/identifiers, foreign key (many to one), attributes
