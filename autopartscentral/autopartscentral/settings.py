@@ -64,8 +64,7 @@ STATIC_ROOT = os.path.join(PACKAGE_ROOT, "site_media", "static")
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-# STATIC_URL = "/site_media/static/" ORIGINAL FROM PINAX (replaced with working for server)
-STATIC_URL = "/static/"
+STATIC_URL = "/site_media/static/"
 
 # Additional locations of static files
 STATICFILES_DIRS = [
