@@ -7,7 +7,7 @@ import datetime
 # TODO Complete __unicode__ for other tables
 # TODO Check the use of many to many field
 
-YEAR_CHOICES = [(r, r) for r in range(1960, datetime.date.today().year+1)]
+YEAR_CHOICES = [(r, r) for r in range(1990, datetime.date.today().year+1)]
 COUNTRY_CHOICES = []  # For address also add city and state
 
 
@@ -114,15 +114,16 @@ class VehicleModel(models.Model):
 class Vehicle(models.Model):
     id = models.AutoField(primary_key=True)
     model = models.ForeignKey(VehicleModel, related_name='vehicles')
-    year = models.IntegerField(choices=YEAR_CHOICES)
+    year_start = models.IntegerField(choices=YEAR_CHOICES)
+    year_end = models.IntegerField(choices=YEAR_CHOICES)
     engine = models.CharField(max_length=50)
     trim = models.CharField(max_length=50)
 
     class Meta:
-        unique_together = ('model', 'year', 'engine', 'trim')
+        unique_together = ('model', 'year_start', 'year_end', 'engine', 'trim')
 
     def __unicode__(self):
-        return u'%s %s %s %s' % (self.model, str(self.year), self.engine, self.trim)
+        return u'%s %s %s %s %s' % (self.model, str(self.year_start), str(self.year_end), self.engine, self.trim)
 
 
 class Part(models.Model):

@@ -5,3 +5,5 @@ pinax-eventlog==1.1.1
 pinax-theme-bootstrap==7.8.0
 django-widget-tweaks==1.4.1
 django-nested-admin==3.0.8
+psycopg2
+Pillow==3.4.1

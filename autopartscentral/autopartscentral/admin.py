@@ -47,7 +47,7 @@ class VehicleMakeAdmin(nested_admin.NestedModelAdmin):
 
 
 class VehicleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'make', 'model', 'year', 'engine', 'trim')
+    list_display = ('id', 'make', 'model', 'year_start', 'year_end', 'engine', 'trim')
 
     def make(self, obj):
         return obj.model.make
