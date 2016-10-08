@@ -79,3 +79,13 @@ class SignupView(account.views.SignupView):
             self.created_address.save()
             self.created_userprofile.save()
     """
+
+
+class ShopView(TemplateView):
+    template_name = "product-grid-left-sidebar.html"
+
+    def categories_l1(self):
+        return models.CategoryL1.objects.all()
+
+    def parts(self):
+        return models.Part.objects.all()
