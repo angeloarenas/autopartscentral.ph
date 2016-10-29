@@ -131,7 +131,10 @@ class Part(models.Model):
     name = models.CharField(max_length=50)
     part_number = models.CharField(max_length=30)
     sku = models.IntegerField(unique=True)
-    category_l3 = models.ForeignKey(CategoryL3, related_name='parts')
+    # Todo: All categories above the set category should be null - solution to the update foreign key problem
+    category_l1 = models.ForeignKey(CategoryL1, related_name='parts')  # if category_l3 is set, l1 and l2 should be null
+    category_l2 = models.ForeignKey(CategoryL2, related_name='parts', blank=True, null=True)  # if l2 is set l1
+    category_l3 = models.ForeignKey(CategoryL3, related_name='parts', blank=True, null=True)  # should be null
     brand = models.ForeignKey(Brand, related_name='parts', blank=True, null=True)
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     description = models.TextField(blank=True)

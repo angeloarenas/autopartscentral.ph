@@ -88,4 +88,15 @@ class ShopView(TemplateView):
         return models.CategoryL1.objects.all()
 
     def parts(self):
-        return models.Part.objects.all()
+        category1 = self.request.GET.get('category1')
+        category2 = self.request.GET.get('category2')
+        category3 = self.request.GET.get('category3')
+
+        if category3:
+            return models.Part.objects.filter(category_l3__name=category3)
+        elif category2:
+            return models.Part.objects.filter(category_l2__name=category2)
+        elif category1:
+            return models.Part.objects.filter(category_l1__name=category1)
+        else:
+            return models.Part.objects.all()
