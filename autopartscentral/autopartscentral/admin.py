@@ -25,9 +25,14 @@ class BrandAdmin(admin.ModelAdmin):
     list_display = ('name', )
 
 
+class PartImageInline(admin.TabularInline):
+    model = models.PartImage
+    extra = 1
+
 class PartAdmin(admin.ModelAdmin):
     list_display = ('name', 'part_number', 'sku', 'brand', 'price', 'description', 'availability')
     filter_horizontal = ('compatibility',)
+    inlines = [PartImageInline]
 
 
 class VehicleInline(nested_admin.NestedTabularInline):

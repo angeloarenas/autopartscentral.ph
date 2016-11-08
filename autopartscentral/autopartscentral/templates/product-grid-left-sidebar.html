@@ -161,7 +161,11 @@
                             <div class="col-sm-4 col-xs-12">
                                 <div class="productBox">
                                     <div class="productImage clearfix">
-                                        <img src="{% static "img/products/products-01.jpg" %}" alt="products-img">
+                                        {% if not i.images.all  %}
+                                            <img src="{% static "img/products/products-01.jpg" %}" alt="products-img">
+                                        {% else %}
+                                            <img src="{{ i.images.all.first.image.url }}" alt="products-img">
+                                        {% endif %}
                                         <div class="productMasking">
                                             <ul class="list-inline btn-group" role="group">
                                                 <li><a data-toggle="modal" href=".login-modal" class="btn btn-default"><i class="fa fa-heart"></i></a></li>
