@@ -144,6 +144,7 @@ INSTALLED_APPS = [
 
     "widget_tweaks",
     "nested_admin",
+    "smart_selects",
 ]
 
 # A sample logging configuration. The only tangible logging

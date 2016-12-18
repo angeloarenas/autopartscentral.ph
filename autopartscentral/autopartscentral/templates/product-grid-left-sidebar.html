@@ -41,8 +41,15 @@
                                             <!--<a href="{% url 'shop' %}?category1={{ i.name }}">{{ i.name }}</a>-->
                                             <a href="javascript:;" data-toggle="collapse" data-target="#{{ i.id }}">{{ i.name }}<i class="fa fa-plus"></i></a>
                                             <ul id="{{ i.id }}" class="collapse collapseItem">
+                                                <li><a href="{% url 'shop' %}?category1={{ i.name }}">
+                                                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                                    All <span>({{ i.parts.all.count }})</span></a>
+                                                </li>
                                                 {% for j in i.categories.all %}
-                                                    <li><a href="{% url 'shop' %}?category2={{ j.name }}"><i class="fa fa-caret-right" aria-hidden="true"></i> {{ j.name }} <span>(6)</span></a></li>
+                                                    <li><a href="{% url 'shop' %}?category2={{ j.name }}">
+                                                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                                        {{ j.name }} <span>({{ j.parts.all.count }})</span></a>
+                                                    </li>
                                                 {% endfor %}
                                             </ul>
                                         </li>

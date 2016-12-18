@@ -11,6 +11,7 @@ urlpatterns = [
     url(r"^shop/", views.ShopView.as_view(), name='shop'),
     url(r"^admin/", include(admin.site.urls)),
     url(r'^nested_admin/', include('nested_admin.urls')),
+    url(r'^chaining/', include('smart_selects.urls')),
     url(r"^account/", include("account.urls")),
 ]
 

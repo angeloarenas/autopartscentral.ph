@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
+from smart_selects.db_fields import ChainedForeignKey
 
 # TODO Edit __unicode__ here most specially look at VehicleEngine might need to just combine this table with upper level
 # TODO Arrange fields into -> primary key, primary names/identifiers, foreign key (many to one), attributes
@@ -131,10 +132,10 @@ class Part(models.Model):
     name = models.CharField(max_length=50)
     part_number = models.CharField(max_length=30)
     sku = models.IntegerField(unique=True)
-    # Todo: All categories above the set category should be null - solution to the update foreign key problem
-    category_l1 = models.ForeignKey(CategoryL1, related_name='parts')  # if category_l3 is set, l1 and l2 should be null
-    category_l2 = models.ForeignKey(CategoryL2, related_name='parts', blank=True, null=True)  # if l2 is set l1
-    category_l3 = models.ForeignKey(CategoryL3, related_name='parts', blank=True, null=True)  # should be null
+    # Todo: Cascading dropdown in parts, no changing of super category in categories | NOT A SOLID FIX
+    category_l1 = models.ForeignKey(CategoryL1, related_name='parts')
+    category_l2 = ChainedForeignKey(CategoryL2, related_name='parts', blank=True, null=True, chained_field="category_l1", chained_model_field="category")
+    category_l3 = ChainedForeignKey(CategoryL3, related_name='parts', blank=True, null=True, chained_field="category_l2", chained_model_field="category")
     brand = models.ForeignKey(Brand, related_name='parts', blank=True, null=True)
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     description = models.TextField(blank=True)
