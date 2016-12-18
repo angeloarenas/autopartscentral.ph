@@ -58,43 +58,44 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default priceRange">
-                        <div class="panel-heading">Filter by Price</div>
-                        <div class="panel-body clearfix">
-                            <div class="price-slider-inner">
-                    <span class="amount-wrapper">
-                      Price:
-                      <input type="text" id="price-amount-1" readonly>
-                      <strong>-</strong>
-                      <input type="text" id="price-amount-2" readonly> 
-                    </span>
-                                <div id="price-range"></div>
+                    <div class="panel panel-default filterNormal">
+                        <div class="panel-heading">filter by vehicle</div>
+                        <div class="panel-body">
+                            <div class="filterArea">
+                                <select name="guiest_ed1" id="guiest_id1" class="select-drop">
+                                    {% for i in view.vehicle_makes %}
+                                    <option selected disabled>Make</option>
+                                    <option value="1">{{ i.name }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <input class="btn btn-default" type="submit" value="Filter">
-                            <!-- <span class="priceLabel">Price: <strong>$12 - $30</strong></span> -->
-                        </div>
-                    </div>
-                    <div class="panel panel-default filterNormal">
-                        <div class="panel-heading">filter by Color</div>
-                        <div class="panel-body">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Black<span>(15)</span></a></li>
-                                <li><a href="#">White<span>(10)</span></a></li>
-                                <li><a href="#">Red<span>(7)</span></a></li>
-                                <li><a href="#">Blue<span>(12)</span></a></li>
-                                <li><a href="#">Orange<span>(12)</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="panel panel-default filterNormal">
-                        <div class="panel-heading">filter by Size</div>
-                        <div class="panel-body">
-                            <ul class="list-unstyled clearfix">
-                                <li><a href="#">Small<span>(15)</span></a></li>
-                                <li><a href="#">Medium<span>(10)</span></a></li>
-                                <li><a href="#">Large<span>(7)</span></a></li>
-                                <li><a href="#">Extra Large<span>(12)</span></a></li>
-                            </ul>
+                            <br>
+                            <div class="filterArea">
+                                <select name="guiest_id1" id="guiest_id1" class="select-drop">
+                                    <option selected disabled>Model</option>
+                                    <option value="1">Sort by popularity</option>
+                                    <option value="2">Sort by rating</option>
+                                    <option value="3">Sort by newness</option>
+                                    <option value="3">Sort by price</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="filterArea">
+                                <select name="guiest_id1" id="guiest_id1" class="select-drop">
+                                    <option selected disabled>Year</option>
+                                    <option value="1">Sort by popularity</option>
+                                    <option value="2">Sort by rating</option>
+                                    <option value="3">Sort by newness</option>
+                                    <option value="3">Sort by price</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="filterArea">
+                                <div class="btn-group center-block" role="group">
+                                    <button type="button" class="btn btn-default" onclick="window.location.href='product-list-left-sidebar.html'"><span>Clear</span></button>
+                                    <button type="button" class="btn btn-default active" onclick="window.location.href='product-grid-left-sidebar.html'"><span>Apply</span></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

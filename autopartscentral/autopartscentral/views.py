@@ -87,6 +87,9 @@ class ShopView(TemplateView):
     def categories_l1(self):
         return models.CategoryL1.objects.all()
 
+    def vehicle_makes(self):
+        return models.VehicleMake.objects.all()
+
     def parts(self):
         category1 = self.request.GET.get('category1')
         category2 = self.request.GET.get('category2')
