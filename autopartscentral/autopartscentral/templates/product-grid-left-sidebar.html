@@ -41,12 +41,12 @@
                                             <!--<a href="{% url 'shop' %}?category1={{ i.name }}">{{ i.name }}</a>-->
                                             <a href="javascript:;" data-toggle="collapse" data-target="#{{ i.id }}">{{ i.name }}<i class="fa fa-plus"></i></a>
                                             <ul id="{{ i.id }}" class="collapse collapseItem">
-                                                <li><a href="{% url 'shop' %}?category1={{ i.name }}">
+                                                <li><a href="javascript:void(0)" class="set_category_1_filter" data-name="{{ i.name }}">
                                                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                                                     All <span>({{ i.parts.all.count }})</span></a>
                                                 </li>
                                                 {% for j in i.categories.all %}
-                                                    <li><a href="{% url 'shop' %}?category2={{ j.name }}">
+                                                    <li><a href="javascript:void(0)" class="set_category_2_filter" data-name="{{ j.name }}">
                                                         <i class="fa fa-caret-right" aria-hidden="true"></i>
                                                         {{ j.name }} <span>({{ j.parts.all.count }})</span></a>
                                                     </li>
@@ -63,7 +63,7 @@
                         <div class="panel-body">
                             <div class="filterArea">
                                 <select name="guiest_ed1" id="filter_vehicle_make" >
-                                    <option selected disabled>Make</option>
+                                    <option value=0 selected disabled>Make</option>
                                     {% for i in view.vehicle_makes %}
                                         <option value="{{ i.id }}">{{ i.name }}</option>
                                     {% endfor %}
@@ -72,20 +72,20 @@
                             <br>
                             <div class="filterArea">
                                 <select name="guiest_id1" id="filter_vehicle_model">
-                                    <option selected disabled>Model</option>
+                                    <option value=0 selected disabled>Model</option>
                                 </select>
                             </div>
                             <br>
                             <div class="filterArea">
                                 <select name="guiest_id1" id="filter_vehicle_year">
-                                    <option selected disabled>Year</option>
+                                    <option value=0 selected disabled>Year</option>
                                 </select>
                             </div>
                             <br>
                             <div class="filterArea">
                                 <div class="btn-group center-block" role="group">
-                                    <button type="button" class="btn btn-default" onclick="window.location.href='product-list-left-sidebar.html'"><span>Clear</span></button>
-                                    <button type="button" class="btn btn-default active" onclick="window.location.href='product-grid-left-sidebar.html'"><span>Apply</span></button>
+                                    <button type="button" id="clear_vehicle_filter" class="btn btn-default"><span>Clear</span></button>
+                                    <button type="button" id="set_vehicle_filter" class="btn btn-default active"><span>Apply</span></button>
                                 </div>
                             </div>
                         </div>
@@ -240,5 +240,6 @@
 {% endblock %}
 
 {% block body_scripts_extra %}
+    <script src="{% static "js/uri.js" %}"></script>
     <script src="{% static "js/vehicle.js" %}"></script>
 {% endblock %}
