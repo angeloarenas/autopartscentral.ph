@@ -1,4 +1,7 @@
 from django.views.generic import TemplateView
+from django.http import JsonResponse
+from django.utils.encoding import smart_unicode
+from django.db.models import Max, Min
 import models
 import forms
 import account.views
@@ -103,3 +106,21 @@ class ShopView(TemplateView):
             return models.Part.objects.filter(category_l1__name=category1)
         else:
             return models.Part.objects.all()
+
+
+# TODO JsonResponse shouldn't be safe=False, find a better way to send JSON data
+# TODO vehicle_max_year can be changed to current year
+def vehicle_filter(request):
+    if request.is_ajax() and request.GET:
+        if 'vehicle_make' in request.GET:
+            vehicle_models = models.VehicleModel.objects.filter(make=request.GET['vehicle_make'])
+            return JsonResponse([{'id': i.id, 'name': smart_unicode(i)} for i in vehicle_models], safe=False)
+        if 'vehicle_model' in request.GET:
+            vehicle_min_year = models.Vehicle.objects.filter(
+                model=request.GET['vehicle_model']).aggregate(Min('year_start'))['year_start__min']
+            vehicle_max_year = models.Vehicle.objects.filter(
+                model=request.GET['vehicle_model']).aggregate(Max('year_end'))['year_end__max']
+            return JsonResponse([{'id': i, 'name': j}
+                                 for i, j in enumerate(range(vehicle_min_year, vehicle_max_year+1))], safe=False)
+    else:
+        return JsonResponse({'error': 'Not Ajax or no GET'})

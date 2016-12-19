@@ -62,31 +62,23 @@
                         <div class="panel-heading">filter by vehicle</div>
                         <div class="panel-body">
                             <div class="filterArea">
-                                <select name="guiest_ed1" id="guiest_id1" class="select-drop">
-                                    {% for i in view.vehicle_makes %}
+                                <select name="guiest_ed1" id="filter_vehicle_make" >
                                     <option selected disabled>Make</option>
-                                    <option value="1">{{ i.name }}</option>
+                                    {% for i in view.vehicle_makes %}
+                                        <option value="{{ i.id }}">{{ i.name }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                             <br>
                             <div class="filterArea">
-                                <select name="guiest_id1" id="guiest_id1" class="select-drop">
+                                <select name="guiest_id1" id="filter_vehicle_model">
                                     <option selected disabled>Model</option>
-                                    <option value="1">Sort by popularity</option>
-                                    <option value="2">Sort by rating</option>
-                                    <option value="3">Sort by newness</option>
-                                    <option value="3">Sort by price</option>
                                 </select>
                             </div>
                             <br>
                             <div class="filterArea">
-                                <select name="guiest_id1" id="guiest_id1" class="select-drop">
+                                <select name="guiest_id1" id="filter_vehicle_year">
                                     <option selected disabled>Year</option>
-                                    <option value="1">Sort by popularity</option>
-                                    <option value="2">Sort by rating</option>
-                                    <option value="3">Sort by newness</option>
-                                    <option value="3">Sort by price</option>
                                 </select>
                             </div>
                             <br>
@@ -245,4 +237,8 @@
                     -->
         </div>
     </div>
+{% endblock %}
+
+{% block body_scripts_extra %}
+    <script src="{% static "js/vehicle.js" %}"></script>
 {% endblock %}
