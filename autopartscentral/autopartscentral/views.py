@@ -97,15 +97,26 @@ class ShopView(TemplateView):
         category1 = self.request.GET.get('category1')
         category2 = self.request.GET.get('category2')
         category3 = self.request.GET.get('category3')
+        vehicle_make = self.request.GET.get('make')
+        vehicle_model = self.request.GET.get('model')
+        vehicle_year = self.request.GET.get('year')
+
+        objects = models.Part.objects.all()
+        if vehicle_make:
+            objects = objects.filter(compatibility__model__make__id=vehicle_make)
+        if vehicle_model:
+            objects = objects.filter(compatibility__model__id=vehicle_model)
+        #if vehicle_year:
+            #objects = objects.filter(compatibility__model__id=vehicle_model)
 
         if category3:
-            return models.Part.objects.filter(category_l3__name=category3)
+            objects = objects.filter(category_l3__name=category3)
         elif category2:
-            return models.Part.objects.filter(category_l2__name=category2)
+            objects = objects.filter(category_l2__name=category2)
         elif category1:
-            return models.Part.objects.filter(category_l1__name=category1)
-        else:
-            return models.Part.objects.all()
+            objects = objects.filter(category_l1__name=category1)
+
+        return objects
 
 
 # TODO JsonResponse shouldn't be safe=False, find a better way to send JSON data
