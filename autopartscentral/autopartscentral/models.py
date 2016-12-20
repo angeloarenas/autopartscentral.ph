@@ -38,7 +38,8 @@ class UserProfile(models.Model):
 
 class CategoryL1(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=30)
+    slug = models.SlugField(max_length=35, unique=True)
     description = models.TextField(blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='category_images/')
 
@@ -52,6 +53,7 @@ class CategoryL1(models.Model):
 class CategoryL2(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
+    slug = models.SlugField(max_length=35, unique=True)
     category = models.ForeignKey(CategoryL1, related_name='categories')
     description = models.TextField(blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='category_images/')
@@ -67,6 +69,7 @@ class CategoryL2(models.Model):
 class CategoryL3(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
+    slug = models.SlugField(max_length=35, unique=True)
     category = models.ForeignKey(CategoryL2, related_name='categories')
     description = models.TextField(blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='category_images/')
@@ -129,7 +132,9 @@ class Vehicle(models.Model):
 
 class Part(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=260, unique=True,
+                            help_text='Unique value for shop page URL, created from name.')
     part_number = models.CharField(max_length=30)
     sku = models.IntegerField(unique=True)
     # Todo: Cascading dropdown in parts, no changing of super category in categories | NOT A SOLID FIX
