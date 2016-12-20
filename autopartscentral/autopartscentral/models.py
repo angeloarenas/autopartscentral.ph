@@ -145,7 +145,7 @@ class Part(models.Model):
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     description = models.TextField(blank=True)
     availability = models.BooleanField(default=True)
-    compatibility = models.ManyToManyField(Vehicle)
+    compatibility = models.ManyToManyField(Vehicle, blank=True)
     created_on = models.DateField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True)
 
