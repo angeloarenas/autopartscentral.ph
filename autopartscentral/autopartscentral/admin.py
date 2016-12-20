@@ -11,14 +11,17 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 class CategoryL1Admin(admin.ModelAdmin):
     list_display = ('name', 'description', 'image')
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class CategoryL2Admin(admin.ModelAdmin):
     list_display = ('name', 'category', 'description', 'image')
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class CategoryL3Admin(admin.ModelAdmin):
     list_display = ('name', 'category', 'description', 'image')
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class BrandAdmin(admin.ModelAdmin):
@@ -29,8 +32,10 @@ class PartImageInline(admin.TabularInline):
     model = models.PartImage
     extra = 1
 
+
 class PartAdmin(admin.ModelAdmin):
     list_display = ('name', 'part_number', 'sku', 'brand', 'price', 'description', 'availability')
+    prepopulated_fields = {'slug': ('name',)}
     filter_horizontal = ('compatibility',)
     inlines = [PartImageInline]
 
