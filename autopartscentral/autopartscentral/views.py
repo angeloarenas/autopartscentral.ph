@@ -84,6 +84,8 @@ class SignupView(account.views.SignupView):
     """
 
 
+# TODO if manual input model id not in make
+# TODO Error404 or something for wrong category and make/model/year combination
 class ShopView(TemplateView):
     template_name = "product-grid-left-sidebar.html"
 
@@ -110,13 +112,21 @@ class ShopView(TemplateView):
             #objects = objects.filter(compatibility__model__id=vehicle_model)
 
         if category3:
-            objects = objects.filter(category_l3__name=category3)
+            objects = objects.filter(category_l3__slug=category3)
         elif category2:
-            objects = objects.filter(category_l2__name=category2)
+            objects = objects.filter(category_l2__slug=category2)
         elif category1:
-            objects = objects.filter(category_l1__name=category1)
+            objects = objects.filter(category_l1__slug=category1)
 
         return objects
+
+
+# TODO Error404 if no part passed or part_id not found
+class ShopSingleView(TemplateView):
+    template_name = "single-product.html"
+
+    def part(self):
+        return models.Part.objects.get(slug=self.request.GET.get('part'))
 
 
 # TODO JsonResponse shouldn't be safe=False, find a better way to send JSON data

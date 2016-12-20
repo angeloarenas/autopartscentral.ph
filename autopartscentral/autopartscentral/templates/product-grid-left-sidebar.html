@@ -38,15 +38,15 @@
                                 <ul class="nav navbar-nav side-nav">
                                     {% for i in view.categories_l1 %}
                                         <li>
-                                            <!--<a href="{% url 'shop' %}?category1={{ i.name }}">{{ i.name }}</a>-->
+                                            <!--<a href="{% url 'shop' %}?category1={{ i.slug }}">{{ i.name }}</a>-->
                                             <a href="javascript:;" data-toggle="collapse" data-target="#{{ i.id }}">{{ i.name }}<i class="fa fa-plus"></i></a>
                                             <ul id="{{ i.id }}" class="collapse collapseItem">
-                                                <li><a href="javascript:void(0)" class="set_category_1_filter" data-name="{{ i.name }}">
+                                                <li><a href="javascript:void(0)" class="set_category_1_filter" data-name="{{ i.slug }}">
                                                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                                                     All <span>({{ i.parts.all.count }})</span></a>
                                                 </li>
                                                 {% for j in i.categories.all %}
-                                                    <li><a href="javascript:void(0)" class="set_category_2_filter" data-name="{{ j.name }}">
+                                                    <li><a href="javascript:void(0)" class="set_category_2_filter" data-name="{{ j.slug }}">
                                                         <i class="fa fa-caret-right" aria-hidden="true"></i>
                                                         {{ j.name }} <span>({{ j.parts.all.count }})</span></a>
                                                     </li>
@@ -113,26 +113,28 @@
                         {% for i in view.parts %}
                             <div class="col-sm-4 col-xs-12">
                                 <div class="productBox">
-                                    <div class="productImage clearfix">
-                                        {% if not i.images.all  %}
-                                            <img src="{% static "img/products/products-01.jpg" %}" alt="products-img">
-                                        {% else %}
-                                            <img src="{{ i.images.all.first.image.url }}" alt="products-img">
-                                        {% endif %}
-                                        <div class="productMasking">
-                                            <ul class="list-inline btn-group" role="group">
-                                                <li><a data-toggle="modal" href=".login-modal" class="btn btn-default"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="cart-page.html" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a></li>
-                                                <li><a class="btn btn-default" data-toggle="modal" href=".quick-view" ><i class="fa fa-eye"></i></a></li>
-                                            </ul>
+                                    <a href="{% url 'shop_single' %}?part={{ i.slug }}">
+                                        <div class="productImage clearfix">
+                                            {% if not i.images.all  %}
+                                                <img src="{% static "img/products/products-01.jpg" %}" alt="products-img">
+                                            {% else %}
+                                                <img src="{{ i.images.all.first.image.url }}" alt="products-img">
+                                            {% endif %}
+                                            <div class="productMasking">
+                                                <!--
+                                                <ul class="list-inline btn-group" role="group">
+                                                    <li><a data-toggle="modal" href=".login-modal" class="btn btn-default"><i class="fa fa-heart"></i></a></li>
+                                                    <li><a href="cart-page.html" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a class="btn btn-default" data-toggle="modal" href=".quick-view" ><i class="fa fa-eye"></i></a></li>
+                                                </ul>
+                                                -->
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="productCaption clearfix">
-                                        <a href="single-product.html">
+                                        <div class="productCaption clearfix">
                                             <h5>{{ i.name }}</h5>
-                                        </a>
-                                        <h3>P{{ i.price }}</h3>
-                                    </div>
+                                            <h3>P{{ i.price }}</h3>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         {% endfor %}
@@ -193,50 +195,6 @@
             </div>
         </div>
     </section>
-{% endblock %}
-
-{% block body_modals_extra %}
-    <!-- PRODUCT QUICK VIEW MODAL -->
-    <div class="modal fade quick-view" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <!-- Error here check inspect in Chrome, whole site's code gets added here
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <div class="media">
-                        <div class="media-left">
-                            <img class="media-object" src="{% static "img/products/quick-view/quick-view-01.jpg" %}" alt="Image">
-                        </div>
-                        <div class="media-body">
-                            <h2>Old Skool Navy</h2>
-                            <h3>$149</h3>
-                            <p>Classic sneaker from Vans. Cotton canvas and suede upper. Textile lining with heel stabilizer and ankle support. Contrasting laces. Sits on a classic waffle rubber sole.</p>
-                            <span class="quick-drop">
-                                <select name="guiest_id3" id="guiest_id3" class="select-drop">
-                                    <option value="0">Size</option>
-                                    <option value="1">Size 1</option>
-                                    <option value="2">Size 2</option>
-                                    <option value="3">Size 3</option>
-                              </select>
-                            </span>
-                            <span class="quick-drop resizeWidth">
-                                <select name="guiest_id4" id="guiest_id4" class="select-drop">
-                                    <option value="0">Qty</option>
-                                    <option value="1">Qty 1</option>
-                                    <option value="2">Qty 2</option>
-                                    <option value="3">Qty 3</option>
-                                </select>
-                            </span>
-                            <div class="btn-area">
-                                <a href="#" class="btn btn-primary btn-block">Add to cart <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                    -->
-        </div>
-    </div>
 {% endblock %}
 
 {% block body_scripts_extra %}
