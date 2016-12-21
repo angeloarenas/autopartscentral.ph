@@ -104,19 +104,20 @@ class ShopView(TemplateView):
         vehicle_year = self.request.GET.get('year')
 
         objects = models.Part.objects.all()
+        print objects
         if vehicle_make:
-            objects = objects.filter(compatibility__model__make__id=vehicle_make)
+            objects = objects.filter(compatibility__model__make__id=vehicle_make).distinct()
         if vehicle_model:
-            objects = objects.filter(compatibility__model__id=vehicle_model)
+            objects = objects.filter(compatibility__model__id=vehicle_model).distinct()
         #if vehicle_year:
-            #objects = objects.filter(compatibility__model__id=vehicle_model)
+            #objects = objects.filter(compatibility__model__id=vehicle_model).distinct()
 
         if category3:
-            objects = objects.filter(category_l3__slug=category3)
+            objects = objects.filter(category_l3__slug=category3).distinct()
         elif category2:
-            objects = objects.filter(category_l2__slug=category2)
+            objects = objects.filter(category_l2__slug=category2).distinct()
         elif category1:
-            objects = objects.filter(category_l1__slug=category1)
+            objects = objects.filter(category_l1__slug=category1).distinct()
 
         return objects
 
