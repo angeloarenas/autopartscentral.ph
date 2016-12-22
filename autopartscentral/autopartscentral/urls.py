@@ -12,7 +12,7 @@ urlpatterns = [
     url(r"^shop/detail/$", views.ShopDetailView.as_view(), name='shop_detail'),
     url(r"^cart/add/$", views.cart_add, name='cart_add'),
     url(r"^cart/remove/$", views.cart_remove, name='cart_remove'),
-    url(r"^ajax/", views.vehicle_filter, name='ajax'),
+    url(r"^vehicle/filter/$", views.vehicle_filter, name='vehicle_filter'),
 
     url(r"^admin/", include(admin.site.urls)),
     url(r'^nested_admin/', include('nested_admin.urls')),

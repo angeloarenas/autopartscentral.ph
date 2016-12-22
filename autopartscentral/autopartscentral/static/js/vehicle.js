@@ -8,7 +8,7 @@ function fill_vehicle_models(make_id) {
         $("#filter_vehicle_model").html(response_cache_models[make_id]);
     } else {
         $.getJSON(
-            "/ajax/",
+            "/vehicle/filter/",
             {vehicle_make: make_id},
             function(ret) {
                 var options = '<option value=0 selected disabled>Model</option>';
@@ -26,7 +26,7 @@ function fill_vehicle_years(model_id) {
         $("#filter_vehicle_year").html(response_cache_years[model_id]);
     } else {
         $.getJSON(
-            "/ajax/",
+            "/vehicle/filter/",
             {vehicle_model: model_id},
             function(ret) {
                 var options = '<option value=0 selected disabled>Year</option>';
