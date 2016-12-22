@@ -23,9 +23,12 @@ $(document).ready(function() {
         $.post(
             "/cart/add/",
             {part: part_slug},
-            function(ret, status) {
-                console.log(status);
-                //update cart html, success modal
-            });
+            function(data) {
+                //Update cart
+                $('#cart_update_modal').modal('toggle').find('div.modal-body').text(data);
+            })
+            .error(function(data) {
+                $('#cart_update_modal').modal('toggle').find('div.modal-body').text(data.responseText);
+        });
     });
 });

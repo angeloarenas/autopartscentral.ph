@@ -156,9 +156,9 @@ def cart_add(request):
         cart = Cart(request.session)
         product = models.Part.objects.get(slug=request.POST.get('part'))
         cart.add(product)
-        return HttpResponse("Added")
+        return HttpResponse(content=product.name + " successfully added to cart")
     else:
-        return HttpResponse("Error")
+        return HttpResponse(status=400, content="Error adding to cart")
 
 
 # TODO Check if in cart
@@ -167,6 +167,6 @@ def cart_remove(request):
         cart = Cart(request.session)
         product = models.Part.objects.get(slug=request.POST.get('part'))
         cart.remove(product)
-        return HttpResponse("Removed")
+        return HttpResponse(content=product.name + " successfully removed from cart")
     else:
-        return HttpResponse("Error")
+        return HttpResponse(status=400, content="Error removing from cart")
