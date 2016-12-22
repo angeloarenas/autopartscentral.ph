@@ -124,7 +124,7 @@ class ShopView(TemplateView):
 
 
 # TODO Error404 if no part passed or part_id not found
-class ShopSingleView(TemplateView):
+class ShopDetailView(TemplateView):
     template_name = "single-product.html"
 
     def part(self):
