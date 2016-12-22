@@ -86,7 +86,7 @@
                                 </select>
                             </span>
                             <div class="btn-area">
-                                <a href="{% url 'cart_add' %}?part={{ view.part.slug }}" class="btn btn-primary btn-block">Add to cart <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                <a href="javascript:void(0)" id="cart_add" data-slug="{{ view.part.slug }}" class="btn btn-primary btn-block">Add to cart <i class="fa fa-angle-right" aria-hidden="true"></i></a>
                             </div>
                             <div class="tabArea">
                                 <ul class="nav nav-tabs">
@@ -202,4 +202,8 @@
         </div>
     </section>
 {% endblock %}
-      
+
+{% block body_scripts_extra %}
+    <script src="{% static "js/cookie.js" %}"></script>
+    <script src="{% static "js/cart.js" %}"></script>
+{% endblock %}

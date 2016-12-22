@@ -149,15 +149,24 @@ def vehicle_filter(request):
         return JsonResponse({'error': 'Not Ajax or no GET'})
 
 
+# TODO Check first if part is available
+# TODO Quantity
 def cart_add(request):
-    cart = Cart(request.session)
-    product = models.Part.objects.get(slug=request.GET.get('part'))
-    cart.add(product)
-    return HttpResponse("Added")
+    if request.is_ajax() and request.POST and 'part' in request.POST:
+        cart = Cart(request.session)
+        product = models.Part.objects.get(slug=request.POST.get('part'))
+        cart.add(product)
+        return HttpResponse("Added")
+    else:
+        return HttpResponse("Error")
 
 
+# TODO Check if in cart
 def cart_remove(request):
-    cart = Cart(request.session)
-    product = models.Part.objects.get(slug=request.GET.get('part'))
-    cart.remove(product)
-    return HttpResponse("Removed")
+    if request.is_ajax() and request.POST and 'part' in request.POST:
+        cart = Cart(request.session)
+        product = models.Part.objects.get(slug=request.POST.get('part'))
+        cart.remove(product)
+        return HttpResponse("Removed")
+    else:
+        return HttpResponse("Error")
