@@ -10,6 +10,8 @@ urlpatterns = [
     url(r"^account/signup/", views.SignupView.as_view(), name='account_signup'),
     url(r"^shop/$", views.ShopView.as_view(), name='shop'),
     url(r"^shop/single/$", views.ShopSingleView.as_view(), name='shop_single'),
+    url(r"^cart/add/$", views.cart_add, name='cart_add'),
+    url(r"^cart/remove/$", views.cart_remove, name='cart_remove'),
     url(r"^ajax/", views.vehicle_filter, name='ajax'),
 
     url(r"^admin/", include(admin.site.urls)),

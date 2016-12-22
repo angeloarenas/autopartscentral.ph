@@ -8,3 +8,4 @@ django-nested-admin==3.0.8
 psycopg2
 Pillow==3.4.1
 django-smart-selects==1.2.6
+django-carton==1.2.1

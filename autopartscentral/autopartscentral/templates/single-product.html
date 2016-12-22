@@ -64,10 +64,6 @@
                             </div>
                         </div>
                         <div class="media-body">
-                            <ul class="list-inline">
-                                <li><a href="index.html"><i class="fa fa-reply" aria-hidden="true"></i>Continue Shopping</a></li>
-                                <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>Share This</a></li>
-                            </ul>
                             <h2>{{ view.part.name }}</h2>
                             <h3>P{{ view.part.price }}</h3>
                             <p>{{ view.part.description }}</p>
@@ -90,7 +86,7 @@
                                 </select>
                             </span>
                             <div class="btn-area">
-                                <a href="cart-page.html" class="btn btn-primary btn-block">Add to cart <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                <a href="{% url 'cart_add' %}?part={{ view.part.slug }}" class="btn btn-primary btn-block">Add to cart <i class="fa fa-angle-right" aria-hidden="true"></i></a>
                             </div>
                             <div class="tabArea">
                                 <ul class="nav nav-tabs">

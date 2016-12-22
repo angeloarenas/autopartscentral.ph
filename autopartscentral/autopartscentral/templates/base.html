@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load carton_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,26 +76,20 @@
                                         <a href="cart-page.html" class="dropdown-toggle" data-toggle="dropdown disabled"><i class="fa fa-shopping-cart"></i>$0</a>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li>Item(s) in your cart</li>
-                                            <li>
-                                                <a href="single-product.html">
-                                                    <div class="media">
-                                                        <img class="media-left media-object" src="{% static "img/home/cart-items/cart-item-01.jpg" %}" alt="cart-Image">
-                                                        <div class="media-body">
-                                                            <h5 class="media-heading">INCIDIDUNT UT <br><span>2 X $199</span></h5>
+                                            {% get_cart as cart %}
+                                            {% for item in cart.items %}
+                                                <li>
+                                                    <a href="single-product.html">
+                                                        <div class="media">
+                                                            <img class="media-left media-object" src="{% static "img/home/cart-items/cart-item-01.jpg" %}" alt="cart-Image">
+                                                            <div class="media-body">
+                                                                <h5 class="media-heading">{{ item.product }}<br><span>{{ item.quantity }} X P{{ item.price }}</span></h5>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="single-product.html">
-                                                    <div class="media">
-                                                        <img class="media-left media-object" src="{% static "img/home/cart-items/cart-item-01.jpg" %}" alt="cart-Image">
-                                                        <div class="media-body">
-                                                            <h5 class="media-heading">INCIDIDUNT UT <br><span>2 X $199</span></h5>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                            <!--Total: {{ cart.total }}-->
                                             <li>
                                                 <div class="btn-group" role="group" aria-label="...">
                                                     <button type="button" class="btn btn-default" onclick="location.href='cart-page.html';">Shopping Cart</button>

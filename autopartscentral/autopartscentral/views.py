@@ -1,11 +1,12 @@
 from django.views.generic import TemplateView
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.utils.encoding import smart_unicode
 from django.db.models import Max, Min
 import models
 import forms
 import account.views
 import account.forms
+from carton.cart import Cart
 
 
 class IndexView(TemplateView):
@@ -146,3 +147,17 @@ def vehicle_filter(request):
                                  for i, j in enumerate(range(vehicle_min_year, vehicle_max_year+1))], safe=False)
     else:
         return JsonResponse({'error': 'Not Ajax or no GET'})
+
+
+def cart_add(request):
+    cart = Cart(request.session)
+    product = models.Part.objects.get(slug=request.GET.get('part'))
+    cart.add(product)
+    return HttpResponse("Added")
+
+
+def cart_remove(request):
+    cart = Cart(request.session)
+    product = models.Part.objects.get(slug=request.GET.get('part'))
+    cart.remove(product)
+    return HttpResponse("Removed")

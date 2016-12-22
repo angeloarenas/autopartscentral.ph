@@ -145,6 +145,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "nested_admin",
     "smart_selects",
+    "carton",
 ]
 
 # A sample logging configuration. The only tangible logging
@@ -194,3 +195,5 @@ AUTHENTICATION_BACKENDS = [
     "account.auth_backends.UsernameAuthenticationBackend",
     "account.auth_backends.EmailAuthenticationBackend",
 ]
+
+CART_PRODUCT_MODEL = 'autopartscentral.models.Part'
