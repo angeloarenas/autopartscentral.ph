@@ -47,7 +47,7 @@
                                     {% for item in cart.items %}
                                     <tr>
                                         <td class="col-xs-2">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <button type="button" class="close cart_remove" data-slug="{{ item.product.slug }}" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             <span class="cartImage"><img src="img/products/cart-image.jpg" alt="image"></span>
                                         </td>
                                         <td class="col-xs-4">{{ item.product.name }}</td>
@@ -84,4 +84,9 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block body_scripts_extra %}
+    <script src="{% static "js/cookie.js" %}"></script>
+    <script src="{% static "js/cart.js" %}"></script>
 {% endblock %}

@@ -31,4 +31,13 @@ $(document).ready(function() {
                 $('#cart_update_modal').modal('toggle').find('div.modal-body').text(data.responseText);
         });
     });
+    $(".cart_remove").click(function() {
+        var part_slug = $(this).data("slug");
+        $.post(
+            "/cart/remove/",
+            {part: part_slug},
+            function() {
+                location.reload(true);
+            });
+    });
 });

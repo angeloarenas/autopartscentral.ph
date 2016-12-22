@@ -158,7 +158,7 @@ def cart_add(request):
     if request.is_ajax() and request.POST and 'part' in request.POST:
         cart = Cart(request.session)
         product = models.Part.objects.get(slug=request.POST.get('part'))
-        cart.add(product)
+        cart.add(product, price=product.price)
         return HttpResponse(content=product.name + " successfully added to cart")
     else:
         return HttpResponse(status=400, content="Error adding to cart")
