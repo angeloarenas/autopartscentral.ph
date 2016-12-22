@@ -25,10 +25,10 @@ $(document).ready(function() {
             {part: part_slug},
             function(data) {
                 //Update cart
-                $('#cart_update_modal').modal('toggle').find('div.modal-body').text(data);
+                $('#cart_updated_modal').modal('toggle').find('div.modal-body').text(data);
             })
             .error(function(data) {
-                $('#cart_update_modal').modal('toggle').find('div.modal-body').text(data.responseText);
+                $('#cart_updated_modal').modal('toggle').find('div.modal-body').text(data.responseText);
         });
     });
     $(".cart_remove").click(function() {
