@@ -50,12 +50,13 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6 hidden-sm hidden-xs">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                                <ul class="menu menu-right">
+                                    <li>
+                                        <span class="input-group">
+                                            <input type="text" class="form-control" placeholder="Search Part or Part#" aria-describedby="basic-addon2">
+                                            <span class="input-group-addon" id="basic-addon2">Search AutoPartsCentral</span>
+                                        </span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-md-6 col-xs-12">
@@ -73,7 +74,7 @@
                                         </ul>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="cart-page.html" class="dropdown-toggle" data-toggle="dropdown disabled"><i class="fa fa-shopping-cart"></i>$0</a>
+                                        <a href="cart-page.html" class="dropdown-toggle" data-toggle="dropdown disabled"><i class="fa fa-shopping-cart"></i>P0</a>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li>Item(s) in your cart</li>
                                             {% get_cart as cart %}
@@ -118,6 +119,7 @@
                             <a class="navbar-brand" href="javascript:void(0)"><img src="{% static "img/logo_header.png" %}" alt=""></a>
                         </div>
 
+
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse navbar-ex1-collapse">
                             <ul class="nav navbar-nav navbar-right">
@@ -127,63 +129,48 @@
                                     <ul class="dropdown-menu row">
                                         <li class="col-sm-3 col-xs-12">
                                             <ul class="list-unstyled">
-                                                <li>Products Grid View</li>
-                                                <li><a href="{% url 'shop' %}">Products Sidebar Left</a></li>
-                                                <li><a href="product-grid-right-sidebar.html">Products Sidebar Right</a></li>
-                                                <li><a href="product-grid-3-col-filter.html">Products 3 Columns V1</a></li>
-                                                <li><a href="product-grid-3-col.html">Products 3 Columns V2</a></li>
-                                                <li><a href="product-grid-4-col.html">Products 4 Columns</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="col-sm-3 col-xs-12">
-                                            <ul class="list-unstyled">
-                                                <li>Products List View</li>
-                                                <li><a href="product-list-left-sidebar.html">Products Sidebar Left</a></li>
-                                                <li><a href="product-list-right-sidebar.html">Products Sidebar Right</a></li>
-                                                <li class="listHeading">Others</li>
-                                                <li><a href="single-product.html">Single Product</a></li>
-                                                <li><a href="cart-page.html">Cart Page</a></li>
+                                                <li>Shop</li>
+                                                <li><a href="{% url 'shop' %}">Shop</a></li>
+                                                <li><a href="product-list-left-sidebar.html">By Part</a></li>
+                                                <li><a href="product-list-right-sidebar.html">By Make</a></li>
+                                                <li class="listHeading">Categories</li>
+                                                <li><a href="single-product.html">Engine</a></li>
+                                                <li><a href="cart-page.html">Suspension</a></li>
+                                                <li><a href="">Accesories</a></li>
                                             </ul>
                                         </li>
                                         <li class="col-sm-3 col-xs-12">
                                             <ul class="list-unstyled">
                                                 <li>Checkout</li>
-                                                <li><a href="checkout-step-1.html">Step 1 - Address</a></li>
-                                                <li><a href="checkout-step-2.html">Step 2 - Shipping</a></li>
-                                                <li><a href="checkout-step-3.html">Step 3 - Payment</a></li>
-                                                <li><a href="checkout-step-4.html">Step 4 - Payment</a></li>
+                                                <li><a href="checkout-step-1.html">Address</a></li>
+                                                <li><a href="checkout-step-2.html">Shipping</a></li>
+                                                <li><a href="checkout-step-3.html">Payment</a></li>
                                                 <li><a href="checkout-complete.html">Order Complete</a></li>
                                             </ul>
                                         </li>
                                         <li class="col-sm-3 col-xs-12">
-                                            <a href="#" class="menu-photo"><img src="{% static "img/menu-photo.jpg" %}" alt="menu-img"></a>
+                                            <a href="#" class="menu-photo"><img src="{% static "img/menu-photo.png" %}" alt="menu-img"></a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact us</a>
+                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About Us</a>
                                     <ul class="dropdown-menu dropdown-menu-left">
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="{% url 'account_signup' %}">Register</a></li>
-                                        <li><a href="signup-login.html">Register or Login</a></li>
-                                        <li><a href="{% url 'account_login' %}">Login</a></li>
-                                        <li><a href="lost-password.html">Password Recovery</a></li>
+                                        <li><a href="about-us.html">Contact Us</a></li>
                                         <li><a href="privacy-policy.html">Privacy Policy</a></li>
                                         <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
-                                        <li><a href="404.html">404 Not Found</a></li>
-                                        <li><a href="coming-soon.html">Coming Soon</a></li>
                                     </ul>
                                 </li>
 
                                 <li class="dropdown">
                                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account</a>
                                     <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="account-dashboard.html">Dashboard</a></li>
                                         <li><a href="account-profile.html">Profile</a></li>
                                         <li><a href="account-all-orders.html">All Orders</a></li>
-                                        <li><a href="account-single-order.html">Single Order</a></li>
-                                        <li><a href="account-wishlist.html">Wishlist</a></li>
                                         <li><a href="account-address.html">Address</a></li>
+                                        <li><a href="{% url 'account_signup' %}">Register</a></li>
+                                        <li><a href="{% url 'account_login' %}">Login</a></li>
+                                        <li><a href="lost-password.html">Password Recovery</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -219,9 +206,11 @@
                                 <h5>BRANDS</h5>
                                 <ul class="list-unstyled">
                                     <li><a href="#">Nissan </a></li>
-                                    <li><a href="#">Toyata </a></li>
+                                    <li><a href="#">Toyota </a></li>
                                     <li><a href="#">Mitsubishi</a></li>
                                     <li><a href="#">Isuzu</a></li>
+                                    <li><a href="#">Hyundai</a></li>
+                                    <li><a href="#">Honda</a></li>
                                 </ul>
                             </div>
                         </div>
