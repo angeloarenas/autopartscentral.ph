@@ -131,6 +131,10 @@ class ShopDetailView(TemplateView):
         return models.Part.objects.get(slug=self.request.GET.get('part'))
 
 
+class CartView(TemplateView):
+    template_name = "cart-page.html"
+
+
 # TODO JsonResponse shouldn't be safe=False, find a better way to send JSON data
 # TODO vehicle_max_year can be changed to current year
 def vehicle_filter(request):
