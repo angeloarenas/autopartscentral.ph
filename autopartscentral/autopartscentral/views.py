@@ -105,7 +105,6 @@ class ShopView(TemplateView):
         vehicle_year = self.request.GET.get('year')
 
         objects = models.Part.objects.all()
-        print objects
         if vehicle_make:
             objects = objects.filter(compatibility__model__make__id=vehicle_make).distinct()
         if vehicle_model:

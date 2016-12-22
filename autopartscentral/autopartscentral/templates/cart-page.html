@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load carton_tags %}
 
 {% block body_maincontent %}
     <!-- LIGHT SECTION -->
@@ -42,36 +43,19 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    {% get_cart as cart %}
+                                    {% for item in cart.items %}
                                     <tr>
                                         <td class="col-xs-2">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             <span class="cartImage"><img src="img/products/cart-image.jpg" alt="image"></span>
                                         </td>
-                                        <td class="col-xs-4">Italian Winter Hat</td>
-                                        <td class="col-xs-2">$ 99.00</td>
-                                        <td class="col-xs-2"><input type="text" placeholder="1"></td>
-                                        <td class="col-xs-2">$ 99.00</td>
+                                        <td class="col-xs-4">{{ item.product.name }}</td>
+                                        <td class="col-xs-2">$ {{ item.price }}</td>
+                                        <td class="col-xs-2"><input type="text" placeholder="{{ item.quantity }}"></td>
+                                        <td class="col-xs-2">$ {{ item.subtotal }}</td>
                                     </tr>
-                                    <tr>
-                                        <td class="col-xs-2">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <span class="cartImage"><img src="img/products/cart-image.jpg" alt="image"></span>
-                                        </td>
-                                        <td class="col-xs-4">Italian Winter Hat</td>
-                                        <td class="col-xs-2">$ 99.00</td>
-                                        <td class="col-xs-2"><input type="text" placeholder="1"></td>
-                                        <td class="col-xs-2">$ 99.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-xs-2">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <span class="cartImage"><img src="img/products/cart-image.jpg" alt="image"></span>
-                                        </td>
-                                        <td class="col-xs-4">Italian Winter Hat</td>
-                                        <td class="col-xs-2">$ 99.00</td>
-                                        <td class="col-xs-2"><input type="text" placeholder="1"></td>
-                                        <td class="col-xs-2">$ 99.00</td>
-                                    </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
@@ -87,7 +71,7 @@
                                     <ul class="list-unstyled">
                                         <li>Sub Total <span>$ 792.00</span></li>
                                         <li>UK Vat <span>$ 18.00</span></li>
-                                        <li>Grand Total <span class="grandTotal">$ 810.00</span></li>
+                                        <li>Grand Total <span class="grandTotal">{{ cart.total }}</span></li>
                                     </ul>
                                 </div>
                             </div>

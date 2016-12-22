@@ -73,11 +73,11 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    {% get_cart as cart %}
                                     <li class="dropdown">
-                                        <a href="{% url 'cart' %}" class="dropdown-toggle" data-toggle="dropdown disabled"><i class="fa fa-shopping-cart"></i>P0</a>
+                                        <a href="{% url 'cart' %}" class="dropdown-toggle" data-toggle="dropdown disabled"><i class="fa fa-shopping-cart"></i>{{ cart.total }}</a>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li>Item(s) in your cart</li>
-                                            {% get_cart as cart %}
                                             {% for item in cart.items %}
                                                 <li>
                                                     <a href="single-product.html">
@@ -90,7 +90,6 @@
                                                     </a>
                                                 </li>
                                             {% endfor %}
-                                            <!--Total: {{ cart.total }}-->
                                             <li>
                                                 <div class="btn-group" role="group" aria-label="...">
                                                     <button type="button" class="btn btn-default" onclick="location.href='{% url 'cart' %}';">Shopping Cart</button>
