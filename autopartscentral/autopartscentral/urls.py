@@ -13,6 +13,7 @@ urlpatterns = [
     url(r"^cart/$", views.CartView.as_view(), name='cart'),
     url(r"^cart/add/$", views.cart_add, name='cart_add'),
     url(r"^cart/remove/$", views.cart_remove, name='cart_remove'),
+    url(r"^cart/update/$", views.cart_update, name='cart_update'),
     url(r"^vehicle/filter/$", views.vehicle_filter, name='vehicle_filter'),
 
     url(r"^admin/", include(admin.site.urls)),

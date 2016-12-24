@@ -24,7 +24,7 @@ $(document).ready(function() {
             "/cart/add/",
             {part: part_slug},
             function(data) {
-                //Update cart
+                //TODO Update cart
                 $('#cart_updated_modal').modal('toggle').find('div.modal-body').text(data);
             })
             .error(function(data) {
@@ -36,6 +36,27 @@ $(document).ready(function() {
         $.post(
             "/cart/remove/",
             {part: part_slug},
+            function() {
+                location.reload(true);
+            });
+    });
+    //TODO Use id instead of slug
+    $("#cart_update").click(function() {
+        var data = [];
+        $(".cart_item_row").each(function() {
+            var quantity = $(this).find('.cart_item_quantity').val();
+            if(quantity) {
+                data.push(
+                    {
+                        part: $(this).find('.cart_remove').data("slug"),
+                        quantity: quantity
+                    }
+                );
+            }
+        });
+        $.post(
+            "/cart/update/",
+            {data: JSON.stringify(data)},
             function() {
                 location.reload(true);
             });

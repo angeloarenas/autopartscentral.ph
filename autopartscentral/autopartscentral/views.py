@@ -2,6 +2,7 @@ from django.views.generic import TemplateView
 from django.http import JsonResponse, HttpResponse
 from django.utils.encoding import smart_unicode
 from django.db.models import Max, Min
+import json
 import models
 import forms
 import account.views
@@ -173,3 +174,16 @@ def cart_remove(request):
         return HttpResponse(content=product.name + " successfully removed from cart")
     else:
         return HttpResponse(status=400, content="Error removing from cart")
+
+
+# TODO Check if in cart
+def cart_update(request):
+    if request.is_ajax() and request.POST and 'data' in request.POST:
+        cart = Cart(request.session)
+        json_data = json.loads(request.POST.get('data'))
+        for i in json_data:
+            product = models.Part.objects.get(slug=i['part'])
+            cart.set_quantity(product, quantity=i['quantity'])
+        return HttpResponse("Successfully updated cart")
+    else:
+        return HttpResponse(status=400, content="Error updating cart")

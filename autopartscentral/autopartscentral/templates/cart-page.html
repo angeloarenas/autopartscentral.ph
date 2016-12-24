@@ -45,16 +45,16 @@
                                     <tbody>
                                     {% get_cart as cart %}
                                     {% for item in cart.items %}
-                                    <tr>
-                                        <td class="col-xs-2">
-                                            <button type="button" class="close cart_remove" data-slug="{{ item.product.slug }}" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <span class="cartImage"><img src="img/products/cart-image.jpg" alt="image"></span>
-                                        </td>
-                                        <td class="col-xs-4">{{ item.product.name }}</td>
-                                        <td class="col-xs-2">$ {{ item.price }}</td>
-                                        <td class="col-xs-2"><input type="text" placeholder="{{ item.quantity }}"></td>
-                                        <td class="col-xs-2">$ {{ item.subtotal }}</td>
-                                    </tr>
+                                        <tr class="cart_item_row">
+                                            <td class="col-xs-2">
+                                                <button type="button" class="close cart_remove" data-slug="{{ item.product.slug }}" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <span class="cartImage"><img src="img/products/cart-image.jpg" alt="image"></span>
+                                            </td>
+                                            <td class="col-xs-4">{{ item.product.name }}</td>
+                                            <td class="col-xs-2">$ {{ item.price }}</td>
+                                            <td class="col-xs-2"><input class="cart_item_quantity" type="text" placeholder="{{ item.quantity }}"></td>
+                                            <td class="col-xs-2">$ {{ item.subtotal }}</td>
+                                        </tr>
                                     {% endfor %}
                                     </tbody>
                                 </table>
@@ -64,7 +64,7 @@
                                     <input type="text" class="form-control" placeholder="I have a discount coupon" aria-describedby="basic-addon2">
                                     <a href="#" class="btn input-group-addon" id="basic-addon2">apply coupon</a>
                                 </div>
-                                <a href="#" class="btn">update cart</a>
+                                <a href="javascript:void(0)" class="btn" id="cart_update">update cart</a>
                             </div>
                             <div class="row totalAmountArea">
                                 <div class="col-sm-4 col-sm-offset-8 col-xs-12">
