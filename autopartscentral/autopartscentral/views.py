@@ -1,6 +1,8 @@
 from django.views.generic import TemplateView
 from django.http import JsonResponse, HttpResponse
 from django.utils.encoding import smart_unicode
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.db.models import Max, Min
 import json
 import models
@@ -133,6 +135,16 @@ class ShopDetailView(TemplateView):
 
 class CartView(TemplateView):
     template_name = "cart-page.html"
+
+
+class CheckoutLoginView(account.views.LoginView):
+    template_name = "checkout-step-1.html"
+    form_class = account.forms.LoginEmailForm
+
+
+@method_decorator(login_required, name='dispatch')
+class CheckoutShippingView(TemplateView):
+    template_name = ""
 
 
 # TODO JsonResponse shouldn't be safe=False, find a better way to send JSON data

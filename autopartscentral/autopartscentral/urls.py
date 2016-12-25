@@ -14,6 +14,9 @@ urlpatterns = [
     url(r"^cart/add/$", views.cart_add, name='cart_add'),
     url(r"^cart/remove/$", views.cart_remove, name='cart_remove'),
     url(r"^cart/update/$", views.cart_update, name='cart_update'),
+    url(r"^checkout/step/login/$", views.CheckoutLoginView.as_view(), name='checkout_login'),
+    url(r"^checkout/step/shipping/$", views.CheckoutShippingView.as_view(), name='checkout_shipping'),
+    url(r"^checkout/step/review/$", views.cart_update, name='checkout_review'),
     url(r"^vehicle/filter/$", views.vehicle_filter, name='vehicle_filter'),
 
     url(r"^admin/", include(admin.site.urls)),
