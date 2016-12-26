@@ -156,7 +156,7 @@ class CheckoutLoginView(account.views.LoginView):
 
 
 class CheckoutShippingView(TemplateView):
-    template_name = "cart-page.html"
+    template_name = "checkout-step-2.html"
 
     @method_decorator(lambda x: login_required(x, login_url=reverse_lazy('checkout_login')))
     def dispatch(self, *args, **kwargs):
