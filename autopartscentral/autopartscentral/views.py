@@ -4,6 +4,7 @@ from django.utils.encoding import smart_unicode
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.db.models import Max, Min
+from django.urls import reverse_lazy
 import json
 import models
 import forms
@@ -141,10 +142,25 @@ class CheckoutLoginView(account.views.LoginView):
     template_name = "checkout-step-1.html"
     form_class = account.forms.LoginEmailForm
 
+    # Auto redirect to next checkout step after logging in
+    def get_context_data(self, **kwargs):
+        ctx = super(CheckoutLoginView, self).get_context_data(**kwargs)
+        ctx.update({
+            "redirect_field_value": reverse_lazy('checkout_shipping')
+        })
+        return ctx
 
-@method_decorator(login_required, name='dispatch')
+    # Auto redirect to next checkout step if already logged in
+    def get_success_url(self, fallback_url=None, **kwargs):
+        return super(CheckoutLoginView, self).get_success_url(reverse_lazy('checkout_shipping'), **kwargs)
+
+
 class CheckoutShippingView(TemplateView):
-    template_name = ""
+    template_name = "cart-page.html"
+
+    @method_decorator(lambda x: login_required(x, login_url=reverse_lazy('checkout_login')))
+    def dispatch(self, *args, **kwargs):
+        return super(CheckoutShippingView, self).dispatch(*args, **kwargs)
 
 
 # TODO JsonResponse shouldn't be safe=False, find a better way to send JSON data

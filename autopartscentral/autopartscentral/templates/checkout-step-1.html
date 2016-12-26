@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load widget_tweaks %}
 
 {% block body_maincontent %}
     <!-- LIGHT SECTION -->
@@ -24,7 +25,7 @@
     </section>
 
     <!-- MAIN CONTENT SECTION -->
-    <section class="mainContent clearfix stepsWrapper">
+    <section class="mainContent clearfix stepsWrapper logIn">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
@@ -56,74 +57,39 @@
                             </div>
                         </div>
 
-                        <form action="" class="row" method="POST" role="form">
-                            <div class="col-xs-12">
-                                <div class="page-header">
-                                    <h4>Billing information</h4>
+                        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h3>log in</h3></div>
+                                <div class="panel-body">
+                                    <form method="POST" action="{% url "account_login" %}" autocapitalize="off" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+                                        {% csrf_token %}
+                                        {% for error in form.non_field_errors %}
+                                            <label>* {{ error }}</label>
+                                        {% endfor %}
+                                        <div class="form-group">
+                                            <label>{{ form.email.label }}</label>
+                                            {% render_field form.email class="form-control" %}
+                                            {{ form.email.errors }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{{ form.password.label }}</label>
+                                            {% render_field form.password class="form-control" %}
+                                            {{ form.password.errors }}
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                {% render_field form.remember %} {{ form.remember.label }}
+                                            </label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block">log in</button>
+                                        {% if redirect_field_value %}
+                                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                        {% endif %}
+                                        <a href="{% url "account_password_reset" %}" class="btn btn-link btn-block">Forgot your password?</a>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <label for="">First Name</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <label for="">Last Name</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <label for="">Email</label>
-                                <input type="email" class="form-control" id="">
-                            </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <label for="">Company</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <label for="">Address</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <label for="">Phone</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <label for="">City</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <label for="">Zip Code</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <label for="">Country</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <label for="">Fax</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="form-group col-sm-6 col-xs-12">
-                                <label for="">First Name</label>
-                                <textarea class="form-control"></textarea>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="page-header">
-                                    <h4>Shipping information</h4>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 checkboxArea">
-                                <input id="checkbox1" type="checkbox" name="checkbox" value="1" checked="checked">
-                                <label for="checkbox1"><span></span>Same as billing Information </label>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="well well-lg clearfix">
-                                    <ul class="pager">
-                                        <li class="previous"><a href="#" class="hideContent">back</a></li>
-                                        <li class="next"><a href="checkout-step-2.html">Continue</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
