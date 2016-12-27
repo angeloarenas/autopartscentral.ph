@@ -26,7 +26,7 @@ class UserProfile(models.Model):
 
 class Address(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(UserProfile, related_name='addresses')
+    user = models.ForeignKey(User, related_name='addresses')
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     contact_no = models.CharField(max_length=30)
@@ -178,7 +178,7 @@ class Discount(models.Model):
 # TODO Add status
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
-    customer = models.ForeignKey(UserProfile, related_name='orders')
+    customer = models.ForeignKey(User, related_name='orders')
     shipping_address = models.ForeignKey(Address, related_name='orders')
     placed_timestamp = models.DateTimeField(auto_now=True)
     notes = models.TextField(blank=True)
