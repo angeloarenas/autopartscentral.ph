@@ -9,19 +9,7 @@ from smart_selects.db_fields import ChainedForeignKey
 # TODO Check the use of many to many field
 
 YEAR_CHOICES = [(r, r) for r in range(1990, datetime.date.today().year+1)]
-COUNTRY_CHOICES = []  # For address also add city and state
-
-
-class Address(models.Model):  # TODO Not in normal form - city, state, country
-    id = models.AutoField(primary_key=True)
-    line_1 = models.CharField(max_length=40)
-    line_2 = models.CharField(max_length=40, blank=True)
-    city = models.CharField(max_length=20)
-    state = models.CharField(max_length=20)  # Just put choices here of states in PH
-    country = models.CharField(max_length=20)  # Should be just PH
-
-    def __unicode__(self):
-        return u'%s %s' % (self.line_1, self.line_2)
+COUNTRY_CHOICES = (('PH', 'Philippines'), )
 
 
 class UserProfile(models.Model):
@@ -29,11 +17,27 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=30)
     middle_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30)
-    contact_no = models.CharField(max_length=13)
-    default_shipping_address = models.OneToOneField(Address, related_name='userprofile')
+    contact_no = models.CharField(max_length=30)
+    default_shipping_address = models.OneToOneField('Address', related_name='userprofile')
 
     def __unicode__(self):
         return u'%i: %s %s' % (self.user.id, self.first_name, self.last_name)
+
+
+class Address(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(UserProfile, related_name='addresses')
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    contact_no = models.CharField(max_length=30)
+    line_1 = models.CharField(max_length=40)
+    line_2 = models.CharField(max_length=40, blank=True)
+    city = models.CharField(max_length=30)
+    province = models.CharField(max_length=30)
+    country = models.CharField(max_length=2, choices=COUNTRY_CHOICES)
+
+    def __unicode__(self):
+        return u'%s %s' % (self.line_1, self.line_2)
 
 
 class CategoryL1(models.Model):
@@ -171,6 +175,7 @@ class Discount(models.Model):
     value = models.DecimalField(max_digits=12, decimal_places=2)
 
 
+# TODO Add status
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
     customer = models.ForeignKey(UserProfile, related_name='orders')
