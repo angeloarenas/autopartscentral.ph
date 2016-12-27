@@ -40,10 +40,14 @@ class SignupView(account.views.SignupView):
     # TODO Better make sure this is in sync with the form, any error would result to user without UserProfile, etc.
     def create_userprofile(self, form):
         default_shipping_address = models.Address.objects.create(
+            user=self.created_user,
+            first_name=form.cleaned_data['first_name'],
+            last_name=form.cleaned_data['last_name'],
+            contact_no=form.cleaned_data['contact_no'],
             line_1=form.cleaned_data['address_line_1'],
             line_2=form.cleaned_data['address_line_2'],
             city=form.cleaned_data['address_city'],
-            state=form.cleaned_data['address_state'],
+            province=form.cleaned_data['address_province'],
             country=form.cleaned_data['address_country'],
         )
         models.UserProfile.objects.create(

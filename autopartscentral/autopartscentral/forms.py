@@ -1,5 +1,6 @@
 from django import forms
 import account.forms
+import models
 
 
 class SignupForm(account.forms.SignupForm):
@@ -29,7 +30,7 @@ class SignupForm(account.forms.SignupForm):
 
     contact_no = forms.CharField(
         label="Contact Number",
-        max_length=13,
+        max_length=30,
         widget=forms.TextInput(),
         required=True
     )
@@ -50,21 +51,21 @@ class SignupForm(account.forms.SignupForm):
 
     address_city = forms.CharField(
         label="City",
-        max_length=20,
+        max_length=30,
         widget=forms.TextInput(),
         required=True
     )
 
-    address_state = forms.CharField(
-        label="State",
-        max_length=20,
+    address_province = forms.CharField(
+        label="Province",
+        max_length=30,
         widget=forms.TextInput(),
         required=True
     )
 
-    address_country = forms.CharField(
+    address_country = forms.ChoiceField(
         label="Country",
-        max_length=20,
-        widget=forms.TextInput(),
+        choices=models.COUNTRY_CHOICES,
+        widget=forms.Select(),
         required=True
     )
