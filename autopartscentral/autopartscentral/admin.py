@@ -9,6 +9,10 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'contact_no')
 
 
+class AddressAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'contact_no', 'line_1', 'line_2', 'city', 'province')
+
+
 class CategoryL1Admin(admin.ModelAdmin):
     list_display = ('name', 'description', 'image')
     prepopulated_fields = {"slug": ("name",)}
@@ -64,6 +68,7 @@ class VehicleAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.UserProfile, UserProfileAdmin)
+admin.site.register(models.Address, AddressAdmin)
 admin.site.register(models.CategoryL1, CategoryL1Admin)
 admin.site.register(models.CategoryL2, CategoryL2Admin)
 admin.site.register(models.CategoryL3, CategoryL3Admin)

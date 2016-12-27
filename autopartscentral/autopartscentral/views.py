@@ -166,6 +166,9 @@ class CheckoutShippingView(TemplateView):
     def dispatch(self, *args, **kwargs):
         return super(CheckoutShippingView, self).dispatch(*args, **kwargs)
 
+    def user_addresses(self):
+        return models.Address.objects.filter(user=self.request.user.id)
+
 
 # TODO JsonResponse shouldn't be safe=False, find a better way to send JSON data
 # TODO vehicle_max_year can be changed to current year
