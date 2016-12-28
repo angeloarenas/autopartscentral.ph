@@ -142,6 +142,7 @@ INSTALLED_APPS = [
     # project
     "autopartscentral",
 
+    "formtools",
     "widget_tweaks",
     "nested_admin",
     "smart_selects",

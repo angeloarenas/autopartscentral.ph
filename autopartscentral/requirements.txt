@@ -9,3 +9,4 @@ psycopg2
 Pillow==3.4.1
 django-smart-selects==1.2.6
 django-carton==1.2.1
+django-formtools==1.0
