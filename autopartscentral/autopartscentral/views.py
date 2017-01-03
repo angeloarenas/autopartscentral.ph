@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 from django.http import JsonResponse, HttpResponse
 from django.utils.encoding import smart_unicode
 from django.contrib.auth.decorators import login_required
@@ -149,9 +149,7 @@ class CheckoutLoginView(account.views.LoginView):
     # Auto redirect to next checkout step after logging in
     def get_context_data(self, **kwargs):
         ctx = super(CheckoutLoginView, self).get_context_data(**kwargs)
-        ctx.update({
-            "redirect_field_value": reverse_lazy('checkout_shipping')
-        })
+        ctx.update({"redirect_field_value": reverse_lazy('checkout_shipping')})
         return ctx
 
     # Auto redirect to next checkout step if already logged in
@@ -159,15 +157,25 @@ class CheckoutLoginView(account.views.LoginView):
         return super(CheckoutLoginView, self).get_success_url(reverse_lazy('checkout_shipping'), **kwargs)
 
 
-class CheckoutShippingView(TemplateView):
+# TODO Use SessionWizard if more steps will be added or implement one page like partspro - use javascript
+@method_decorator(lambda x: login_required(x, login_url=reverse_lazy('checkout_login')), name='dispatch')
+class CheckoutShippingView(FormView):
     template_name = "checkout-step-2.html"
+    form_class = forms.CheckoutShippingForm
+    success_url = reverse_lazy('checkout_review')
 
-    @method_decorator(lambda x: login_required(x, login_url=reverse_lazy('checkout_login')))
-    def dispatch(self, *args, **kwargs):
-        return super(CheckoutShippingView, self).dispatch(*args, **kwargs)
+    def get_form_kwargs(self):
+        kwargs = super(CheckoutShippingView, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user.id})
+        kwargs.update({'initial': {'shipping_address': self.request.user.userprofile.default_shipping_address}})
+        return kwargs
 
     def user_addresses(self):
         return models.Address.objects.filter(user=self.request.user.id)
+
+
+class CheckoutReviewView(TemplateView):
+    pass
 
 
 # TODO JsonResponse shouldn't be safe=False, find a better way to send JSON data

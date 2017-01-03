@@ -74,6 +74,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            {{ form.as_p }}
                                             {% for i in view.user_addresses %}
                                                 <tr>
                                                     <td><input type="radio" name="address_selection"></td>
