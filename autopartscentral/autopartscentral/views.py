@@ -167,11 +167,8 @@ class CheckoutShippingView(FormView):
     def get_form_kwargs(self):
         kwargs = super(CheckoutShippingView, self).get_form_kwargs()
         kwargs.update({'user': self.request.user.id})
-        kwargs.update({'initial': {'shipping_address': self.request.user.userprofile.default_shipping_address}})
+        # kwargs.update({'initial': {'shipping_address': self.request.user.userprofile.default_shipping_address}})
         return kwargs
-
-    def user_addresses(self):
-        return models.Address.objects.filter(user=self.request.user.id)
 
 
 class CheckoutReviewView(TemplateView):

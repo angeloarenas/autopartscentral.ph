@@ -55,7 +55,8 @@
                                 <a href="checkout-step-4.html" class="progress-wizard-dot"></a>
                             </div>
                         </div>
-                        <form action="">
+                        <form id="checkout_shipping_form" method="POST" action="{% url "checkout_shipping" %}" autocapitalize="off" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+                            {% csrf_token %}
                             <div class="col-xs-12">
                                 <div class="page-header">
                                     <h4>Choose your Delivery Address</h4>
@@ -74,15 +75,16 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {{ form.as_p }}
-                                            {% for i in view.user_addresses %}
+                                            {% for choice in form.shipping_address.field.queryset %}
                                                 <tr>
-                                                    <td><input type="radio" name="address_selection"></td>
-                                                    <td>{{ i.first_name }} {{ i.last_name }}</td>
-                                                    <td>{{ i.contact_no }}</td>
-                                                    <td>{{ i.line_1 }} {{ i.line_2 }}</td>
-                                                    <td>{{ i.city }}</td>
-                                                    <td>{{ i.province }}</td>
+                                                    <td><input type="radio" value="{{ choice.id }}"
+                                                               {% if request.user.userprofile.default_shipping_address %} checked="checked" {% endif %}
+                                                               name="shipping_address"></td>
+                                                    <td>{{ choice.first_name }} {{ choice.last_name }}</td>
+                                                    <td>{{ choice.contact_no }}</td>
+                                                    <td>{{ choice.line_1 }} {{ i.line_2 }}</td>
+                                                    <td>{{ choice.city }}</td>
+                                                    <td>{{ choice.province }}</td>
                                                 </tr>
                                             {% endfor %}
                                             </tbody>
@@ -92,6 +94,7 @@
                                 <div class="well well-lg clearfix">
                                     <ul class="pager">
                                         <li class="previous"><a href="checkout-step-1.html">back</a></li>
+                                        <button type="submit" class="btn btn-primary btn-block">Continue</button>
                                         <li class="next"><a href="checkout-step-3.html">Continue</a></li>
                                     </ul>
                                 </div>
