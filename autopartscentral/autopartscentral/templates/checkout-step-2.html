@@ -78,7 +78,15 @@
                                             {% for choice in form.shipping_address.field.queryset %}
                                                 <tr>
                                                     <td><input type="radio" value="{{ choice.id }}"
-                                                               {% if request.user.userprofile.default_shipping_address %} checked="checked" {% endif %}
+                                                            {% if request.session.checkout_shipping_address_id %}
+                                                                {% if request.session.checkout_shipping_address_id == choice.id %}
+                                                                   checked="checked"
+                                                                {% endif %}
+                                                            {% else %}
+                                                                {% if request.user.userprofile.default_shipping_address.id == choice.id %}
+                                                                   checked="checked"
+                                                                {% endif %}
+                                                            {% endif %}
                                                                name="shipping_address"></td>
                                                     <td>{{ choice.first_name }} {{ choice.last_name }}</td>
                                                     <td>{{ choice.contact_no }}</td>

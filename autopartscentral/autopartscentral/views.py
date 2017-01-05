@@ -164,6 +164,10 @@ class CheckoutShippingView(FormView):
     form_class = forms.CheckoutShippingForm
     success_url = reverse_lazy('checkout_review')
 
+    def form_valid(self, form):
+        self.request.session['checkout_shipping_address_id'] = form.cleaned_data['shipping_address'].id
+        return super(CheckoutShippingView, self).form_valid(form)
+
     def get_form_kwargs(self):
         kwargs = super(CheckoutShippingView, self).get_form_kwargs()
         kwargs.update({'user': self.request.user.id})
