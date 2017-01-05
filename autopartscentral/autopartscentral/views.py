@@ -175,8 +175,9 @@ class CheckoutShippingView(FormView):
         return kwargs
 
 
+@method_decorator(lambda x: login_required(x, login_url=reverse_lazy('checkout_login')), name='dispatch')
 class CheckoutReviewView(TemplateView):
-    pass
+    template_name = "checkout-step-4.html"
 
 
 # TODO JsonResponse shouldn't be safe=False, find a better way to send JSON data
