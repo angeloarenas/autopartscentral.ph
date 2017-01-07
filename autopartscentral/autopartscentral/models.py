@@ -10,7 +10,9 @@ from smart_selects.db_fields import ChainedForeignKey
 
 YEAR_CHOICES = [(r, r) for r in range(1990, datetime.date.today().year+1)]
 COUNTRY_CHOICES = (('PH', 'Philippines'), )
-
+ORDER_STATUS_CHOICES = (('PL', 'PLACED'), ('CO', 'CONFIRMED'),
+                        ('PR', 'PROCESSED'), ('SH', 'SHIPPED'),
+                        ('RE', 'RECEIVED'), )
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='userprofile')
@@ -169,26 +171,38 @@ class PartFeatured(models.Model):
     part = models.OneToOneField(Part, related_name='+')
 
 
-class Discount(models.Model):
+# TODO percentage vs actual
+class OrderDiscount(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
+    code = models.CharField(max_length=30, unique=True)
     value = models.DecimalField(max_digits=12, decimal_places=2)
 
 
-# TODO Add status
+# TODO percentage vs actual
+class PartDiscount(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=30)
+    code = models.CharField(max_length=30, unique=True)
+    part = models.ForeignKey(Part, related_name='part_discounts')
+    value = models.DecimalField(max_digits=12, decimal_places=2)
+
+
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
     customer = models.ForeignKey(User, related_name='orders')
     shipping_address = models.ForeignKey(Address, related_name='orders')
     placed_timestamp = models.DateTimeField(auto_now=True)
-    notes = models.TextField(blank=True)
+    shipped_timestamp = models.DateTimeField(null=True, blank=True)
+    customer_instructions = models.TextField(blank=True)
+    status = models.CharField(max_length=2, choices=ORDER_STATUS_CHOICES, default='PL')
+    discount = models.ForeignKey(OrderDiscount, related_name='orders', null=True, blank=True)
 
 
 class OrderDetails(models.Model):
     id = models.AutoField(primary_key=True)
     order = models.ForeignKey(Order, related_name='orderdetails')
     part = models.ForeignKey(Part, related_name='orderdetails')
+    unit_price = models.DecimalField(max_digits=12, decimal_places=2)
     quantity = models.IntegerField(default=1)
-    discount = models.ForeignKey(Discount, related_name='orderdetails')
-    net_price = models.DecimalField(max_digits=12, decimal_places=2)
-# Part discount and order discount?
+    discount = models.ForeignKey(PartDiscount, related_name='orderdetails', null=True, blank=True)
