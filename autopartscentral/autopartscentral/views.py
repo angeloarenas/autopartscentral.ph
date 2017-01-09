@@ -192,7 +192,7 @@ class CheckoutShippingView(FormView):
 class CheckoutReviewView(FormView):
     template_name = "checkout-step-4.html"
     form_class = forms.CheckoutReviewForm
-    success_url = reverse_lazy('shop')
+    success_url = reverse_lazy('checkout_complete')
 
     # Auto redirect back to cart if cart is empty or to shipping if no shipping
     def dispatch(self, request, *args, **kwargs):
@@ -228,11 +228,28 @@ class CheckoutReviewView(FormView):
                 quantity=item.quantity,
                 net_price=item.subtotal
             )
+        self.request.session['checkout_order_id'] = order.id
 
         cart.clear()
         del self.request.session['checkout_shipping_address_id']
+
         # TODO Confirmation if order was placed (error if e.g. cart is empty, other errors)
+
         return super(CheckoutReviewView, self).form_valid(form)
+
+
+@method_decorator(lambda x: login_required(x, login_url=reverse_lazy('checkout_login')), name='dispatch')
+class CheckoutCompleteView(TemplateView):
+    template_name = "cart-page.html"
+
+    # Auto redirect back to shop if no order id
+    # TODO Redirect profile orders
+    def dispatch(self, request, *args, **kwargs):
+        if 'checkout_order_id' not in request.session:
+            return HttpResponseRedirect(reverse_lazy('shop'))
+        else:
+            del self.request.session['checkout_order_id']
+        return super(CheckoutCompleteView, self).dispatch(request, *args, **kwargs)
 
 
 # TODO JsonResponse shouldn't be safe=False, find a better way to send JSON data

@@ -17,6 +17,7 @@ urlpatterns = [
     url(r"^checkout/step/login/$", views.CheckoutLoginView.as_view(), name='checkout_login'),
     url(r"^checkout/step/shipping/$", views.CheckoutShippingView.as_view(), name='checkout_shipping'),
     url(r"^checkout/step/review/$", views.CheckoutReviewView.as_view(), name='checkout_review'),
+    url(r"^checkout/step/complete/$", views.CheckoutCompleteView.as_view(), name='checkout_complete'),
     url(r"^vehicle/filter/$", views.vehicle_filter, name='vehicle_filter'),
 
     url(r"^admin/", include(admin.site.urls)),
