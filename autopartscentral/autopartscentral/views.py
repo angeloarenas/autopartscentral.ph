@@ -240,7 +240,7 @@ class CheckoutReviewView(FormView):
 
 @method_decorator(lambda x: login_required(x, login_url=reverse_lazy('checkout_login')), name='dispatch')
 class CheckoutCompleteView(TemplateView):
-    template_name = "cart-page.html"
+    template_name = "checkout-complete.html"
 
     # Auto redirect back to shop if no order id
     # TODO Redirect profile orders
