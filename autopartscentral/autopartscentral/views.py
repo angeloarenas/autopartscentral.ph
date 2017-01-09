@@ -182,8 +182,35 @@ class CheckoutReviewView(FormView):
     success_url = reverse_lazy('shop')
 
     def form_valid(self, form):
-        # TODO Create order here
-        # TODO Delete session variables - checkout_shipping_address_id
+        cart = Cart(self.request.session)
+        shipping_address = models.Address.objects.get(id=self.request.session['checkout_shipping_address_id'])
+
+        order = models.Order.objects.create(
+            customer=self.request.user,
+            shipping_address_first_name=shipping_address.first_name,
+            shipping_address_last_name=shipping_address.last_name,
+            shipping_address_contact_no=shipping_address.contact_no,
+            shipping_address_line_1=shipping_address.line_1,
+            shipping_address_line_2=shipping_address.line_2,
+            shipping_address_city=shipping_address.city,
+            shipping_address_province=shipping_address.province,
+            shipping_address_country=shipping_address.country,
+            net_price=cart.total
+        )
+        for item in cart.items:
+            models.OrderDetails.objects.create(
+                order=order,
+                part=item.product,
+                part_name=item.product.name,
+                part_number=item.product.part_number,
+                unit_price=item.price,
+                quantity=item.quantity,
+                net_price=item.subtotal
+            )
+
+        cart.clear()
+        del self.request.session['checkout_shipping_address_id']
+        # TODO Confirmation if order was placed
         return super(CheckoutReviewView, self).form_valid(form)
 
 
