@@ -14,13 +14,14 @@ ORDER_STATUS_CHOICES = (('PL', 'PLACED'), ('CO', 'CONFIRMED'),
                         ('PR', 'PROCESSED'), ('SH', 'SHIPPED'),
                         ('RE', 'RECEIVED'), )
 
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='userprofile')
     first_name = models.CharField(max_length=30)
     middle_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30)
     contact_no = models.CharField(max_length=30)
-    default_shipping_address = models.OneToOneField('Address', related_name='userprofile')
+    default_shipping_address = models.OneToOneField('Address', related_name='userprofile', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __unicode__(self):
         return u'%i: %s %s' % (self.user.id, self.first_name, self.last_name)
@@ -144,13 +145,13 @@ class Part(models.Model):
     part_number = models.CharField(max_length=30)
     sku = models.IntegerField(unique=True)
     # Todo: Cascading dropdown in parts, no changing of super category in categories | NOT A SOLID FIX
-    category_l1 = models.ForeignKey(CategoryL1, related_name='parts')
-    category_l2 = ChainedForeignKey(CategoryL2, related_name='parts', blank=True, null=True, chained_field="category_l1", chained_model_field="category")
-    category_l3 = ChainedForeignKey(CategoryL3, related_name='parts', blank=True, null=True, chained_field="category_l2", chained_model_field="category")
-    brand = models.ForeignKey(Brand, related_name='parts', blank=True, null=True)
+    category_l1 = models.ForeignKey(CategoryL1, related_name='parts', on_delete=models.PROTECT)
+    category_l2 = ChainedForeignKey(CategoryL2, related_name='parts', on_delete=models.SET_NULL, blank=True, null=True, chained_field="category_l1", chained_model_field="category")
+    category_l3 = ChainedForeignKey(CategoryL3, related_name='parts', on_delete=models.SET_NULL, blank=True, null=True, chained_field="category_l2", chained_model_field="category")
+    brand = models.ForeignKey(Brand, related_name='parts', on_delete=models.SET_NULL, blank=True, null=True)
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     description = models.TextField(blank=True)
-    availability = models.BooleanField(default=True)
+    is_available = models.BooleanField(default=True)
     compatibility = models.ManyToManyField(Vehicle, blank=True)
     created_on = models.DateField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True)
@@ -168,7 +169,7 @@ class PartImage(models.Model):
 
 class PartFeatured(models.Model):
     id = models.AutoField(primary_key=True)
-    part = models.OneToOneField(Part, related_name='+')
+    part = models.OneToOneField(Part, related_name='part_featured')
 
 
 # TODO percentage vs actual
@@ -177,6 +178,7 @@ class OrderDiscount(models.Model):
     name = models.CharField(max_length=30)
     code = models.CharField(max_length=30, unique=True)
     value = models.DecimalField(max_digits=12, decimal_places=2)
+    is_active = models.BooleanField(default=True)
 
 
 # TODO percentage vs actual
@@ -186,23 +188,47 @@ class PartDiscount(models.Model):
     code = models.CharField(max_length=30, unique=True)
     part = models.ForeignKey(Part, related_name='part_discounts')
     value = models.DecimalField(max_digits=12, decimal_places=2)
+    is_active = models.BooleanField(default=True)
 
 
+# TODO Should be backed up separately and regularly
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
-    customer = models.ForeignKey(User, related_name='orders')
-    shipping_address = models.ForeignKey(Address, related_name='orders')
+    customer = models.ForeignKey(User, related_name='orders', on_delete=models.PROTECT)
+
+    shipping_address_first_name = models.CharField(max_length=30)
+    shipping_address_last_name = models.CharField(max_length=30)
+    shipping_address_contact_no = models.CharField(max_length=30)
+    shipping_address_line_1 = models.CharField(max_length=40)
+    shipping_address_line_2 = models.CharField(max_length=40, blank=True)
+    shipping_address_city = models.CharField(max_length=30)
+    shipping_address_province = models.CharField(max_length=30)
+    shipping_address_country = models.CharField(max_length=2, choices=COUNTRY_CHOICES)
+
     placed_timestamp = models.DateTimeField(auto_now=True)
     shipped_timestamp = models.DateTimeField(null=True, blank=True)
+
     customer_instructions = models.TextField(blank=True)
+    staff_notes = models.TextField(blank=True)
+
     status = models.CharField(max_length=2, choices=ORDER_STATUS_CHOICES, default='PL')
-    discount = models.ForeignKey(OrderDiscount, related_name='orders', null=True, blank=True)
+
+    discount_name = models.CharField(max_length=30, blank=True)
+    discount_value = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    net_price = models.DecimalField(max_digits=12, decimal_places=2)
 
 
 class OrderDetails(models.Model):
     id = models.AutoField(primary_key=True)
     order = models.ForeignKey(Order, related_name='orderdetails')
-    part = models.ForeignKey(Part, related_name='orderdetails')
+
+    part = models.ForeignKey(Part, related_name='orderdetails', on_delete=models.PROTECT)
+    part_name = models.CharField(max_length=255)
+    part_number = models.CharField(max_length=30)
+
     unit_price = models.DecimalField(max_digits=12, decimal_places=2)
     quantity = models.IntegerField(default=1)
-    discount = models.ForeignKey(PartDiscount, related_name='orderdetails', null=True, blank=True)
+
+    discount_name = models.CharField(max_length=30, blank=True)
+    discount_value = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    net_price = models.DecimalField(max_digits=12, decimal_places=2)
