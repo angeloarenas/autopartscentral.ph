@@ -121,7 +121,7 @@ class VehicleModel(models.Model):
         return self.name
 
 
-#PARTIALLY DENORMALIZED TABLE
+# PARTIALLY DENORMALIZED TABLE
 class Vehicle(models.Model):
     id = models.AutoField(primary_key=True)
     model = models.ForeignKey(VehicleModel, related_name='vehicles')
@@ -210,9 +210,9 @@ class Order(models.Model):
 
     customer_instructions = models.TextField(blank=True)
     staff_notes = models.TextField(blank=True)
-
     status = models.CharField(max_length=2, choices=ORDER_STATUS_CHOICES, default='PL')
 
+    discount = models.ForeignKey(OrderDiscount, related_name='orders', on_delete=models.PROTECT, blank=True, null=True)
     discount_name = models.CharField(max_length=30, blank=True)
     discount_value = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     net_price = models.DecimalField(max_digits=12, decimal_places=2)
@@ -220,15 +220,16 @@ class Order(models.Model):
 
 class OrderDetails(models.Model):
     id = models.AutoField(primary_key=True)
-    order = models.ForeignKey(Order, related_name='orderdetails')
+    order = models.ForeignKey(Order, related_name='order_details')
 
-    part = models.ForeignKey(Part, related_name='orderdetails', on_delete=models.PROTECT)
+    part = models.ForeignKey(Part, related_name='order_details', on_delete=models.PROTECT)
     part_name = models.CharField(max_length=255)
     part_number = models.CharField(max_length=30)
 
     unit_price = models.DecimalField(max_digits=12, decimal_places=2)
     quantity = models.IntegerField()
 
+    discount = models.ForeignKey(PartDiscount, related_name='order_details', on_delete=models.PROTECT, blank=True, null=True)
     discount_name = models.CharField(max_length=30, blank=True)
     discount_value = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     net_price = models.DecimalField(max_digits=12, decimal_places=2)
