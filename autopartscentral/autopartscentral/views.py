@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView, FormView
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.utils.encoding import smart_unicode
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -138,6 +138,7 @@ class ShopDetailView(TemplateView):
         return models.Part.objects.get(slug=self.request.GET.get('part'))
 
 
+# TODO Show shopping cart is empty
 class CartView(TemplateView):
     template_name = "cart-page.html"
 
@@ -145,6 +146,12 @@ class CartView(TemplateView):
 class CheckoutLoginView(account.views.LoginView):
     template_name = "checkout-step-1.html"
     form_class = account.forms.LoginEmailForm
+
+    # Auto redirect back to cart if cart is empty
+    def dispatch(self, request, *args, **kwargs):
+        if Cart(request.session).is_empty:
+            return HttpResponseRedirect(reverse_lazy('cart'))
+        return super(CheckoutLoginView, self).dispatch(request, *args, **kwargs)
 
     # Auto redirect to next checkout step after logging in
     def get_context_data(self, **kwargs):
@@ -164,6 +171,12 @@ class CheckoutShippingView(FormView):
     form_class = forms.CheckoutShippingForm
     success_url = reverse_lazy('checkout_review')
 
+    # Auto redirect back to cart if cart is empty
+    def dispatch(self, request, *args, **kwargs):
+        if Cart(request.session).is_empty:
+            return HttpResponseRedirect(reverse_lazy('cart'))
+        return super(CheckoutShippingView, self).dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
         self.request.session['checkout_shipping_address_id'] = form.cleaned_data['shipping_address'].id
         return super(CheckoutShippingView, self).form_valid(form)
@@ -180,6 +193,14 @@ class CheckoutReviewView(FormView):
     template_name = "checkout-step-4.html"
     form_class = forms.CheckoutReviewForm
     success_url = reverse_lazy('shop')
+
+    # Auto redirect back to cart if cart is empty or to shipping if no shipping
+    def dispatch(self, request, *args, **kwargs):
+        if Cart(request.session).is_empty:
+            return HttpResponseRedirect(reverse_lazy('cart'))
+        if 'checkout_shipping_address_id' not in request.session:
+            return HttpResponseRedirect(reverse_lazy('checkout_shipping'))
+        return super(CheckoutReviewView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         cart = Cart(self.request.session)
@@ -210,7 +231,7 @@ class CheckoutReviewView(FormView):
 
         cart.clear()
         del self.request.session['checkout_shipping_address_id']
-        # TODO Confirmation if order was placed
+        # TODO Confirmation if order was placed (error if e.g. cart is empty, other errors)
         return super(CheckoutReviewView, self).form_valid(form)
 
 
