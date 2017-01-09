@@ -227,7 +227,7 @@ class OrderDetails(models.Model):
     part_number = models.CharField(max_length=30)
 
     unit_price = models.DecimalField(max_digits=12, decimal_places=2)
-    quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField()
 
     discount_name = models.CharField(max_length=30, blank=True)
     discount_value = models.DecimalField(max_digits=12, decimal_places=2, default=0)
