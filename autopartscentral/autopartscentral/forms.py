@@ -74,3 +74,11 @@ class CheckoutShippingForm(forms.Form):
         user = kwargs.pop('user', -1)
         super(CheckoutShippingForm, self).__init__(*args, **kwargs)
         self.fields['shipping_address'].queryset = models.Address.objects.filter(user=user)
+
+
+class CheckoutReviewForm(forms.Form):
+    filler_field = forms.CharField(
+        label="Filler Field",
+        widget=forms.HiddenInput,
+        required=False,
+    )

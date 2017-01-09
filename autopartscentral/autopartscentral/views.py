@@ -176,8 +176,15 @@ class CheckoutShippingView(FormView):
 
 
 @method_decorator(lambda x: login_required(x, login_url=reverse_lazy('checkout_login')), name='dispatch')
-class CheckoutReviewView(TemplateView):
+class CheckoutReviewView(FormView):
     template_name = "checkout-step-4.html"
+    form_class = forms.CheckoutReviewForm
+    success_url = reverse_lazy('shop')
+
+    def form_valid(self, form):
+        # TODO Create order here
+        # TODO Delete session variables - checkout_shipping_address_id
+        return super(CheckoutReviewView, self).form_valid(form)
 
 
 # TODO JsonResponse shouldn't be safe=False, find a better way to send JSON data

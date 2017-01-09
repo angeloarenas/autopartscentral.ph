@@ -38,7 +38,7 @@ class PartImageInline(admin.TabularInline):
 
 
 class PartAdmin(admin.ModelAdmin):
-    list_display = ('name', 'part_number', 'sku', 'brand', 'price', 'description', 'availability')
+    list_display = ('name', 'part_number', 'sku', 'brand', 'price', 'description', 'is_available')
     prepopulated_fields = {'slug': ('name',)}
     filter_horizontal = ('compatibility',)
     inlines = [PartImageInline]

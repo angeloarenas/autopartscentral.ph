@@ -56,7 +56,8 @@
                             </div>
                         </div>
 
-                        <form action="" class="row" method="POST" role="form">
+                        <form id="checkout_shipping_form" method="POST" action="{% url "checkout_review" %}" autocapitalize="off" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+                            {% csrf_token %}
                             <div class="col-xs-12">
                                 <div class="page-header">
                                     <h4>order review</h4>
@@ -197,10 +198,12 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-xs-12">
                                 <div class="well well-lg clearfix">
                                     <ul class="pager">
                                         <li class="previous"><a href="checkout-step-3.html">Back</a></li>
+                                        <button type="submit" class="btn btn-primary btn-block">Continue</button>
                                         <li class="next"><a href="checkout-complete.html">Confirm</a></li>
                                     </ul>
                                 </div>
