@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load carton_tags %}
 
 {% block body_maincontent %}
     <!-- LIGHT SECTION -->
@@ -63,32 +64,19 @@
                                     <h4>order review</h4>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">Billing Address</h4>
-                                    </div>
-                                    <div class="panel-body">
-                                        <address>
-                                            <strong>Adam Smith</strong><br>
-                                            9/4 C Babor Road, Mohammad pur, <br>
-                                            Shyamoli, Dhaka <br>
-                                            Bangladesh
-                                        </address>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xs-12">
+                            <div class="col-xs-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">Shipping Address</h4>
                                     </div>
                                     <div class="panel-body">
                                         <address>
-                                            <strong>Adam Smith</strong><br>
-                                            9/4 C Babor Road, Mohammad pur, <br>
-                                            Shyamoli, Dhaka <br>
-                                            Bangladesh
+                                            <strong>{{ view.shipping_address.first_name }} {{ view.shipping_address.last_name }}</strong><br>
+                                            {{ view.shipping_address.contact_no }} <br>
+                                            {{ view.shipping_address.line_1 }} {{ view.shipping_address.line_2 }} <br>
+                                            {{ view.shipping_address.city }} <br>
+                                            {{ view.shipping_address.province }} <br>
+                                            {{ view.shipping_address.get_country_display }} <br>
                                         </address>
                                     </div>
                                 </div>
@@ -100,7 +88,7 @@
                                     </div>
                                     <div class="panel-body">
                                         <address>
-                                            <span>Credit Card - VISA</span>
+                                            <span>Cash on Delivery</span>
                                         </address>
                                     </div>
                                 </div>
@@ -112,11 +100,12 @@
                                     </div>
                                     <div class="panel-body">
                                         <address>
-                                            <span>Post Air Mail</span>
+                                            <span>Auto Parts Central Express</span>
                                         </address>
                                     </div>
                                 </div>
                             </div>
+                            <!--
                             <div class="col-xs-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
@@ -140,6 +129,8 @@
                                     </div>
                                 </div>
                             </div>
+                            -->
+                            {% get_cart as cart %}
                             <div class="col-xs-12">
                                 <div class="cartListInner">
                                     <div class="table-responsive">
@@ -154,36 +145,17 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            {% for item in cart.items %}
                                             <tr>
                                                 <td class="col-xs-2">
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                     <span class="cartImage"><img src="img/products/cart-image.jpg" alt="image"></span>
                                                 </td>
-                                                <td class="col-xs-4">Italian Winter Hat</td>
-                                                <td class="col-xs-2">$ 99.00</td>
-                                                <td class="col-xs-2"><input type="text" placeholder="1"></td>
-                                                <td class="col-xs-2">$ 99.00</td>
+                                                <td class="col-xs-4">{{ item.product.name }}</td>
+                                                <td class="col-xs-2">P {{ item.price }}</td>
+                                                <td class="col-xs-2">{{ item.quantity }}</td>
+                                                <td class="col-xs-2">P {{ item.subtotal }}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="col-xs-2">
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <span class="cartImage"><img src="img/products/cart-image.jpg" alt="image"></span>
-                                                </td>
-                                                <td class="col-xs-4">Italian Winter Hat</td>
-                                                <td class="col-xs-2">$ 99.00</td>
-                                                <td class="col-xs-2"><input type="text" placeholder="1"></td>
-                                                <td class="col-xs-2">$ 99.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-xs-2">
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <span class="cartImage"><img src="img/products/cart-image.jpg" alt="image"></span>
-                                                </td>
-                                                <td class="col-xs-4">Italian Winter Hat</td>
-                                                <td class="col-xs-2">$ 99.00</td>
-                                                <td class="col-xs-2"><input type="text" placeholder="1"></td>
-                                                <td class="col-xs-2">$ 99.00</td>
-                                            </tr>
+                                            {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>
@@ -192,7 +164,7 @@
                                             <ul class="list-unstyled">
                                                 <li>Sub Total <span>$ 792.00</span></li>
                                                 <li>UK Vat <span>$ 18.00</span></li>
-                                                <li>Grand Total <span class="grandTotal">$ 810.00</span></li>
+                                                <li>Grand Total <span class="grandTotal">P {{ cart.total }}</span></li>
                                             </ul>
                                         </div>
                                     </div>

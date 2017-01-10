@@ -229,18 +229,23 @@ class CheckoutReviewView(FormView):
                 net_price=item.subtotal
             )
         self.request.session['checkout_order_id'] = order.id
-
-        cart.clear()
-        del self.request.session['checkout_shipping_address_id']
+        # TODO Send email
 
         # TODO Confirmation if order was placed (error if e.g. cart is empty, other errors)
 
         return super(CheckoutReviewView, self).form_valid(form)
 
+    def shipping_address(self):
+        return models.Address.objects.get(id=self.request.session['checkout_shipping_address_id'])
+
 
 @method_decorator(lambda x: login_required(x, login_url=reverse_lazy('checkout_login')), name='dispatch')
 class CheckoutCompleteView(TemplateView):
     template_name = "checkout-complete.html"
+
+    checkout_order_id = 0
+    checkout_shipping_address_id = 0
+    checkout_cart_total = 0
 
     # Auto redirect back to shop if no order id
     # TODO Redirect profile orders
@@ -248,9 +253,18 @@ class CheckoutCompleteView(TemplateView):
         if 'checkout_order_id' not in request.session:
             return HttpResponseRedirect(reverse_lazy('shop'))
         else:
+            self.checkout_order_id = self.request.session['checkout_order_id']
+            self.checkout_shipping_address_id = request.session['checkout_shipping_address_id']
+            self.checkout_cart_total = Cart(self.request.session).total
             del self.request.session['checkout_order_id']
+            del self.request.session['checkout_shipping_address_id']
+            Cart(self.request.session).clear()
         return super(CheckoutCompleteView, self).dispatch(request, *args, **kwargs)
 
+    def order_details(self):
+        return {'checkout_order_id': self.checkout_order_id,
+                'checkout_shipping_address': models.Address.objects.get(id=self.checkout_shipping_address_id),
+                'checkout_cart_total': self.checkout_cart_total}
 
 # TODO JsonResponse shouldn't be safe=False, find a better way to send JSON data
 # TODO vehicle_max_year can be changed to current year

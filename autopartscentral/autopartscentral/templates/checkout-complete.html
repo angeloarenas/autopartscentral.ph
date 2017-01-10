@@ -30,19 +30,23 @@
                 <div class="col-xs-12">
                     <div class="thanksContent">
                         <h2>Thank You For Your Order <small>You will receive an email of your order details</small></h2>
-                        <h3>Shipping Details</h3>
                         <div class="thanksInner">
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12 tableBlcok">
                                     <address>
-                                        <span>Shipping address:</span> <a href="mailto:adamsmith@bigbag.com">adamsmith@bigbag.com</a> <br>
-                                        <span>Email:</span> <a href="mailto:adamsmith@bigbag.com">adamsmith@bigbag.com</a> <br>
-                                        <span>Phone:</span> +884 5452 6432
+                                        <span>Name:</span> {{ view.order_details.checkout_shipping_address.first_name }} {{ view.order_details.checkout_shipping_address.last_name }}<br>
+                                        <span>Email:</span> <a href="mailto:{{ request.user.email }}">{{ request.user.email }}</a> <br>
+                                        <span>Contact Number:</span> {{ view.order_details.checkout_shipping_address.contact_no }} <br>
+                                        <span>Shipping address:</span> {{ view.order_details.checkout_shipping_address.line_1 }} {{ view.order_details.checkout_shipping_address.line_2 }}<br>
+                                        {{ view.order_details.checkout_shipping_address.city }}, {{ view.order_details.checkout_shipping_address.province }}<br>
+                                        {{ view.order_details.checkout_shipping_address.get_country_display }} <br>
+
+                                        <br> <span>Total Amount:</span> P {{ view.order_details.checkout_cart_total }} <br>
                                     </address>
                                 </div>
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="well">
-                                        <h2><small>Order ID</small>9547</h2>
+                                        <h2><small>Order ID</small>{{ view.order_details.checkout_order_id }}</h2>
                                     </div>
                                 </div>
                             </div>
