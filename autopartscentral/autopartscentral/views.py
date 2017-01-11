@@ -93,6 +93,14 @@ class SignupView(account.views.SignupView):
     """
 
 
+class AccountDashboardView(TemplateView):
+    template_name = "account-dashboard.html"
+
+
+class AccountProfileView(TemplateView):
+    template_name = "account-profile.html"
+
+
 # TODO if manual input model id not in make
 # TODO Error404 or something for wrong category and make/model/year combination
 class ShopView(TemplateView):
