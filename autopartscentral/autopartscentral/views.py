@@ -111,6 +111,11 @@ class AccountOrdersView(TemplateView):
     template_name = "account-all-orders.html"
 
 
+@method_decorator(login_required, name='dispatch')
+class AccountAddressesView(TemplateView):
+    template_name = "account-address.html"
+
+
 # TODO if manual input model id not in make
 # TODO Error404 or something for wrong category and make/model/year combination
 class ShopView(TemplateView):

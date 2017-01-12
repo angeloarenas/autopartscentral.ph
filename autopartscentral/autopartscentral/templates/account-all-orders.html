@@ -29,11 +29,10 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="btn-group" role="group" aria-label="...">
-                        <a href="account-dashboard.html" class="btn btn-default"><i class="fa fa-th" aria-hidden="true"></i>Account Dashboard</a>
-                        <a href="account-profile.html" class="btn btn-default"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
-                        <a href="account-address.html" class="btn btn-default"><i class="fa fa-map-marker" aria-hidden="true"></i>My Address</a>
-                        <a href="account-all-orders.html" class="btn btn-default active"><i class="fa fa-list" aria-hidden="true"></i>All Orders</a>
-                        <a href="account-wishlist.html" class="btn btn-default"><i class="fa fa-gift" aria-hidden="true"></i>Wishlist</a>
+                        <a href="{% url 'account_dashboard' %}" class="btn btn-default"><i class="fa fa-th" aria-hidden="true"></i>Account Dashboard</a>
+                        <a href="{% url 'account_profile' %}" class="btn btn-default"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
+                        <a href="{% url 'account_addresses' %}" class="btn btn-default"><i class="fa fa-map-marker" aria-hidden="true"></i>My Address</a>
+                        <a href="{% url 'account_orders' %}" class="btn btn-default active"><i class="fa fa-list" aria-hidden="true"></i>All Orders</a>
                     </div>
                 </div>
             </div>
