@@ -101,9 +101,34 @@ class AccountDashboardView(TemplateView):
         return models.Order.objects.filter(customer=self.request.user.id).exclude(status='RE').order_by('-placed_timestamp')
 
 
+# TODO Add change email with email verification
 @method_decorator(login_required, name='dispatch')
-class AccountProfileView(TemplateView):
+class AccountProfileView(FormView):
     template_name = "account-profile.html"
+    form_class = forms.ProfileForm
+    success_url = reverse_lazy('account_profile')
+
+    def form_valid(self, form):
+        user = models.User.objects.get(id=self.request.user.id)
+        user.username = form.cleaned_data['username']
+        user.save()
+
+        user.userprofile.first_name = form.cleaned_data['first_name']
+        user.userprofile.middle_name = form.cleaned_data['middle_name']
+        user.userprofile.last_name = form.cleaned_data['last_name']
+        user.userprofile.contact_no = form.cleaned_data['contact_no']
+        user.userprofile.save()
+        return super(AccountProfileView, self).form_valid(form)
+
+    def get_form_kwargs(self):
+        kwargs = super(AccountProfileView, self).get_form_kwargs()
+        kwargs.update({'initial': {'email': self.request.user.email,
+                                   'username': self.request.user.username,
+                                   'first_name': self.request.user.userprofile.first_name,
+                                   'middle_name': self.request.user.userprofile.middle_name,
+                                   'last_name': self.request.user.userprofile.last_name,
+                                   'contact_no': self.request.user.userprofile.contact_no}})
+        return kwargs
 
 
 @method_decorator(login_required, name='dispatch')

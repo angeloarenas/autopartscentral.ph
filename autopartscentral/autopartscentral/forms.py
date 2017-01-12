@@ -82,3 +82,49 @@ class CheckoutReviewForm(forms.Form):
         widget=forms.HiddenInput,
         required=False,
     )
+
+
+class ProfileForm(account.forms.SignupForm):
+    first_name = forms.CharField(
+        label="First Name",
+        max_length=30,
+        widget=forms.TextInput(),
+        required=True
+    )
+    middle_name = forms.CharField(
+        label="Middle Name",
+        max_length=30,
+        widget=forms.TextInput(),
+        required=False
+    )
+    last_name = forms.CharField(
+        label="Last Name",
+        max_length=30,
+        widget=forms.TextInput(),
+        required=True
+    )
+    contact_no = forms.CharField(
+        label="Contact Number",
+        max_length=30,
+        widget=forms.TextInput(),
+        required=True
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        del self.fields["email"]
+        del self.fields["password"]
+        del self.fields["password_confirm"]
+        del self.fields["code"]
+
+    def clean_username(self):
+        if 'username' in self.changed_data:
+            return super(ProfileForm, self).clean_username()
+        else:
+            return self.cleaned_data["username"]
+
+    # def clean_email(self):
+        # if 'email' in self.changed_data:
+            # return super(ProfileForm, self).clean_email()
+        # else:
+            # return self.cleaned_data["email"]

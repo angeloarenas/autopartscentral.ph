@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load widget_tweaks %}
 
 {% block body_maincontent %}
     <!-- LIGHT SECTION -->
@@ -52,46 +53,49 @@
                                 </div>
                             </div>
                             <div class="col-md-10 col-sm-9 col-xs-12">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" id="signup_form" method="POST" action="{% url "account_profile" %}" autocapitalize="off" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+                                    {% csrf_token %}
+                                    {% for error in form.non_field_errors %}
+                                        <label>* {{ error }}</label>
+                                    {% endfor %}
                                     <div class="form-group">
-                                        <label for="" class="col-md-2 col-sm-3 control-label">First Name</label>
+                                        <label for="" class="col-md-2 col-sm-3 control-label">{{ form.username.label }}</label>
                                         <div class="col-md-10 col-sm-9">
-                                            <input type="text" class="form-control" id="" placeholder="">
+                                            {% render_field form.username class="form-control" %}
+                                            {{ form.username.errors.as_text }}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="" class="col-md-2 col-sm-3 control-label">Last Name</label>
+                                        <label for="" class="col-md-2 col-sm-3 control-label">{{ form.first_name.label }}</label>
                                         <div class="col-md-10 col-sm-9">
-                                            <input type="text" class="form-control" id="" placeholder="">
+                                            {% render_field form.first_name class="form-control" %}
+                                            {{ form.first_name.errors.as_text }}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="" class="col-md-2 col-sm-3 control-label">Phone Number</label>
+                                        <label for="" class="col-md-2 col-sm-3 control-label">{{ form.middle_name.label }}</label>
                                         <div class="col-md-10 col-sm-9">
-                                            <input type="text" class="form-control" id="" placeholder="">
+                                            {% render_field form.middle_name class="form-control" %}
+                                            {{ form.middle_name.errors.as_text }}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="" class="col-md-2 col-sm-3 control-label">Email Address</label>
+                                        <label for="" class="col-md-2 col-sm-3 control-label">{{ form.last_name.label }}</label>
                                         <div class="col-md-10 col-sm-9">
-                                            <input type="email" class="form-control" id="" placeholder="">
+                                            {% render_field form.last_name class="form-control" %}
+                                            {{ form.last_name.errors.as_text }}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="" class="col-md-2 col-sm-3 control-label">Password</label>
+                                        <label for="" class="col-md-2 col-sm-3 control-label">{{ form.contact_no.label }}</label>
                                         <div class="col-md-10 col-sm-9">
-                                            <input type="password" class="form-control" id="" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="" class="col-md-2 col-sm-3 control-label">New Password</label>
-                                        <div class="col-md-10 col-sm-9">
-                                            <input type="password" class="form-control" id="" placeholder="">
+                                            {% render_field form.contact_no class="form-control" %}
+                                            {{ form.contact_no.errors.as_text }}
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-offset-10 col-md-2 col-sm-offset-9 col-sm-3">
-                                            <button type="submit" class="btn btn-primary btn-block">SAVE INFO</button>
+                                            <button type="submit" class="btn btn-primary btn-block">SAVE CHANGES</button>
                                         </div>
                                     </div>
                                 </form>
