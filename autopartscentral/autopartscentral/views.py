@@ -93,12 +93,22 @@ class SignupView(account.views.SignupView):
     """
 
 
+@method_decorator(login_required, name='dispatch')
 class AccountDashboardView(TemplateView):
     template_name = "account-dashboard.html"
 
+    def pending_orders(self):
+        return models.Order.objects.filter(customer=self.request.user.id).exclude(status='RE').order_by('-placed_timestamp')
 
+
+@method_decorator(login_required, name='dispatch')
 class AccountProfileView(TemplateView):
     template_name = "account-profile.html"
+
+
+@method_decorator(login_required, name='dispatch')
+class AccountOrdersView(TemplateView):
+    template_name = "account-all-orders.html"
 
 
 # TODO if manual input model id not in make
