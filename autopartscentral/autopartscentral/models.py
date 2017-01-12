@@ -10,9 +10,8 @@ from smart_selects.db_fields import ChainedForeignKey
 
 YEAR_CHOICES = [(r, r) for r in range(1990, datetime.date.today().year+1)]
 COUNTRY_CHOICES = (('PH', 'Philippines'), )
-ORDER_STATUS_CHOICES = (('PL', 'PLACED'), ('CO', 'CONFIRMED'),
-                        ('PR', 'PROCESSED'), ('SH', 'SHIPPED'),
-                        ('RE', 'RECEIVED'), )
+ORDER_STATUS_CHOICES = (('PL', 'PLACED'), ('PR', 'PROCESSED'),
+                        ('SH', 'SHIPPED'), ('RE', 'RECEIVED'), )
 
 
 class UserProfile(models.Model):
@@ -205,7 +204,7 @@ class Order(models.Model):
     shipping_address_province = models.CharField(max_length=30)
     shipping_address_country = models.CharField(max_length=2, choices=COUNTRY_CHOICES)
 
-    placed_timestamp = models.DateTimeField(auto_now=True)
+    placed_timestamp = models.DateTimeField(auto_now_add=True)
     shipped_timestamp = models.DateTimeField(null=True, blank=True)
 
     customer_instructions = models.TextField(blank=True)
