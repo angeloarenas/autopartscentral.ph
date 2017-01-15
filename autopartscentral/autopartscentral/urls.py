@@ -11,6 +11,7 @@ urlpatterns = [
     url(r"^account/dashboard/$", views.AccountDashboardView.as_view(), name='account_dashboard'),
     url(r"^account/profile/$", views.AccountProfileView.as_view(), name='account_profile'),
     url(r"^account/addresses/$", views.AccountAddressesView.as_view(), name='account_addresses'),
+    url(r"^account/addresses/add/$", views.AccountAddressesAddView.as_view(), name='account_addresses_add'),
     url(r"^account/orders/$", views.AccountOrdersView.as_view(), name='account_orders'),
     url(r"^account/orders/detail/$", views.AccountOrdersView.as_view(), name='account_orders_detail'),
 

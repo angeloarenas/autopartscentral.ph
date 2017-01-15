@@ -144,6 +144,11 @@ class AccountAddressesView(TemplateView):
         return models.Address.objects.filter(user=self.request.user)
 
 
+@method_decorator(login_required, name='dispatch')
+class AccountAddressesAddView(TemplateView):
+    template_name = "address_add.html"
+
+
 # TODO if manual input model id not in make
 # TODO Error404 or something for wrong category and make/model/year combination
 class ShopView(TemplateView):

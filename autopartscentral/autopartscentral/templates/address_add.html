@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block body_maincontent %}
+    <!-- LIGHT SECTION -->
+    <section class="lightSection clearfix pageHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="page-title">
+                        <h2>billing &amp; Shipping address</h2>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <ol class="breadcrumb pull-right">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="active">billing &amp; Shipping address</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT SECTION -->
+    <section class="mainContent clearfix userProfile stepsWrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a href="{% url 'account_dashboard' %}" class="btn btn-default"><i class="fa fa-th" aria-hidden="true"></i>Account Dashboard</a>
+                        <a href="{% url 'account_profile' %}" class="btn btn-default"><i class="fa fa-user" aria-hidden="true"></i>Profile</a>
+                        <a href="{% url 'account_addresses' %}" class="btn btn-default active"><i class="fa fa-map-marker" aria-hidden="true"></i>My Address</a>
+                        <a href="{% url 'account_orders' %}" class="btn btn-default"><i class="fa fa-list" aria-hidden="true"></i>All Orders</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="innerWrapper clearfix stepsPage">
+                        <form action="" class="row" method="POST" role="form">
+                            <div class="col-xs-12">
+                                <div class="page-header">
+                                    <h4>Address Information</h4>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6 col-xs-12">
+                                <label for="">First Name</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="form-group col-sm-6 col-xs-12">
+                                <label for="">Last Name</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="form-group col-sm-6 col-xs-12">
+                                <label for="">Email</label>
+                                <input type="email" class="form-control" id="">
+                            </div>
+                            <div class="form-group col-sm-6 col-xs-12">
+                                <label for="">Company</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="form-group col-sm-6 col-xs-12">
+                                <label for="">Address</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="form-group col-sm-6 col-xs-12">
+                                <label for="">Phone</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="form-group col-sm-6 col-xs-12">
+                                <label for="">City</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="form-group col-sm-6 col-xs-12">
+                                <label for="">Zip Code</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="form-group col-sm-6 col-xs-12">
+                                <label for="">Country</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="form-group col-sm-6 col-xs-12">
+                                <label for="">Fax</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="form-group col-sm-6 col-xs-12">
+                                <label for="">First Name</label>
+                                <textarea class="form-control"></textarea>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="well well-lg clearfix">
+                                    <ul class="pager">
+                                        <li class="next"><a href="checkout-step-2.html">Save</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
