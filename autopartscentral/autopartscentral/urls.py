@@ -27,6 +27,8 @@ urlpatterns = [
     url(r"^cart/remove/$", views.cart_remove, name='cart_remove'),
     url(r"^cart/update/$", views.cart_update, name='cart_update'),
     url(r"^vehicle/filter/$", views.vehicle_filter, name='vehicle_filter'),
+    url(r"^account/addresses/delete/$", views.address_delete, name='account_addresses_delete'),
+    url(r"^account/addresses/setdefault/$", views.address_setdefault, name='account_addresses_setdefault'),
 
     url(r"^admin/", include(admin.site.urls)),
     url(r'^nested_admin/', include('nested_admin.urls')),

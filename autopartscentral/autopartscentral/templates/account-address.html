@@ -45,54 +45,37 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>Company</th>
                                         <th>Name</th>
+                                        <th class="col-md-2 col-sm-3">Contact Number</th>
                                         <th>Address</th>
-                                        <th>Country</th>
-                                        <th class="col-md-2 col-sm-3">Phone</th>
-                                        <th></th>
+                                        <th>City</th>
+                                        <th>Province</th>
+                                        <th>Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Nokia</td>
-                                        <td>Adam Smith</td>
-                                        <td>9/4 C Babor Road, Mohammad Pur, Dhaka</td>
-                                        <td>Bangladesh</td>
-                                        <td>+884 5452 6452</td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                                <button type="button" class="btn btn-default"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Samsung</td>
-                                        <td>Adam Smith</td>
-                                        <td>9/4 C Babor Road, Mohammad Pur, Dhaka</td>
-                                        <td>Bangladesh</td>
-                                        <td>+884 5452 6452</td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                                <button type="button" class="btn btn-default"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Motorola</td>
-                                        <td>Adam Smith</td>
-                                        <td>9/4 C Babor Road, Mohammad Pur, Dhaka</td>
-                                        <td>Bangladesh</td>
-                                        <td>+884 5452 6452</td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                                <button type="button" class="btn btn-default"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    {% for address in view.addresses %}
+                                        <tr>
+                                            <td>{{ address.first_name }} {{ address.last_name }}</td>
+                                            <td>{{ address.contact_no }}</td>
+                                            <td>{{ address.line_1 }} {{ address.line_2 }}</td>
+                                            <td>{{ address.city }}</td>
+                                            <td>{{ address.province }}</td>
+                                            <td>
+                                                {% if address.id == request.user.userprofile.default_shipping_address.id %}
+                                                    Default
+                                                {% else %}
+                                                    <a href="javascript:void(0)" id="address_setdefault" data-address="{{ address.id }}">Set Default</a>
+                                                {% endif %}
+                                                <div class="btn-group" role="group">
+                                                    <button type="button" class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                                    {% if address.id != request.user.userprofile.default_shipping_address.id %}
+                                                        <button type="button" class="btn btn-default" id="address_delete" data-address="{{ address.id }}"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                    {% endif %}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
@@ -102,4 +85,9 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block body_scripts_extra %}
+    <script src="{% static "js/cookie.js" %}"></script>
+    <script src="{% static "js/address.js" %}"></script>
 {% endblock %}

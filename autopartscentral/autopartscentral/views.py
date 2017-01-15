@@ -140,6 +140,9 @@ class AccountOrdersView(TemplateView):
 class AccountAddressesView(TemplateView):
     template_name = "account-address.html"
 
+    def addresses(self):
+        return models.Address.objects.filter(user=self.request.user)
+
 
 # TODO if manual input model id not in make
 # TODO Error404 or something for wrong category and make/model/year combination
@@ -314,6 +317,7 @@ class CheckoutCompleteView(TemplateView):
                 'checkout_shipping_address': models.Address.objects.get(id=self.checkout_shipping_address_id),
                 'checkout_cart_total': self.checkout_cart_total}
 
+
 # TODO JsonResponse shouldn't be safe=False, find a better way to send JSON data
 # TODO vehicle_max_year can be changed to current year
 def vehicle_filter(request):
@@ -366,3 +370,24 @@ def cart_update(request):
         return HttpResponse("Successfully updated cart")
     else:
         return HttpResponse(status=400, content="Error updating cart")
+
+
+def address_delete(request):
+    if request.is_ajax and request.POST and 'address' in request.POST:
+        address = models.Address.objects.get(id=request.POST.get('address'))
+        if address.user.id == request.user.id and address.id != request.user.userprofile.default_shipping_address.id:
+            address.delete()
+        return HttpResponse("Successfully deleted address")
+    else:
+        return HttpResponse(status=400, content="Error deleting address")
+
+
+def address_setdefault(request):
+    if request.is_ajax and request.POST and 'address' in request.POST:
+        address = models.Address.objects.get(id=request.POST.get('address'))
+        if address.user.id == request.user.id and address.id != request.user.userprofile.default_shipping_address.id:
+            request.user.userprofile.default_shipping_address = address
+            request.user.userprofile.save()
+        return HttpResponse("Successfully set address default")
+    else:
+        return HttpResponse(status=400, content="Error setting address default")
