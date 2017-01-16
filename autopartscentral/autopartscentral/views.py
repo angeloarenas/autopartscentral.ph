@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, CreateView
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.utils.encoding import smart_unicode
 from django.contrib.auth.decorators import login_required
@@ -145,8 +145,15 @@ class AccountAddressesView(TemplateView):
 
 
 @method_decorator(login_required, name='dispatch')
-class AccountAddressesAddView(TemplateView):
+class AccountAddressesAddView(CreateView):
     template_name = "address_add.html"
+    model = models.Address
+    form_class = forms.AddressForm
+    success_url = reverse_lazy('account_addresses')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(AccountAddressesAddView, self).form_valid(form)
 
 
 # TODO if manual input model id not in make

@@ -128,3 +128,16 @@ class ProfileForm(account.forms.SignupForm):
             # return super(ProfileForm, self).clean_email()
         # else:
             # return self.cleaned_data["email"]
+
+
+class AddressForm(forms.ModelForm):
+    country = forms.ChoiceField(
+        label="Country",
+        choices=models.COUNTRY_CHOICES,
+        widget=forms.Select(),
+        required=True
+    )
+
+    class Meta:
+        model = models.Address
+        fields = ['first_name', 'last_name', 'contact_no', 'line_1', 'line_2', 'city', 'province', 'country']
