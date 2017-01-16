@@ -1,10 +1,11 @@
-from django.views.generic import TemplateView, FormView, CreateView
+from django.views.generic import TemplateView, FormView, CreateView, UpdateView
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.utils.encoding import smart_unicode
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.db.models import Max, Min
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
 import json
 import models
 import forms
@@ -147,13 +148,27 @@ class AccountAddressesView(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class AccountAddressesAddView(CreateView):
     template_name = "address_add.html"
-    model = models.Address
     form_class = forms.AddressForm
     success_url = reverse_lazy('account_addresses')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(AccountAddressesAddView, self).form_valid(form)
+
+
+@method_decorator(login_required, name='dispatch')
+class AccountAddressesUpdateView(UpdateView):
+    template_name = "address_add.html"
+    form_class = forms.AddressForm
+    success_url = reverse_lazy('account_addresses')
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.get_object().user != self.request.user:
+            return HttpResponseRedirect(reverse_lazy('account_addresses'))
+        return super(AccountAddressesUpdateView, self).dispatch(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(models.Address, id=self.kwargs['id'])
 
 
 # TODO if manual input model id not in make

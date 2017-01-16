@@ -66,12 +66,12 @@
                                                 {% if address.id == request.user.userprofile.default_shipping_address.id %}
                                                     Default
                                                 {% else %}
-                                                    <a href="javascript:void(0)" id="address_setdefault" data-address="{{ address.id }}">Set Default</a>
+                                                    <a href="javascript:void(0)" class="address_setdefault" data-address="{{ address.id }}">Set Default</a>
                                                 {% endif %}
                                                 <div class="btn-group" role="group">
-                                                    <button type="button" class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                                    <button type="button" class="btn btn-default" onclick="location.href='{% url 'account_addresses_update' address.id %}';"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                                     {% if address.id != request.user.userprofile.default_shipping_address.id %}
-                                                        <button type="button" class="btn btn-default" id="address_delete" data-address="{{ address.id }}"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                        <button type="button" class="btn btn-default address_delete" data-address="{{ address.id }}"><i class="fa fa-times" aria-hidden="true"></i></button>
                                                     {% endif %}
                                                 </div>
                                             </td>

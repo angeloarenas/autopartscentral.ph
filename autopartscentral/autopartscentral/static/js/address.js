@@ -18,7 +18,7 @@ $.ajaxSetup({
 });
 
 $(document).ready(function() {
-    $("#address_delete").click(function() {
+    $(".address_delete").click(function() {
         var address = $(this).data("address");
         $.post(
             "/account/addresses/delete/",
@@ -27,7 +27,7 @@ $(document).ready(function() {
                 location.reload(true);
             });
     });
-    $("#address_setdefault").click(function() {
+    $(".address_setdefault").click(function() {
         var address = $(this).data("address");
         $.post(
             "/account/addresses/setdefault/",
