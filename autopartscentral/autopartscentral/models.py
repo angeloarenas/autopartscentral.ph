@@ -11,7 +11,7 @@ from smart_selects.db_fields import ChainedForeignKey
 YEAR_CHOICES = [(r, r) for r in range(1990, datetime.date.today().year+1)]
 COUNTRY_CHOICES = (('PH', 'Philippines'), )
 ORDER_STATUS_CHOICES = (('PL', 'PLACED'), ('PR', 'PROCESSED'),
-                        ('SH', 'SHIPPED'), ('RE', 'RECEIVED'), )
+                        ('SH', 'SHIPPED'), ('RE', 'RECEIVED'), ('CA', 'CANCELLED'),)
 
 
 class UserProfile(models.Model):

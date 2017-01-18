@@ -46,54 +46,38 @@
                                     <thead>
                                     <tr>
                                         <th>Order ID</th>
-                                        <th>Date</th>
-                                        <th>Items</th>
+                                        <th>Date & Time Placed</th>
+                                        <th>No. of Items</th>
                                         <th>Total Price</th>
                                         <th>Status</th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>#451231</td>
-                                        <td>Mar 25, 2016</td>
-                                        <td>2</td>
-                                        <td>$99.00</td>
-                                        <td><span class="label label-primary">Processing</span></td>
-                                        <td><a href="#" class="btn btn-default">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#451231</td>
-                                        <td>Mar 25, 2016</td>
-                                        <td>3</td>
-                                        <td>$150.00</td>
-                                        <td><span class="label label-success">Completed</span></td>
-                                        <td><a href="#" class="btn btn-default">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#451231</td>
-                                        <td>Mar 25, 2016</td>
-                                        <td>3</td>
-                                        <td>$150.00</td>
-                                        <td><span class="label label-danger">Canceled</span></td>
-                                        <td><a href="#" class="btn btn-default">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#451231</td>
-                                        <td>Mar 25, 2016</td>
-                                        <td>2</td>
-                                        <td>$99.00</td>
-                                        <td><span class="label label-info">On Hold</span></td>
-                                        <td><a href="#" class="btn btn-default">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#451231</td>
-                                        <td>Mar 25, 2016</td>
-                                        <td>3</td>
-                                        <td>$150.00</td>
-                                        <td><span class="label label-warning">Pending</span></td>
-                                        <td><a href="#" class="btn btn-default">View</a></td>
-                                    </tr>
+                                    {% for order in view.orders %}
+                                        <tr>
+                                            <td>{{ order.id }}</td>
+                                            <td>{{ order.placed_timestamp }}</td>
+                                            <td>{{ order.order_details.all.count }}</td>
+                                            <td>P{{ order.net_price }}</td>
+                                            <td><span
+                                                    {% if order.status == 'PL' %}
+                                                        class="label label-default">
+                                                    {% elif order.status == 'PR' %}
+                                                        class="label label-info">
+                                                    {% elif order.status == 'SH' %}
+                                                        class="label label-primary">
+                                                    {% elif order.status == 'RE' %}
+                                                        class="label label-success">
+                                                    {% elif order.status == 'CA' %}
+                                                        class="label label-danger">
+                                                    {% else %}
+                                                        class="label label-warning">
+                                                    {% endif %}
+                                            {{ order.get_status_display }}</span></td>
+                                            <td><a href="#" class="btn btn-default">View</a></td>
+                                        </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                             </div>

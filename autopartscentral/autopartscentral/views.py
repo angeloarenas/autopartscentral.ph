@@ -99,7 +99,7 @@ class AccountDashboardView(TemplateView):
     template_name = "account-dashboard.html"
 
     def pending_orders(self):
-        return models.Order.objects.filter(customer=self.request.user.id).exclude(status='RE').order_by('-placed_timestamp')
+        return models.Order.objects.filter(customer=self.request.user.id).exclude(status__in=['RE', 'CA']).order_by('-placed_timestamp')
 
 
 # TODO Add change email with email verification
@@ -130,11 +130,6 @@ class AccountProfileView(FormView):
                                    'last_name': self.request.user.userprofile.last_name,
                                    'contact_no': self.request.user.userprofile.contact_no}})
         return kwargs
-
-
-@method_decorator(login_required, name='dispatch')
-class AccountOrdersView(TemplateView):
-    template_name = "account-all-orders.html"
 
 
 @method_decorator(login_required, name='dispatch')
@@ -169,6 +164,14 @@ class AccountAddressesUpdateView(UpdateView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(models.Address, id=self.kwargs['id'])
+
+
+@method_decorator(login_required, name='dispatch')
+class AccountOrdersView(TemplateView):
+    template_name = "account-all-orders.html"
+
+    def orders(self):
+        return models.Order.objects.filter(customer=self.request.user).order_by('-placed_timestamp')
 
 
 # TODO if manual input model id not in make
