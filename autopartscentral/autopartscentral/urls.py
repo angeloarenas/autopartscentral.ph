@@ -14,7 +14,7 @@ urlpatterns = [
     url(r"^account/addresses/add/$", views.AccountAddressesAddView.as_view(), name='account_addresses_add'),
     url(r"^account/addresses/update/(?P<id>\d+)/$", views.AccountAddressesUpdateView.as_view(), name='account_addresses_update'),
     url(r"^account/orders/$", views.AccountOrdersView.as_view(), name='account_orders'),
-    url(r"^account/orders/detail/(?P<id>\d+)/$", views.AccountOrdersView.as_view(), name='account_orders_detail'),
+    url(r"^account/orders/detail/(?P<id>\d+)/$", views.AccountOrdersDetailView.as_view(), name='account_orders_detail'),
 
     url(r"^shop/$", views.ShopView.as_view(), name='shop'),
     url(r"^shop/detail/$", views.ShopDetailView.as_view(), name='shop_detail'),  # TODO Require parameter like in account_addresses_update

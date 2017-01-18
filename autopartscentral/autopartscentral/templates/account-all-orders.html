@@ -75,7 +75,7 @@
                                                         class="label label-warning">
                                                     {% endif %}
                                             {{ order.get_status_display }}</span></td>
-                                            <td><a href="#" class="btn btn-default">View</a></td>
+                                            <td><a href="{% url 'account_orders_detail' order.id %}" class="btn btn-default">View</a></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

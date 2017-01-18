@@ -174,6 +174,19 @@ class AccountOrdersView(TemplateView):
         return models.Order.objects.filter(customer=self.request.user).order_by('-placed_timestamp')
 
 
+@method_decorator(login_required, name='dispatch')
+class AccountOrdersDetailView(TemplateView):
+    template_name = "account-single-order.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.order().customer != self.request.user:
+            return HttpResponseRedirect(reverse_lazy('account_orders'))
+        return super(AccountOrdersDetailView, self).dispatch(request, *args, **kwargs)
+
+    def order(self):
+        return get_object_or_404(models.Order, id=self.kwargs['id'])
+
+
 # TODO if manual input model id not in make
 # TODO Error404 or something for wrong category and make/model/year combination
 class ShopView(TemplateView):
