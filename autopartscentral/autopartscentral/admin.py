@@ -67,6 +67,11 @@ class VehicleAdmin(admin.ModelAdmin):
         return obj.model.make
 
 
+class VehicleModelAdmin(nested_admin.NestedModelAdmin):
+    list_display = ('name', )
+    inlines = [VehicleInline]
+
+
 admin.site.register(models.UserProfile, UserProfileAdmin)
 admin.site.register(models.Address, AddressAdmin)
 admin.site.register(models.CategoryL1, CategoryL1Admin)
@@ -75,6 +80,7 @@ admin.site.register(models.CategoryL3, CategoryL3Admin)
 admin.site.register(models.Brand, BrandAdmin)
 admin.site.register(models.Part, PartAdmin)
 admin.site.register(models.VehicleMake, VehicleMakeAdmin)
+admin.site.register(models.VehicleModel, VehicleModelAdmin)
 admin.site.register(models.Vehicle, VehicleAdmin)
 admin.site.register(models.Order)
 admin.site.register(models.OrderDetails)
