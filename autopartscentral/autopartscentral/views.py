@@ -224,12 +224,11 @@ class ShopView(TemplateView):
         return objects
 
 
-# TODO Error404 if no part passed or part_id not found
 class ShopDetailView(TemplateView):
     template_name = "single-product.html"
 
     def part(self):
-        return models.Part.objects.get(slug=self.kwargs['slug'])
+        return get_object_or_404(models.Part, slug=self.kwargs['slug'])
 
 
 # TODO Show shopping cart is empty
