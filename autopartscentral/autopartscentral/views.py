@@ -229,7 +229,7 @@ class ShopDetailView(TemplateView):
     template_name = "single-product.html"
 
     def part(self):
-        return models.Part.objects.get(slug=self.request.GET.get('part'))
+        return models.Part.objects.get(slug=self.kwargs['slug'])
 
 
 # TODO Show shopping cart is empty

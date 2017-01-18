@@ -113,7 +113,7 @@
                         {% for i in view.parts %}
                             <div class="col-sm-4 col-xs-12">
                                 <div class="productBox">
-                                    <a href="{% url 'shop_detail' %}?part={{ i.slug }}">
+                                    <a href="{% url 'shop_detail' i.slug %}">
                                         <div class="productImage clearfix">
                                             {% if not i.images.all  %}
                                                 <img src="{% static "img/products/products-01.jpg" %}" alt="products-img">

@@ -17,7 +17,7 @@ urlpatterns = [
     url(r"^account/orders/detail/(?P<id>\d+)/$", views.AccountOrdersDetailView.as_view(), name='account_orders_detail'),
 
     url(r"^shop/$", views.ShopView.as_view(), name='shop'),
-    url(r"^shop/detail/$", views.ShopDetailView.as_view(), name='shop_detail'),  # TODO Require parameter like in account_addresses_update
+    url(r"^shop/detail/(?P<slug>[\w-]+)/$", views.ShopDetailView.as_view(), name='shop_detail'),
 
     url(r"^cart/$", views.CartView.as_view(), name='cart'),
     url(r"^checkout/step/login/$", views.CheckoutLoginView.as_view(), name='checkout_login'),
