@@ -12,6 +12,14 @@ import forms
 import account.views
 import account.forms
 from carton.cart import Cart
+from decimal import Decimal, ROUND_UP
+
+
+def compute_subtotal_vat(total):
+    subtotal = total / Decimal('1.12')
+    subtotal = subtotal.quantize(Decimal('.01'), rounding=ROUND_UP)
+    vat = total - subtotal
+    return {'subtotal': subtotal, 'vat': vat}
 
 
 class IndexView(TemplateView):
@@ -186,6 +194,9 @@ class AccountOrdersDetailView(TemplateView):
     def order(self):
         return get_object_or_404(models.Order, id=self.kwargs['id'])
 
+    def subtotal_vat(self):
+        return compute_subtotal_vat(self.order().net_price)
+
 
 # TODO if manual input model id not in make
 # TODO Error404 or something for wrong category and make/model/year combination
@@ -234,6 +245,9 @@ class ShopDetailView(TemplateView):
 # TODO Show shopping cart is empty
 class CartView(TemplateView):
     template_name = "cart-page.html"
+
+    def subtotal_vat(self):
+        return compute_subtotal_vat(Cart(self.request.session).total)
 
 
 class CheckoutLoginView(account.views.LoginView):
@@ -330,6 +344,9 @@ class CheckoutReviewView(FormView):
 
     def shipping_address(self):
         return models.Address.objects.get(id=self.request.session['checkout_shipping_address_id'])
+
+    def subtotal_vat(self):
+        return compute_subtotal_vat(Cart(self.request.session).total)
 
 
 @method_decorator(lambda x: login_required(x, login_url=reverse_lazy('checkout_login')), name='dispatch')

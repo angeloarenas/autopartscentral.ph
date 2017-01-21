@@ -75,7 +75,7 @@
                                     </li>
                                     {% get_cart as cart %}
                                     <li class="dropdown">
-                                        <a href="{% url 'cart' %}" class="dropdown-toggle" data-toggle="dropdown disabled"><i class="fa fa-shopping-cart"></i>{{ cart.total }}</a>
+                                        <a href="{% url 'cart' %}" class="dropdown-toggle" data-toggle="dropdown disabled"><i class="fa fa-shopping-cart"></i>&#8369;{{ cart.total }}</a>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li>Item(s) in your cart</li>
                                             {% for item in cart.items %}
@@ -84,7 +84,7 @@
                                                         <div class="media">
                                                             <img class="media-left media-object" src="{% static "img/home/cart-items/cart-item-01.jpg" %}" alt="cart-Image">
                                                             <div class="media-body">
-                                                                <h5 class="media-heading">{{ item.product }}<br><span>{{ item.quantity }} X P{{ item.price }}</span></h5>
+                                                                <h5 class="media-heading">{{ item.product }}<br><span>{{ item.quantity }} X &#8369;{{ item.price }}</span></h5>
                                                             </div>
                                                         </div>
                                                     </a>

@@ -104,9 +104,9 @@
                                                         <span class="cartImage"><img src="img/products/cart-image.jpg" alt="image"></span>
                                                     </td>
                                                     <td class="col-xs-4">{{ item.part_name }}</td>
-                                                    <td class="col-xs-2">P {{ item.unit_price }}</td>
+                                                    <td class="col-xs-2">&#8369;{{ item.unit_price }}</td>
                                                     <td class="col-xs-2">{{ item.quantity }}</td>
-                                                    <td class="col-xs-2">P {{ item.net_price }}</td>
+                                                    <td class="col-xs-2">&#8369;{{ item.net_price }}</td>
                                                 </tr>
                                             {% endfor %}
                                             </tbody>
@@ -115,9 +115,9 @@
                                     <div class="row totalAmountArea">
                                         <div class="col-sm-4 col-sm-offset-8 col-xs-12">
                                             <ul class="list-unstyled">
-                                                <li>Sub Total <span>$ 792.00</span></li>
-                                                <li>UK Vat <span>$ 18.00</span></li>
-                                                <li>Grand Total <span class="grandTotal">P {{ view.order.net_price }}</span></li>
+                                                <li>SUBTOTAL<span>&#8369;{{ view.subtotal_vat.subtotal }}</span></li>
+                                                <li>PH VAT<span>&#8369;{{ view.subtotal_vat.vat }}</span></li>
+                                                <li>GRAND TOTAL<span class="grandTotal">&#8369;{{ view.order.net_price }}</span></li>
                                             </ul>
                                         </div>
                                     </div>

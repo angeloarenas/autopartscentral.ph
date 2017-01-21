@@ -59,7 +59,7 @@
                                             <td>{{ order.id }}</td>
                                             <td>{{ order.placed_timestamp }}</td>
                                             <td>{{ order.order_details.all.count }}</td>
-                                            <td>P{{ order.net_price }}</td>
+                                            <td>&#8369;{{ order.net_price }}</td>
                                             <td><span
                                                     {% if order.status == 'PL' %}
                                                         class="label label-default">
