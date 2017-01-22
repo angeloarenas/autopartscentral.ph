@@ -171,7 +171,10 @@
                                         <li><a href="{% url 'account_signup' %}">Register</a></li>
                                         <li><a href="{% url 'account_login' %}">Login</a></li>
                                         <li><a href="lost-password.html">Password Recovery</a></li>
-                                        <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                                        <li><form method="POST" action="{% url "account_logout" %}">
+                                            {% csrf_token %}
+                                            <a href="#" onclick="$(this).closest('form').submit();return false">Logout</a>
+                                            </form></li>
                                     </ul>
                                 </li>
                             </ul>
