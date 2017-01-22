@@ -102,6 +102,16 @@ class SignupView(account.views.SignupView):
     """
 
 
+class ConfirmEmailView(account.views.ConfirmEmailView):
+
+    def get_template_names(self):
+        return ["account/email_confirmed.html"]
+
+    def get(self, *args, **kwargs):
+        super(ConfirmEmailView, self).post(*args, **kwargs)
+        return self.render_to_response(self.get_context_data())
+
+
 @method_decorator(login_required, name='dispatch')
 class AccountDashboardView(TemplateView):
     template_name = "account-dashboard.html"

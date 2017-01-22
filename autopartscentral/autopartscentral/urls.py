@@ -8,6 +8,7 @@ urlpatterns = [
     url(r"^$", views.IndexView.as_view(), name='index'),
     url(r"^account/login/$", views.LoginView.as_view(), name='account_login'),
     url(r"^account/signup/$", views.SignupView.as_view(), name='account_signup'),
+    url(r"^account/confirm_email/(?P<key>\w+)/$", views.ConfirmEmailView.as_view(), name="account_confirm_email"),
     url(r"^account/dashboard/$", views.AccountDashboardView.as_view(), name='account_dashboard'),
     url(r"^account/profile/$", views.AccountProfileView.as_view(), name='account_profile'),
     url(r"^account/addresses/$", views.AccountAddressesView.as_view(), name='account_addresses'),

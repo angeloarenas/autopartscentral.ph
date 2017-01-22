@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block body_maincontent %}
+    <!-- LIGHT SECTION -->
+    <section class="lightSection clearfix pageHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="page-title">
+                        <h2>Email Confirmation</h2>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <ol class="breadcrumb pull-right">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="active">Email Confirmation</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT SECTION -->
+    <section class="mainContent clearfix setp5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="thanksContent">
+                        <h2>Email Confirmed Successfully
+                            <small>
+                                Thank you, your email address has been successfully verified. <br> <br>
+                                Welcome to autopartscentral.ph!  <br>
+                                Your central automotive parts shop. <br>
+                                We hope you enjoy your shopping experience with us, {{ confirmation.email_address.user.userprofile.first_name }}. <br>
+                                If you have any concerns or suggestions, contact us at
+                                <a href="mailto:{{ THEME_CONTACT_EMAIL }}">{{ THEME_CONTACT_EMAIL }}</a>. <br><br>
+                                <a href="{% url 'account_login' %}">Log in and start shopping</a>
+                            </small>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
