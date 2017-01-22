@@ -4105,7 +4105,7 @@ body.bodyColor.container {
 .setp5 .thanksContent h2 {
   display: block;
   text-align: center;
-  text-transform: capitalize;
+  text-transform: none;
   font-weight: 700;
   margin-bottom: 55px;
 }
@@ -4123,6 +4123,7 @@ body.bodyColor.container {
   display: block;
   margin-top: 14px;
   font-size: 14px;
+  line-height: 1.6;
 }
 .setp5 .thanksContent h3 {
   color: #252525;

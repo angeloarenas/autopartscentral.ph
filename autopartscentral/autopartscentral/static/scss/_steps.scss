@@ -226,7 +226,7 @@
 		h2{
 			display: block;
 			text-align: center;
-			text-transform: capitalize;
+			text-transform: none;
 			font-weight: 700;
 			margin-bottom: $margin*5+5px;
 			@include mobile{
@@ -239,6 +239,7 @@
 				display: block;
 				margin-top: $margin+4px;
 				font-size: $font-size+4px;
+				line-height: 1.6;
 			}
 		}
 		h3{
