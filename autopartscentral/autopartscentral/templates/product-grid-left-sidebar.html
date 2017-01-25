@@ -139,6 +139,27 @@
                             </div>
                         {% endfor %}
                     </div>
+                    {% if view.parts.has_other_pages %}
+                        <ul class="pagination">
+                            {% if view.parts.has_previous %}
+                                <li><a href="?page={{ view.parts.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&laquo;</span></li>
+                            {% endif %}
+                            {% for i in view.parts.paginator.page_range %}
+                                {% if view.parts.number == i %}
+                                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if view.parts.has_next %}
+                                <li><a href="?page={{ view.parts.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&raquo;</span></li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
         </div>

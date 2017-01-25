@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.db.models import Max, Min
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator, InvalidPage
 import json
 import models
 import forms
@@ -226,6 +227,7 @@ class ShopView(TemplateView):
         vehicle_make = self.request.GET.get('make')
         vehicle_model = self.request.GET.get('model')
         vehicle_year = self.request.GET.get('year')
+        page = self.request.GET.get('page')
 
         objects = models.Part.objects.all()
         if vehicle_make:
@@ -241,6 +243,12 @@ class ShopView(TemplateView):
             objects = objects.filter(category_l2__slug=category2).distinct()
         elif category1:
             objects = objects.filter(category_l1__slug=category1).distinct()
+
+        paginator = Paginator(objects, 12)
+        try:
+            objects = paginator.page(page)
+        except InvalidPage:
+            objects = paginator.page(1)
 
         return objects
 
