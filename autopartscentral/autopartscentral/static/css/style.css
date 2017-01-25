@@ -1400,6 +1400,7 @@ body.bodyColor.container {
 
 .imageBox, .whiteSection .featuredProducts .slide, .mainContent .featuredProducts .slide, .productsContent .productBox {
   height: auto;
+  min-height: 390px;
   display: block;
   cursor: pointer;
   margin-bottom: 80px;
