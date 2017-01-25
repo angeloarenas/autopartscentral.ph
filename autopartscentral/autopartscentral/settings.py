@@ -190,7 +190,7 @@ EMAIL_HOST_USER = 'autopartscentral'
 EMAIL_HOST_PASSWORD = 'centralpartsauto1'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'webmaster@autopartscentral.ph'
+DEFAULT_FROM_EMAIL = 'no-reply@autopartscentral.ph'
 
 ACCOUNT_OPEN_SIGNUP = True
 ACCOUNT_EMAIL_UNIQUE = True
